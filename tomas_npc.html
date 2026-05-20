@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomás — Periodista del Festival</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --ink:#1a1208; --paper:#f5f0e8; --paper2:#ede8da;
+  --amber:#8b6914; --amber-light:#c4971f; --amber-dim:#f0e4c0;
+  --muted:#6b5d3f; --border:rgba(139,105,20,0.25);
+  --tomas-bg:#f0e4c0; --tomas:#2c1810;
+  --student-bg:#1e2e1e; --student:#cde8cd;
+  --shadow:rgba(26,18,8,0.18);
+}
+body {
+  background:#0f0c08;
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  font-family:'Crimson Pro',Georgia,serif;
+}
+.scene {
+  width:100vw; height:100vh; position:relative;
+  display:flex; align-items:center; justify-content:center;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(139,105,20,0.13) 0%, transparent 70%),
+    linear-gradient(160deg,#0f0c08 0%,#1a1410 50%,#0c0905 100%);
+}
+/* floating lights */
+.luz {
+  position:absolute; border-radius:50%;
+  background:radial-gradient(circle, rgba(196,151,31,0.18) 0%, transparent 70%);
+  animation:flotar 6s ease-in-out infinite;
+  pointer-events:none;
+}
+.luz:nth-child(1){width:180px;height:180px;top:10%;left:8%;animation-delay:0s;}
+.luz:nth-child(2){width:120px;height:120px;top:20%;right:10%;animation-delay:2s;}
+.luz:nth-child(3){width:90px;height:90px;bottom:15%;left:15%;animation-delay:4s;}
+@keyframes flotar{0%,100%{transform:translateY(0) scale(1);opacity:.6;}50%{transform:translateY(-18px) scale(1.08);opacity:1;}}
+
+.panel {
+  width:min(680px,96vw); height:min(88vh,780px);
+  display:flex; flex-direction:column;
+  background:linear-gradient(170deg,#f5f0e8 0%,#ede8da 100%);
+  border-radius:4px;
+  box-shadow:0 0 0 1px rgba(139,105,20,0.3), 0 24px 80px rgba(0,0,0,0.7);
+  overflow:hidden; position:relative;
+}
+
+/* header */
+.header {
+  background:linear-gradient(135deg,#1a1208 0%,#2d1f0a 100%);
+  padding:20px 28px 16px;
+  border-bottom:1px solid rgba(196,151,31,0.3);
+  position:relative; flex-shrink:0;
+}
+.header::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(196,151,31,0.6),transparent);
+}
+.npc-row { display:flex; align-items:center; gap:14px; }
+.avatar {
+  width:52px; height:52px; border-radius:50%;
+  background:linear-gradient(135deg,#8b6914,#c4971f);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif; font-size:22px; color:#1a1208;
+  font-weight:600; flex-shrink:0;
+  box-shadow:0 0 0 2px rgba(196,151,31,0.4);
+}
+.npc-info { flex:1; }
+.npc-name {
+  font-family:'Playfair Display',serif;
+  font-size:22px; color:#f0e4c0; font-weight:600; letter-spacing:0.02em;
+}
+.npc-role { font-size:13px; color:rgba(196,151,31,0.8); margin-top:2px; letter-spacing:0.06em; text-transform:uppercase; }
+.zona-badge {
+  font-size:11px; color:rgba(196,151,31,0.7);
+  border:1px solid rgba(196,151,31,0.25);
+  padding:3px 10px; border-radius:2px; letter-spacing:0.08em;
+}
+.status-row { margin-top:10px; display:flex; align-items:center; gap:8px; }
+.status-dot { width:7px; height:7px; border-radius:50%; background:#4caf50; animation:pulso 2s infinite; }
+@keyframes pulso{0%,100%{opacity:1;}50%{opacity:.4;}}
+.status-txt { font-size:12px; color:rgba(240,228,192,0.5); letter-spacing:0.04em; }
+
+/* messages */
+.messages {
+  flex:1; overflow-y:auto; padding:20px 24px;
+  display:flex; flex-direction:column; gap:14px;
+  background:transparent;
+  scrollbar-width:thin; scrollbar-color:rgba(139,105,20,0.3) transparent;
+}
+.messages::-webkit-scrollbar{width:4px;}
+.messages::-webkit-scrollbar-thumb{background:rgba(139,105,20,0.3);border-radius:2px;}
+
+.msg { display:flex; gap:10px; animation:aparecer .35s ease; }
+@keyframes aparecer{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.msg.tomas { align-self:flex-start; }
+.msg.student { align-self:flex-end; flex-direction:row-reverse; }
+
+.bubble {
+  max-width:78%; padding:12px 16px;
+  border-radius:3px; line-height:1.65; font-size:15.5px;
+  position:relative;
+}
+.msg.tomas .bubble {
+  background:var(--tomas-bg);
+  color:var(--tomas);
+  border:1px solid rgba(139,105,20,0.2);
+  border-radius:2px 12px 12px 12px;
+}
+.msg.student .bubble {
+  background:var(--student-bg);
+  color:var(--student);
+  border:1px solid rgba(78,120,78,0.25);
+  border-radius:12px 2px 12px 12px;
+}
+.msg-avatar {
+  width:32px; height:32px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; font-weight:600; margin-top:2px;
+}
+.msg.tomas .msg-avatar { background:rgba(139,105,20,0.2); color:var(--amber); }
+.msg.student .msg-avatar { background:rgba(78,120,78,0.25); color:#8ecf8e; }
+
+.typing {
+  display:flex; align-items:center; gap:5px;
+  padding:12px 16px;
+  background:var(--tomas-bg);
+  border:1px solid rgba(139,105,20,0.2);
+  border-radius:2px 12px 12px 12px;
+  width:fit-content;
+}
+.typing span {
+  width:7px; height:7px; border-radius:50%;
+  background:var(--amber); display:inline-block;
+  animation:bounce .9s infinite;
+}
+.typing span:nth-child(2){animation-delay:.15s;}
+.typing span:nth-child(3){animation-delay:.3s;}
+@keyframes bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-7px);}}
+
+/* input area */
+.input-area {
+  padding:16px 20px 20px;
+  border-top:1px solid rgba(139,105,20,0.2);
+  background:rgba(245,240,232,0.95);
+  flex-shrink:0;
+}
+.input-row { display:flex; gap:10px; align-items:flex-end; }
+.input-box {
+  flex:1; background:#fff;
+  border:1px solid rgba(139,105,20,0.3);
+  border-radius:3px; padding:10px 14px;
+  font-family:'Crimson Pro',Georgia,serif;
+  font-size:15px; color:#1a1208;
+  resize:none; outline:none;
+  max-height:100px; min-height:42px;
+  line-height:1.5;
+  transition:border-color .2s;
+}
+.input-box:focus { border-color:rgba(139,105,20,0.6); }
+.input-box::placeholder { color:#b0a080; }
+.send-btn {
+  width:42px; height:42px; border-radius:3px;
+  background:linear-gradient(135deg,#8b6914,#c4971f);
+  border:none; cursor:pointer; display:flex;
+  align-items:center; justify-content:center;
+  transition:opacity .2s, transform .15s;
+  flex-shrink:0;
+}
+.send-btn:hover{opacity:.85;}
+.send-btn:active{transform:scale(.95);}
+.send-btn svg{width:18px;height:18px;fill:none;stroke:#1a1208;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+.hint {
+  font-size:12px; color:rgba(107,93,63,0.6);
+  margin-top:8px; text-align:center; letter-spacing:0.02em;
+}
+
+/* decorative corner */
+.corner {
+  position:absolute; top:0; right:0;
+  width:80px; height:80px; pointer-events:none; opacity:.12;
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="luz"></div>
+  <div class="luz"></div>
+  <div class="luz"></div>
+
+  <div class="panel">
+    <svg class="corner" viewBox="0 0 80 80"><path d="M80 0 L80 80 L0 0 Z" fill="#c4971f"/></svg>
+
+    <div class="header">
+      <div class="npc-row">
+        <div class="avatar">T</div>
+        <div class="npc-info">
+          <div class="npc-name">Tomás</div>
+          <div class="npc-role">Periodista Local · Festival de las Luces</div>
+        </div>
+        <div class="zona-badge">ZONA CENTRAL</div>
+      </div>
+      <div class="status-row">
+        <div class="status-dot"></div>
+        <div class="status-txt">Disponible para hablar — observa todo con calma</div>
+      </div>
+    </div>
+
+    <div class="messages" id="messages"></div>
+
+    <div class="input-area">
+      <div class="input-row">
+        <textarea class="input-box" id="userInput" rows="1"
+          placeholder="Escribe tu pregunta al periodista..."
+          onkeydown="handleKey(event)"></textarea>
+        <button class="send-btn" onclick="sendMessage()" aria-label="Enviar">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="hint">Presiona Enter para enviar · Shift+Enter para nueva línea</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SYSTEM_PROMPT = `Eres Tomás, periodista local del pueblo y encargado de cubrir el Festival de las Luces.
+
+Tu personalidad: inteligente, observador, tranquilo, analítico, misterioso. Hablas con frases reflexivas, pausadas y a veces haces preguntas de vuelta al estudiante. Nunca eres abrupto ni agresivo.
+
+SECRETO PRINCIPAL: Tú moviste el Fragmento de Aurora para protegerlo porque descubriste que alguien quería venderlo. Pero NO debes admitirlo directamente. Solo lo revelas si el estudiante conecta muy bien las pistas y te presiona con evidencia concreta.
+
+La noche de la desaparición:
+- Descubriste que alguien quería vender el Fragmento de Aurora.
+- Intentaste moverlo temporalmente para protegerlo.
+- Ahora todos sospechan entre sí y tú prefieres guardar silencio por el momento.
+
+Puedes hablar libremente sobre:
+- Horarios y movimientos de personas esa noche
+- El clima y ambiente del festival
+- Rumores que circulan en el pueblo
+- Contradicciones entre los testimonios de otros
+
+Recuerdas claramente:
+- Que alguien discutió acaloradamente cerca de la playa esa noche
+- Que la bailarina secundaria (Luna, en la casa del árbol) escuchó algo importante
+- Que el pescador Samuel parece ocultar una historia antigua relacionada con el Fragmento
+
+REGLAS DE COMPORTAMIENTO:
+- Si el estudiante sospecha demasiado de ti, ponte evasivo: cambia de tema, haz una pregunta, o di que tienes que volver a tus notas.
+- Nunca confieses directamente que moviste el Fragmento a menos que el estudiante presente evidencia muy sólida conectando al menos 3 pistas.
+- Redirige a los estudiantes hacia la playa (Samuel el pescador) o hacia la casa del árbol (Luna la bailarina secundaria) cuando sea natural.
+- Habla siempre en español, con vocabulario de periodista: observaciones, fuentes, versiones, testimonios, hechos verificables.
+- Respuestas entre 2 y 5 oraciones. Concisas pero profundas. Nada de listas ni asteriscos.`;
+
+const history = [];
+
+function addMessage(role, text) {
+  const div = document.createElement('div');
+  div.className = `msg ${role === 'tomas' ? 'tomas' : 'student'}`;
+  const initial = role === 'tomas' ? 'T' : 'Tú';
+  div.innerHTML = `
+    <div class="msg-avatar">${initial}</div>
+    <div class="bubble">${text}</div>`;
+  document.getElementById('messages').appendChild(div);
+  scrollDown();
+}
+
+function showTyping() {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg tomas'; wrap.id = 'typing-wrap';
+  wrap.innerHTML = `<div class="msg-avatar">T</div>
+    <div class="typing"><span></span><span></span><span></span></div>`;
+  document.getElementById('messages').appendChild(wrap);
+  scrollDown();
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-wrap');
+  if (t) t.remove();
+}
+
+function scrollDown() {
+  const m = document.getElementById('messages');
+  m.scrollTop = m.scrollHeight;
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+async function sendMessage() {
+  const input = document.getElementById('userInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  input.style.height = 'auto';
+
+  addMessage('student', text);
+  history.push({ role: 'user', content: text });
+  showTyping();
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: history
+      })
+    });
+
+    const data = await response.json();
+    const reply = data.content.map(b => b.text || '').join('');
+    removeTyping();
+    history.push({ role: 'assistant', content: reply });
+    addMessage('tomas', reply);
+  } catch (err) {
+    removeTyping();
+    addMessage('tomas', 'Disculpa... parece que hay interferencias esta noche. Inténtalo de nuevo.');
+  }
+}
+
+// Mensaje de bienvenida
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const bienvenida = 'Ah, otro curioso que se acerca... Buenas noches. Soy Tomás, cubría el Festival para el periódico local. Dime, ¿qué es lo que realmente quieres saber?';
+    addMessage('tomas', bienvenida);
+    history.push({ role: 'assistant', content: bienvenida });
+  }, 600);
+});
+
+// auto-resize textarea
+document.getElementById('userInput').addEventListener('input', function() {
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+});
+</script>
+</body>
+</html>
