@@ -1,222 +1,431 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luna - Bailarina secundaria</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luna — Casa del Árbol</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #1b1026;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 
-    .container {
-      width: 90%;
-      max-width: 700px;
-      background: #2a163d;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.5);
-    }
+<style>
 
-    h1 {
-      margin-top: 0;
-      color: #f9a8d4;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    .descripcion {
-      color: #f3e8ff;
-      margin-bottom: 25px;
-      line-height: 1.6;
-    }
+body{
+background:#141018;
+font-family:'Crimson Pro', serif;
+color:white;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
 
-    .pregunta {
-      background: #4b1f6b;
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.fondo{
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left, rgba(163,98,255,.12), transparent 30%),
+radial-gradient(circle at bottom right, rgba(255,120,200,.10), transparent 35%),
+linear-gradient(to bottom,#120f18,#1d1625,#120f18);
+z-index:0;
+}
 
-    .pregunta:hover {
-      background: #7e22ce;
-    }
+.container{
+width:min(900px,98vw);
+height:100vh;
+display:flex;
+flex-direction:column;
+position:relative;
+z-index:2;
+background:rgba(18,12,24,.94);
+backdrop-filter:blur(4px);
+border-left:1px solid rgba(255,255,255,.08);
+border-right:1px solid rgba(255,255,255,.08);
+}
 
-    .respuesta {
-      display: none;
-      background: #1f1230;
-      padding: 15px;
-      border-left: 4px solid #f9a8d4;
-      margin-top: 10px;
-      border-radius: 8px;
-      line-height: 1.8;
-      color: #f5d0fe;
-    }
+.header{
+padding:14px 18px;
+border-bottom:1px solid rgba(255,255,255,.08);
+background:rgba(25,18,32,.96);
+}
 
-    .nota {
-      margin-top: 25px;
-      padding: 15px;
-      background: #140b20;
-      border-radius: 10px;
-      color: #fbcfe8;
-      line-height: 1.7;
-    }
+.header-row{
+display:flex;
+align-items:center;
+gap:12px;
+}
 
-  </style>
+.avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:linear-gradient(135deg,#b26cff,#ff9bd2);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:20px;
+font-weight:bold;
+color:#1a1022;
+font-family:'Playfair Display', serif;
+}
+
+.header-info h1{
+font-family:'Playfair Display', serif;
+font-size:24px;
+font-weight:600;
+color:#f5ddff;
+}
+
+.header-sub{
+font-size:12px;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:rgba(255,220,255,.55);
+}
+
+.frase{
+margin-top:8px;
+padding-left:12px;
+border-left:2px solid rgba(255,180,255,.25);
+font-style:italic;
+color:rgba(255,230,255,.65);
+font-size:14px;
+line-height:1.5;
+}
+
+.temas{
+padding:10px 15px;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+border-bottom:1px solid rgba(255,255,255,.06);
+background:rgba(20,14,26,.95);
+}
+
+.tema-btn{
+padding:7px 13px;
+border:none;
+border-radius:20px;
+background:rgba(178,108,255,.12);
+color:#f5dcff;
+cursor:pointer;
+font-family:'Crimson Pro', serif;
+font-size:14px;
+transition:.2s;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.tema-btn:hover{
+background:rgba(255,155,210,.22);
+}
+
+.chat{
+flex:1;
+overflow-y:auto;
+padding:18px;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.mensaje{
+max-width:84%;
+padding:14px 16px;
+line-height:1.8;
+font-size:16px;
+animation:fade .25s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(8px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.ia{
+align-self:flex-start;
+background:rgba(35,22,42,.95);
+border:1px solid rgba(255,255,255,.08);
+border-radius:4px 14px 14px 14px;
+color:#f5eaff;
+}
+
+.usuario{
+align-self:flex-end;
+background:rgba(25,40,28,.92);
+border:1px solid rgba(180,255,180,.15);
+border-radius:14px 4px 14px 14px;
+color:#e8ffe8;
+}
+
+.input-area{
+display:flex;
+gap:10px;
+padding:12px;
+border-top:1px solid rgba(255,255,255,.08);
+background:rgba(14,10,20,.96);
+}
+
+.input-area input{
+flex:1;
+padding:12px;
+background:rgba(30,20,40,.9);
+border:1px solid rgba(255,255,255,.08);
+outline:none;
+color:white;
+font-family:'Crimson Pro', serif;
+font-size:15px;
+border-radius:4px;
+}
+
+.input-area input::placeholder{
+color:rgba(255,255,255,.35);
+}
+
+.send-btn{
+padding:12px 20px;
+border:none;
+background:#d68cff;
+color:#1b1124;
+font-weight:bold;
+cursor:pointer;
+border-radius:4px;
+font-family:'Playfair Display', serif;
+font-size:16px;
+}
+
+.footer{
+text-align:center;
+padding:6px;
+font-size:11px;
+color:rgba(255,255,255,.28);
+background:rgba(14,10,20,.95);
+}
+
+</style>
 </head>
+
 <body>
+
+<div class="fondo"></div>
 
 <div class="container">
 
-  <h1>🌙 Luna — Bailarina secundaria</h1>
+<div class="header">
+<div class="header-row">
 
-  <p class="descripcion">
-    “Yo sé MUCHAS cosas… aunque bueno, algunas personas dicen que hablo demasiado.”
-  </p>
+<div class="avatar">L</div>
 
+<div class="header-info">
+<h1>Luna</h1>
+<div class="header-sub">Bailarina Secundaria · Casa del Árbol</div>
+</div>
 
-  <div class="pregunta" onclick="mostrar('r1')">
-    ¿Qué recuerdas de la noche del festival?
+</div>
 
-    <div class="respuesta" id="r1">
-      Muchísimas cosas.
+<div class="frase">
+“La gente cree que no pongo atención… y por eso escucho absolutamente todo.”
+</div>
+</div>
 
-      Todo estaba raro desde antes de que comenzara el espectáculo.
+<div class="temas">
+<button class="tema-btn" onclick="preguntar('escuchaste')">👂 ¿Qué escuchaste?</button>
+<button class="tema-btn" onclick="preguntar('casa')">🌳 Casa del árbol</button>
+<button class="tema-btn" onclick="preguntar('tomas')">📰 Tomás</button>
+<button class="tema-btn" onclick="preguntar('guantes')">🧤 Guantes</button>
+<button class="tema-btn" onclick="preguntar('elias')">⚽ Elías</button>
+<button class="tema-btn" onclick="preguntar('festival')">🎭 Antes del festival</button>
+<button class="tema-btn" onclick="preguntar('hablar')">🗺️ ¿Con quién hablar?</button>
+</div>
 
-      La gente sonreía… pero esas sonrisas se sentían falsas.
+<div class="chat" id="chat"></div>
 
-      Vi personas entrando y saliendo de la casa del árbol constantemente, como si estuvieran escondiendo algo o reuniéndose en secreto.
+<div class="input-area">
+<input type="text" id="pregunta" placeholder="Pregúntale algo a Luna..." onkeydown="if(event.key==='Enter') enviar()">
+<button class="send-btn" onclick="enviar()">Preguntar</button>
+</div>
 
-      Y el ambiente… no sé… se sentía pesado.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r2')">
-    ¿Escuchaste conversaciones sospechosas?
-
-    <div class="respuesta" id="r2">
-      Sí.
-
-      Escuché varias.
-
-      Pero una me llamó mucho la atención porque hablaban muy bajito y parecían nerviosos.
-
-      No logré entender todo, pero alguien dijo algo como:
-      
-      “No debía salir del lago”.
-
-      Después escuché pasos rápidos bajando por el sendero hacia la playa.
-
-      Honestamente… creo que varias personas sabían más de lo que decían.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r3')">
-    ¿Viste a alguien actuar extraño?
-
-    <div class="respuesta" id="r3">
-      Bueno…
-
-      El periodista estaba demasiado inquieto.
-
-      Caminaba rápido, escribía cosas en una libreta y miraba hacia todos lados.
-
-      Y Elías, el futbolista, discutió con alguien cerca de la zona de hielo.
-
-      No sé con quién.
-
-      Solo recuerdo que levantó la voz y luego se fue muy alterado.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r4')">
-    ¿Qué recuerdas sobre la ropa o apariencia de las personas?
-
-    <div class="respuesta" id="r4">
-      Ah sí, eso sí lo recuerdo bien.
-
-      Una persona llevaba guantes oscuros incluso cuando no hacía tanto frío.
-
-      Eso me pareció rarísimo.
-
-      También vi botas llenas de barro cerca de la escalera de la casa del árbol.
-
-      Y alguien tenía una chaqueta mojada, como si hubiera estado cerca del lago o bajo la lluvia.
-
-      Aunque… bueno… tal vez estoy mezclando algunas cosas.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r5')">
-    ¿Crees que alguien robó el Fragmento?
-
-    <div class="respuesta" id="r5">
-      No sé si “robar” sea la palabra correcta.
-
-      A veces siento que alguien intentaba esconderlo.
-
-      O protegerlo.
-
-      Pero definitivamente todos estaban demasiado nerviosos esa noche.
-
-      Incluso los bailarines dejaron de bromear antes del espectáculo.
-
-      Y eso nunca pasa.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r6')">
-    ¿Quién podría ayudarme a descubrir más?
-
-    <div class="respuesta" id="r6">
-      Deberías hablar con:
-
-      🌊 Samuel, en la playa. Ese señor sabe historias MUY raras sobre el lago.
-
-      ❄️ Elías, en la zona de hielo. Estoy segura de que no contó todo.
-
-      📰 O Tomás, el periodista. Aunque honestamente… creo que él sabe muchísimo más de lo que aparenta.
-    </div>
-  </div>
-
-
-  <div class="nota">
-    🧠 NOTA PARA CRONISTAS:
-
-    Los rumores también forman parte de una historia.
-
-    Pero un buen cronista debe aprender:
-    - qué parece verdad,
-    - qué puede ser exageración,
-    - y qué detalles se repiten entre diferentes testimonios.
-  </div>
+<div class="footer">
+Festival de las Luces — Investigación Narrativa
+</div>
 
 </div>
 
 <script>
-  function mostrar(id) {
-    const respuesta = document.getElementById(id);
 
-    if (respuesta.style.display === "block") {
-      respuesta.style.display = "none";
-    } else {
-      respuesta.style.display = "block";
-    }
-  }
+const chat = document.getElementById("chat");
+
+const respuestas = {
+
+escuchaste:[
+`Mira, yo no estaba espiando, ¿okay? Simplemente estaba en el lugar correcto en el momento correcto. Estaba subida en la casa del árbol esperando que empezara el festival cuando escuché dos voces abajo. Hablaban bajito pero con esa urgencia que tienen las personas cuando algo se les está yendo de las manos.`,
+
+`Lo que más me impactó no fue lo que dijeron sino cómo lo dijeron. Con un nerviosismo que yo nunca había escuchado en el festival. Normalmente todo el mundo está feliz, emocionado, cantando. Pero esas voces sonaban como si estuvieran negociando algo que sabían que estaba mal.`
+],
+
+casa:[
+`Esa noche entró y salió gente de la casa del árbol que normalmente no va ahí. Y yo los conozco a todos, llevo toda la vida en este pueblo. Primero entró alguien con una chaqueta oscura y guantes negros. Y hacía calor esa noche. Eso ya era rarísimo.`,
+
+`Vi al menos tres personas distintas pasar por la casa del árbol en menos de una hora. Ninguna se saludó entre sí aunque se cruzaron. Eso me pareció superextraño porque en el festival todo el mundo se saluda.`
+],
+
+tomas:[
+`Tomás estaba rarísimo esa noche. Normalmente es súper calmado, siempre con esa cara de que ya sabe todo antes de que pase. Pero esa noche lo vi caminar rápido dos veces entre la zona central y la casa del árbol. Sin su libreta.`,
+
+`En un momento lo vi parado solo cerca del árbol grande mirando hacia el lago con esa expresión que tienen las personas cuando están calculando algo en su cabeza. Y cuando alguien lo saludó se sobresaltó. Tomás nunca se sobresalta.`
+],
+
+guantes:[
+`Eso no se me va de la cabeza. ¿Quién usa guantes negros en una noche de festival? Los guantes oscuros son para el invierno o para cuando no quieres dejar huellas en algo. Y yo no digo más porque no quiero meterme en problemas.`,
+
+`Lo que sí puedo decirte es que esa persona con guantes era alguien del pueblo. Lo sé porque conocía el camino entre los árboles sin necesitar luz para orientarse.`
+],
+
+elias:[
+`Ay, Elías. Mira, yo no tengo nada contra él personalmente, pero esa noche estaba insoportable de raro. Lo vi discutir con alguien cerca de la zona de hielo y te juro que pensé que iban a llegar a los golpes.`,
+
+`Después de la discusión Elías desapareció como veinte minutos y cuando volvió estaba diferente. Más tranquilo, pero de esa tranquilidad falsa que tienen las personas cuando acaban de tomar una decisión y ya no hay vuelta atrás.`
+],
+
+festival:[
+`Desde la tarde ya había cosas raras. Valeria estaba supernerviosa y eso no es normal en ella antes de una presentación. La vi ir y venir varias veces entre la zona de hongos y la zona central como si estuviera esperando a alguien.`,
+
+`También noté que había personas que no son del festival ayudando a mover cosas cerca del escenario principal. Caras que yo no reconocía. Y en un pueblo pequeño como este uno reconoce todas las caras.`
+],
+
+hablar:[
+`Si quieres saber qué pasó en la playa esa noche, habla con Samuel. Está ahí todos los días desde que tengo memoria. Habla raro a veces, pero siempre dice cosas importantes si lo escuchas con paciencia.`,
+
+`Para lo del periodista, ve directo a la zona central y busca a Tomás. Y si quieres saber más de Elías, búscalo en la zona de hielo. Pero ve con preguntas concretas porque se pone muy a la defensiva.`
+]
+
+};
+
+const usadas = {};
+
+function agregar(texto,tipo){
+
+const div=document.createElement("div");
+
+div.classList.add("mensaje",tipo);
+
+div.innerHTML=texto;
+
+chat.appendChild(div);
+
+chat.scrollTop=chat.scrollHeight;
+
+}
+
+function obtener(tema){
+
+if(!usadas[tema]) usadas[tema]=0;
+
+const idx=usadas[tema]%respuestas[tema].length;
+
+usadas[tema]++;
+
+return respuestas[tema][idx];
+
+}
+
+function detectar(texto){
+
+texto=texto.toLowerCase();
+
+if(texto.match(/escuch|voz|conversaci/)) return "escuchaste";
+
+if(texto.match(/casa|árbol|arbol/)) return "casa";
+
+if(texto.match(/tom[aá]s|periodista/)) return "tomas";
+
+if(texto.match(/guantes|negros|huellas/)) return "guantes";
+
+if(texto.match(/el[ií]as|futbolista/)) return "elias";
+
+if(texto.match(/festival|antes|valeria/)) return "festival";
+
+if(texto.match(/hablar|preguntar|investigar|quien/)) return "hablar";
+
+return null;
+
+}
+
+function preguntar(tema){
+
+const etiquetas={
+
+escuchaste:"¿Qué escuchaste esa noche?",
+
+casa:"¿Qué viste en la casa del árbol?",
+
+tomas:"¿Qué notaste del periodista?",
+
+guantes:"¿Qué recuerdas de los guantes oscuros?",
+
+elias:"¿Qué sabes de Elías?",
+
+festival:"¿Qué notaste antes del festival?",
+
+hablar:"¿Con quién debería hablar?"
+
+};
+
+agregar(etiquetas[tema],"usuario");
+
+setTimeout(()=>{
+
+agregar(obtener(tema),"ia");
+
+},700);
+
+}
+
+function enviar(){
+
+const input=document.getElementById("pregunta");
+
+const texto=input.value.trim();
+
+if(!texto) return;
+
+agregar(texto,"usuario");
+
+input.value="";
+
+const tema=detectar(texto);
+
+setTimeout(()=>{
+
+if(tema){
+
+agregar(obtener(tema),"ia");
+
+}else{
+
+agregar("Luna se acomoda el cabello y baja la voz. “Okay… eso sí está raro. Pero pregúntame mejor sobre lo que escuché, la casa del árbol, Tomás, Elías o las personas extrañas del festival.”","ia");
+
+}
+
+},700);
+
+}
+
+window.onload=()=>{
+
+setTimeout(()=>{
+
+agregar("Luna sonríe apenas te acercas. “Por fin alguien quiere investigar en serio lo que pasó esa noche. Porque créeme… demasiadas cosas raras ocurrieron antes de que desapareciera el Fragmento.”","ia");
+
+},500);
+
+};
+
 </script>
 
 </body>
