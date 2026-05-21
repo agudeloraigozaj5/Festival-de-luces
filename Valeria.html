@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valeria - Bailarina Principal</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #1a1325;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      background: #2d1b46;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #f9a8d4;
+    }
+
+    .descripcion {
+      color: #f3e8ff;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .pregunta {
+      background: #4c1d95;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .pregunta:hover {
+      background: #6d28d9;
+    }
+
+    .respuesta {
+      display: none;
+      background: #1e1b4b;
+      padding: 15px;
+      border-left: 4px solid #f9a8d4;
+      margin-top: 10px;
+      border-radius: 8px;
+      line-height: 1.7;
+      color: #ede9fe;
+    }
+
+    .nota {
+      margin-top: 25px;
+      padding: 15px;
+      background: #140f1f;
+      border-radius: 10px;
+      color: #f5d0fe;
+      line-height: 1.6;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>🩰 Valeria — Bailarina principal</h1>
+
+  <p class="descripcion">
+    “Algo no se sentía normal aquella noche… las luces brillaban hermoso, pero todos parecían esconder algo.”
+  </p>
+
+
+  <div class="pregunta" onclick="mostrar('r1')">
+    ¿Dónde estabas cuando desapareció el Fragmento de Aurora?
+
+    <div class="respuesta" id="r1">
+      Estaba detrás del escenario, cerca de la zona de hongos, preparándome para salir a bailar.
+      
+      Recuerdo que las luces del festival iluminaban todo de colores morados y dorados… pero aun así el ambiente se sentía extraño.
+      
+      Escuché una discusión fuerte cerca de la zona central. No logré entender todo lo que decían, pero una de las voces sonaba desesperada.
+      
+      Después de eso vi una figura correr hacia la playa.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r2')">
+    ¿Qué recuerdas sobre la persona que corría?
+
+    <div class="respuesta" id="r2">
+      No pude verle bien el rostro…
+      
+      Todo pasó muy rápido.
+      
+      Pero recuerdo claramente una chaqueta oscura, casi negra, y algo brillante escondido bajo el brazo.
+      
+      La persona corría mirando hacia atrás constantemente, como si tuviera miedo de que alguien la siguiera.
+      
+      A veces pienso que quizás solo imaginé algunas cosas… pero estoy segura de que alguien ocultaba algo esa noche.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r3')">
+    ¿Cómo estaba el ambiente durante el festival?
+
+    <div class="respuesta" id="r3">
+      Hermoso… y aterrador al mismo tiempo.
+      
+      La música sonaba fuerte, las personas reían y bailaban, pero había demasiadas miradas nerviosas.
+      
+      El viento movía las luces colgadas entre los árboles y algunas antorchas se apagaban solas.
+      
+      Sentía como si alguien estuviera observándonos desde lejos mientras bailábamos.
+      
+      Nunca había sentido algo así durante el Festival de las Luces.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r4')">
+    ¿A quién viste actuar de forma extraña?
+
+    <div class="respuesta" id="r4">
+      Bueno…
+      
+      Vi al futbolista cerca de la zona de hielo mucho más tarde de lo normal.
+      
+      Parecía nervioso y caminaba rápido, como si estuviera buscando a alguien.
+      
+      También recuerdo que varias personas dejaron de bailar de repente cuando comenzó la discusión cerca de la fuente.
+      
+      Y el periodista… Tomás… observaba demasiado.
+      
+      Como si estuviera intentando conectar algo en su cabeza.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r5')">
+    ¿Crees que alguien robó el Fragmento?
+
+    <div class="respuesta" id="r5">
+      No estoy completamente segura…
+      
+      Parte de mí cree que alguien intentó protegerlo.
+      
+      Pero otra parte piensa que todos estaban demasiado asustados para decir la verdad.
+      
+      Samuel, el pescador, siempre decía que el Fragmento nunca debió salir del agua.
+      
+      Tal vez deberías hablar con él… conoce historias antiguas del pueblo.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r6')">
+    ¿Quién podría ayudarme a entender mejor lo que pasó?
+
+    <div class="respuesta" id="r6">
+      Creo que deberías hablar con:
+      
+      ❄️ Elías, en la zona de hielo. Estoy segura de que vio más de lo que admite.
+      
+      🌊 Samuel, el pescador de la playa. Él conoce secretos antiguos sobre el Fragmento.
+      
+      📰 Y quizá Tomás, el periodista… aunque siento que oculta algo.
+      
+      Algo no se sentía normal aquella noche.
+    </div>
+  </div>
+
+
+  <div class="nota">
+    🧠 NOTA PARA CRONISTAS:
+    
+    Las emociones también cuentan una historia.
+    
+    A veces las personas no recuerdan exactamente los hechos…
+    pero sí recuerdan el miedo, el silencio o las miradas.
+    
+    Escucha cuidadosamente cada detalle.
+  </div>
+
+</div>
+
+<script>
+  function mostrar(id) {
+    const respuesta = document.getElementById(id);
+
+    if (respuesta.style.display === "block") {
+      respuesta.style.display = "none";
+    } else {
+      respuesta.style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>
