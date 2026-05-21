@@ -1,132 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tomás IA - Periodista</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script src="https://js.puter.com/v2/"></script>
+<title>Tomás IA Narrativa</title>
 
-  <style>
-    body{
-      margin:0;
-      padding:0;
-      background:#081120;
-      font-family:Arial,sans-serif;
-      color:white;
-    }
+<style>
 
-    .container{
-      max-width:900px;
-      margin:auto;
-      height:100vh;
-      display:flex;
-      flex-direction:column;
-      background:#0b1730;
-    }
+body{
+    margin:0;
+    padding:0;
+    background:#081120;
+    font-family:Arial,sans-serif;
+    color:white;
+}
 
-    .header{
-      padding:20px;
-      background:#16233f;
-      border-bottom:2px solid #facc15;
-    }
+.container{
+    max-width:900px;
+    margin:auto;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    background:#0b1730;
+}
 
-    .header h1{
-      margin:0;
-      color:#facc15;
-      font-size:38px;
-    }
+.header{
+    padding:20px;
+    background:#16233f;
+    border-bottom:3px solid #facc15;
+}
 
-    .header p{
-      margin-top:10px;
-      color:#e2e8f0;
-      font-size:20px;
-    }
+.header h1{
+    margin:0;
+    color:#facc15;
+    font-size:34px;
+}
 
-    .chat{
-      flex:1;
-      overflow-y:auto;
-      padding:20px;
-      display:flex;
-      flex-direction:column;
-      gap:15px;
-    }
+.header p{
+    color:#e2e8f0;
+    margin-top:10px;
+    line-height:1.5;
+}
 
-    .mensaje{
-      max-width:80%;
-      padding:15px;
-      border-radius:18px;
-      line-height:1.6;
-      font-size:18px;
-    }
+.chat{
+    flex:1;
+    overflow-y:auto;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
 
-    .ia{
-      background:#374151;
-      align-self:flex-start;
-      border-left:5px solid #facc15;
-    }
+.mensaje{
+    max-width:80%;
+    padding:16px;
+    border-radius:18px;
+    line-height:1.7;
+    font-size:17px;
+}
 
-    .usuario{
-      background:#2563eb;
-      align-self:flex-end;
-    }
+.ia{
+    background:#374151;
+    align-self:flex-start;
+    border-left:5px solid #facc15;
+}
 
-    .input-area{
-      display:flex;
-      padding:15px;
-      background:#111827;
-      gap:10px;
-    }
+.usuario{
+    background:#2563eb;
+    align-self:flex-end;
+}
 
-    input{
-      flex:1;
-      padding:15px;
-      border:none;
-      border-radius:12px;
-      font-size:17px;
-    }
+.input-area{
+    display:flex;
+    gap:10px;
+    padding:15px;
+    background:#111827;
+}
 
-    button{
-      background:#facc15;
-      border:none;
-      padding:15px 25px;
-      border-radius:12px;
-      font-weight:bold;
-      cursor:pointer;
-      font-size:16px;
-    }
+input{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+}
 
-    button:hover{
-      background:#eab308;
-    }
+button{
+    background:#facc15;
+    border:none;
+    padding:15px 25px;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-  </style>
+button:hover{
+    background:#eab308;
+}
+
+.sistema{
+    text-align:center;
+    color:#94a3b8;
+    font-size:14px;
+    padding:8px;
+}
+
+</style>
 </head>
+
 <body>
 
 <div class="container">
 
-  <div class="header">
-    <h1>📰 Tomás — Periodista del pueblo</h1>
-    <p>
-      “Toda historia tiene varias versiones… la difícil es descubrir cuál merece ser contada.”
-    </p>
-  </div>
+<div class="header">
+<h1>📰 Tomás — Periodista del pueblo</h1>
 
-  <div class="chat" id="chat">
+<p>
+“Toda historia tiene varias versiones… la difícil es descubrir cuál merece ser contada.”
+</p>
+</div>
 
-    <div class="mensaje ia">
-      Llegas justo cuando el pueblo empieza a desconfiar de todos.<br><br>
+<div class="chat" id="chat">
 
-      Haz tus preguntas sobre la desaparición del Fragmento de Aurora.
-    </div>
+<div class="mensaje ia">
+Llegas justo cuando el pueblo empieza a desconfiar de todos.<br><br>
 
-  </div>
+La desaparición del Fragmento de Aurora cambió el ambiente del festival.<br><br>
 
-  <div class="input-area">
-    <input type="text" id="pregunta" placeholder="Haz una pregunta...">
-    <button onclick="enviarPregunta()">Enviar</button>
-  </div>
+Puedes preguntarme sobre:
+<ul>
+<li>la playa</li>
+<li>el lago</li>
+<li>Valeria</li>
+<li>Elías</li>
+<li>las luces</li>
+<li>la discusión</li>
+<li>los sospechosos</li>
+<li>el Fragmento</li>
+</ul>
+</div>
+
+</div>
+
+<div class="input-area">
+<input type="text" id="pregunta" placeholder="Haz una pregunta...">
+<button onclick="enviarPregunta()">Enviar</button>
+</div>
+
+<div class="sistema">
+Sistema narrativo interactivo — Festival de las Luces
+</div>
 
 </div>
 
@@ -134,92 +158,333 @@
 
 const chat = document.getElementById("chat");
 
-async function enviarPregunta(){
-
-  const input = document.getElementById("pregunta");
-  const texto = input.value.trim();
-
-  if(texto === "") return;
-
-  agregarMensaje(texto,"usuario");
-
-  input.value = "";
-
-  try{
-
-    const respuesta = await puter.ai.chat(`
-Eres Tomás, el periodista del pueblo.
-
-Tu personalidad:
-- inteligente,
-- observador,
-- misterioso,
-- analítico.
-
-IMPORTANTE:
-- Nunca reveles toda la verdad.
-- Nunca digas directamente quién robó el Fragmento.
-- Habla como una persona real.
-- Mantén el misterio.
-- Da pistas poco a poco.
-- A veces duda.
-- A veces sospecha de otros.
-- Puedes redirigir estudiantes a:
-  * Valeria,
-  * Samuel,
-  * Luna,
-  * Elías.
-
-Contexto:
-La noche del Festival de las Luces desapareció el Fragmento de Aurora.
-
-Lo que sabes:
-- viste personas actuar extraño,
-- alguien corrió hacia la playa,
-- escuchaste discusiones,
-- sospechas que varias personas ocultan cosas,
-- alguien llevaba algo brillante.
-
-IMPORTANTE:
-- Describe emociones,
-- ambiente,
-- nerviosismo,
-- clima,
-- expresiones,
-- sonidos.
-
-Pregunta del estudiante:
-${texto}
-
-Responde como Tomás:
-`);
-
-    agregarMensaje(respuesta.message.content,"ia");
-
-  }catch(error){
-
-    agregarMensaje(
-      "No pude responder en este momento... algo extraño está ocurriendo en el pueblo.",
-      "ia"
-    );
-
-    console.log(error);
-  }
-
-}
+let secretosDescubiertos = 0;
 
 function agregarMensaje(texto,tipo){
 
-  const div = document.createElement("div");
+    const div = document.createElement("div");
 
-  div.classList.add("mensaje");
-  div.classList.add(tipo);
+    div.classList.add("mensaje");
+    div.classList.add(tipo);
 
-  div.innerHTML = texto.replace(/\n/g,"<br>");
+    div.innerHTML = texto;
 
-  chat.appendChild(div);
+    chat.appendChild(div);
 
-  chat.scrollTop = chat.scrollHeight;
+    chat.scrollTop = chat.scrollHeight;
+}
+
+function respuestaAleatoria(lista){
+    return lista[Math.floor(Math.random() * lista.length)];
+}
+
+function enviarPregunta(){
+
+    const input = document.getElementById("pregunta");
+
+    const textoOriginal = input.value.trim();
+
+    const texto = textoOriginal.toLowerCase();
+
+    if(texto === "") return;
+
+    agregarMensaje(textoOriginal,"usuario");
+
+    input.value = "";
+
+    setTimeout(()=>{
+
+        let respuesta = "";
+
+
+
+/* -------------------------------- */
+/* SALUDOS */
+/* -------------------------------- */
+
+if(
+texto.includes("hola") ||
+texto.includes("buenas") ||
+texto.includes("saludos")
+){
+
+respuesta = respuestaAleatoria([
+
+`Las personas saludan con demasiada tranquilidad esta noche… como si intentaran fingir que nada ocurrió.`,
+
+`Hola.<br><br>
+Supongo que vienes por la historia del Fragmento.`,
+
+`Bienvenido.<br><br>
+Ten cuidado con lo que preguntas. Algunos habitantes del pueblo se ponen nerviosos fácilmente.`
+
+]);
+
+}
+
+
+
+/* -------------------------------- */
+/* PLAYA */
+/* -------------------------------- */
+
+else if(
+texto.includes("playa") ||
+texto.includes("mar") ||
+texto.includes("agua")
+){
+
+respuesta = respuestaAleatoria([
+
+`Alguien corrió hacia la playa esa noche.<br><br>
+No pude distinguir su rostro, pero llevaba algo bajo el brazo.`,
+
+`Samuel, el pescador, asegura haber visto luces extrañas sobre el agua.<br><br>
+A veces mezcla superstición con realidad… aunque no siempre se equivoca.`,
+
+`La arena conservaba huellas incluso después de la medianoche.<br><br>
+Demasiadas personas estuvieron allí aquella noche.`
+
+]);
+
+}
+
+
+
+/* -------------------------------- */
+/* VALERIA */
+/* -------------------------------- */
+
+else if(
+texto.includes("valeria") ||
+texto.includes("bailarina")
+){
+
+respuesta = respuestaAleatoria([
+
+`Valeria parecía nerviosa antes del espectáculo.<br><br>
+Seguía mirando hacia la zona central como si esperara a alguien.`,
+
+`La bailarina escuchó una discusión cerca del festival.<br><br>
+Creo que sabe más de lo que admite.`,
+
+`Las personas sensibles suelen notar detalles que los demás ignoran.<br><br>
+Habla con Valeria.`
+
+]);
+
+}
+
+
+
+/* -------------------------------- */
+/* ELIAS */
+/* -------------------------------- */
+
+else if(
+texto.includes("elias") ||
+texto.includes("futbolista")
+){
+
+respuesta = respuestaAleatoria([
+
+`Elías actúa con demasiada seguridad.<br><br>
+Las personas defensivas suelen ocultar algo.`,
+
+`Escuché que discutió con alguien cerca del hielo.`,
+
+`El futbolista asegura haber seguido una sombra entre los árboles.<br><br>
+No estoy seguro de que contara toda la verdad.`
+
+]);
+
+}
+
+
+
+/* -------------------------------- */
+/* LAGO */
+/* -------------------------------- */
+
+else if(
+texto.includes("lago") ||
+texto.includes("hielo")
+){
+
+respuesta = respuestaAleatoria([
+
+`El lago estaba demasiado silencioso aquella noche.`,
+
+`Cerca del hielo alguien dejó marcas extrañas sobre el suelo húmedo.`,
+
+`Escuché algo romperse cerca del lago.<br><br>
+Después… silencio.`
+
+]);
+
+}
+
+
+
+/* -------------------------------- */
+/* FRAGMENTO */
+/* -------------------------------- */
+
+else if(
+texto.includes("fragmento") ||
+texto.includes("aurora")
+){
+
+secretosDescubiertos++;
+
+if(secretosDescubiertos >= 3){
+
+respuesta = `Cuanto más investigo el Fragmento de Aurora… más entiendo por qué algunos habitantes querían esconderlo.<br><br>
+
+No era simplemente un objeto valioso.<br><br>
+
+Generaba miedo.`;
+
+}else{
+
+respuesta = respuestaAleatoria([
+
+`Desde que desapareció el Fragmento, el pueblo cambió.`,
+
+`Algunos creen que el Fragmento nunca debió salir del lago.`,
+
+`Las personas no solo deseaban el Fragmento.<br><br>
+También le temían.`
+
+]);
+
+}
+
+}
+
+
+
+/* -------------------------------- */
+/* SOSPECHOSOS */
+/* -------------------------------- */
+
+else if(
+texto.includes("sospech") ||
+texto.includes("culpable") ||
+texto.includes("robo")
+){
+
+respuesta = respuestaAleatoria([
+
+`Un buen periodista no acusa sin pruebas.`,
+
+`Todos parecen sospechosos cuando una historia tiene miedo de ser descubierta.`,
+
+`La verdadera pregunta no es quién lo robó… sino por qué alguien quería ocultarlo.`
+
+]);
+
+}
+
+
+
+/* -------------------------------- */
+/* DISCUSION */
+/* -------------------------------- */
+
+else if(
+texto.includes("discusion") ||
+texto.includes("pelea") ||
+texto.includes("gritos")
+){
+
+respuesta = respuestaAleatoria([
+
+`Escuché voces alteradas cerca de la zona central.`,
+
+`Alguien discutía antes del espectáculo.<br><br>
+La música apenas dejaba escuchar las palabras.`,
+
+`La tensión comenzó mucho antes de que desapareciera el Fragmento.`
+
+]);
+
+}
+
+
+
+/* -------------------------------- */
+/* LUCES */
+/* -------------------------------- */
+
+else if(
+texto.includes("luces") ||
+texto.includes("sombras")
+){
+
+respuesta = respuestaAleatoria([
+
+`Las luces del festival hacían que las sombras parecieran moverse.`,
+
+`Varias personas afirman haber visto reflejos extraños sobre el agua.`,
+
+`Aquella noche las luces ocultaban más de lo que revelaban.`
+
+]);
+
+}
+
+
+
+/* -------------------------------- */
+/* AYUDA */
+/* -------------------------------- */
+
+else if(
+texto.includes("ayuda") ||
+texto.includes("donde") ||
+texto.includes("quien")
+){
+
+respuesta = respuestaAleatoria([
+
+`Podrías hablar con Samuel en la playa.`,
+
+`Valeria observó demasiadas cosas durante el festival.`,
+
+`La casa del árbol guarda conversaciones que nadie debía escuchar.`
+
+]);
+
+}
+
+
+
+/* -------------------------------- */
+/* RESPUESTA DEFAULT */
+/* -------------------------------- */
+
+else{
+
+respuesta = respuestaAleatoria([
+
+`Mmm… no estoy seguro de entender tu pregunta.<br><br>
+Tal vez deberías investigar otro lugar del pueblo.`,
+
+`A veces las respuestas aparecen cuando haces mejores preguntas.`,
+
+`Los detalles pequeños suelen ser los más importantes en una investigación.`,
+
+`No todo el pueblo recuerda la noche del festival de la misma manera.`
+
+]);
+
+}
+
+agregarMensaje(respuesta,"ia");
+
+    },700);
+
 }
 
 </script>
