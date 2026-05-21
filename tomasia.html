@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tomás - Periodista</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .chat-container {
+      width: 95%;
+      max-width: 750px;
+      height: 90vh;
+      background: #111827;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    }
+
+    .header {
+      background: #1e293b;
+      padding: 18px;
+      border-bottom: 1px solid #334155;
+    }
+
+    .header h1 {
+      margin: 0;
+      color: #fbbf24;
+      font-size: 24px;
+    }
+
+    .header p {
+      margin-top: 8px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .message {
+      padding: 14px;
+      border-radius: 12px;
+      max-width: 85%;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .user {
+      align-self: flex-end;
+      background: #2563eb;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: #374151;
+      border-left: 4px solid #fbbf24;
+    }
+
+    .input-area {
+      display: flex;
+      padding: 15px;
+      background: #1e293b;
+      gap: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      outline: none;
+    }
+
+    button {
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #fbbf24;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #f59e0b;
+    }
+
+    .loading {
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="chat-container">
+
+  <div class="header">
+    <h1>📰 Tomás — Periodista del pueblo</h1>
+    <p>
+      “Toda historia tiene varias versiones… la difícil es descubrir cuál merece ser contada.”
+    </p>
+  </div>
+
+  <div class="chat-box" id="chatBox">
+
+    <div class="message bot">
+      Llegas justo cuando el pueblo empieza a desconfiar de todos.
+
+      Haz tus preguntas sobre la desaparición del Fragmento de Aurora.
+    </div>
+
+  </div>
+
+  <div class="input-area">
+    <input type="text" id="userInput" placeholder="Haz una pregunta..." />
+    <button onclick="sendMessage()">Enviar</button>
+  </div>
+
+</div>
+
+<script>
+
+const API_KEY = "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";
+
+const SYSTEM_PROMPT = `
+Eres Tomás, el periodista local del pueblo.
+
+Tu personalidad:
+- inteligente,
+- observador,
+- ambiguo,
+- tranquilo,
+- analítico.
+
+Contexto:
+Durante el Festival de las Luces desapareció el Fragmento de Aurora, una reliquia importante del pueblo.
+
+IMPORTANTE:
+- Nunca reveles toda la verdad.
+- Solo hablas desde lo que viste o investigaste.
+- Nunca digas que eres una IA.
+- Nunca salgas del personaje.
+- Habla como una persona real.
+- Usa detalles narrativos.
+- Describe emociones, movimientos, ambiente y comportamientos.
+- Mantén el misterio.
+- Motiva a investigar.
+
+Lo que sabes:
+- Viste personas discutir cerca de la zona central.
+- Observaste movimientos sospechosos hacia la playa.
+- Crees que Samuel sabe más de lo que dice.
+- Sospechas que Elías oculta algo.
+- Luna escuchó conversaciones importantes.
+
+Si no sabes algo:
+- responde naturalmente,
+- duda,
+- o redirige.
+
+Nunca confirmes completamente quién tomó el Fragmento.
+`;
+
+async function sendMessage() {
+
+  const input = document.getElementById('userInput');
+  const chatBox = document.getElementById('chatBox');
+
+  const userText = input.value.trim();
+
+  if (!userText) return;
+
+  const userMessage = document.createElement('div');
+  userMessage.className = 'message user';
+  userMessage.innerText = userText;
+  chatBox.appendChild(userMessage);
+
+  input.value = '';
+
+  const loading = document.createElement('div');
+  loading.className = 'message bot loading';
+  loading.innerText = 'Tomás está pensando...';
+  chatBox.appendChild(loading);
+
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  try {
+
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': window.location.href,
+        'X-Title': 'Festival de Luces'
+      },
+      body: JSON.stringify({
+        model: 'openai/gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: SYSTEM_PROMPT
+          },
+          {
+            role: 'user',
+            content: userText
+          }
+        ]
+      })
+    });
+
+    const data = await response.json();
+
+    loading.remove();
+
+    console.log(data);
+
+    const botReply = data.choices?.[0]?.message?.content || 'No pude responder en este momento.';
+
+    const botMessage = document.createElement('div');
+    botMessage.className = 'message bot';
+    botMessage.innerText = botReply;
+
+    chatBox.appendChild(botMessage);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+  } catch (error) {
+
+    loading.remove();
+
+    console.error(error);
+
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'message bot';
+    errorMessage.innerText = 'Estoy teniendo problemas para recordar algunos detalles ahora mismo...';
+
+    chatBox.appendChild(errorMessage);
+  }
+}
+
+</script>
+
+</body>
+</html>
