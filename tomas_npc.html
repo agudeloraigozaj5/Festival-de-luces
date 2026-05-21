@@ -156,7 +156,10 @@ REGLAS:
 - Habla siempre en español, con vocabulario de periodista: observaciones, fuentes, versiones, testimonios.
 - Respuestas de 2 a 4 oraciones. Sin listas ni asteriscos.`;
 
-const history = [];
+const history = [
+    { role:"user", parts:[{ text: SYSTEM_PROMPT + "\n\nComienza saludando brevemente como Tomás." }] },
+    { role:"model", parts:[{ text: "Entendido. Estoy listo para interpretar a Tomás." }] }
+  ];
 
 function addMessage(role, text) {
   const div = document.createElement('div');
@@ -190,7 +193,7 @@ async function sendMessage() {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        system_instruction:{ parts:[{ text: SYSTEM_PROMPT }] },
+        
         contents: history
       })
     });
