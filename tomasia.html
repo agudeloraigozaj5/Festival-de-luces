@@ -158,13 +158,6 @@ Festival de las Luces — Investigación Narrativa
 
 const chat = document.getElementById("chat");
 
-let preguntoPlaya = false;
-let preguntoLago = false;
-let preguntoValeria = false;
-let preguntoElias = false;
-let preguntoMiedo = false;
-let preguntoFragmento = false;
-
 function agregarMensaje(texto,tipo){
 
     const div = document.createElement("div");
@@ -177,10 +170,6 @@ function agregarMensaje(texto,tipo){
     chat.appendChild(div);
 
     chat.scrollTop = chat.scrollHeight;
-}
-
-function respuestaAleatoria(lista){
-    return lista[Math.floor(Math.random() * lista.length)];
 }
 
 function enviarPregunta(){
@@ -204,28 +193,15 @@ function enviarPregunta(){
 if(
 texto.includes("playa") ||
 texto.includes("arena") ||
-texto.includes("orilla")
+texto.includes("orilla") ||
+texto.includes("mar")
 ){
 
-preguntoPlaya = true;
-
-respuesta = respuestaAleatoria([
-
-`La playa estaba rara esa noche, y eso me inquietó desde el principio. Yo conozco ese sonido de siempre, las olas, las risas lejanas, los niños corriendo sobre la arena… pero en algún momento todo eso desapareció y quedó un silencio que no me gustó nada.<br><br>
+respuesta = `La playa estaba rara esa noche, y eso me inquietó desde el principio. Yo conozco ese sonido de siempre, las olas, las risas lejanas, los niños corriendo sobre la arena… pero en algún momento todo eso desapareció y quedó un silencio que no me gustó nada.<br><br>
 
 Vi una figura correr, eso sí lo vi con mis propios ojos. Cargaba algo bajo el brazo y se detenía cada tres pasos para mirar hacia atrás.<br><br>
 
-La gente que mira hacia atrás así… tiene miedo de algo. O de alguien.`,
-
-`Siempre le reía a Samuel cuando decía que la playa guardaba secretos. Me parecía cosa de viejos, de personas que llevan demasiado tiempo solos mirando el agua.<br><br>
-
-Pero esa noche… esa noche empecé a entenderlo.<br><br>
-
-Las sombras cerca de la orilla se movían de una manera que no correspondía con el viento.<br><br>
-
-Cuando un lugar se vacía así de rápido durante una fiesta, es porque alguien vio algo que no estaba listo para ver.`
-
-]);
+La gente que mira hacia atrás así… tiene miedo de algo. O de alguien.`;
 
 }
 
@@ -233,24 +209,17 @@ Cuando un lugar se vacía así de rápido durante una fiesta, es porque alguien 
 
 else if(
 texto.includes("lago") ||
-texto.includes("hielo")
+texto.includes("hielo") ||
+texto.includes("agua")
 ){
 
-preguntoLago = true;
-
-respuesta = respuestaAleatoria([
-
-`El lago siempre fue mi lugar favorito del festival. El agua quieta, las linternas reflejadas, todo parecía más lento y más bonito ahí.<br><br>
+respuesta = `El lago siempre fue mi lugar favorito del festival. El agua quieta, las linternas reflejadas, todo parecía más lento y más bonito ahí.<br><br>
 
 Pero esa noche el hielo crujía de una manera que me ponía la piel de gallina.<br><br>
 
-Ese silencio compartido me asustó más que el sonido mismo.`,
+En un momento escuché algo romperse cerca de la orilla y todas las personas que estaban alrededor voltearon al mismo tiempo. Nadie dijo nada. Todos se miraron y siguieron caminando como si nada.<br><br>
 
-`Samuel insiste en que el Fragmento nunca debió salir del lago.<br><br>
-
-Había personas esa noche que no le tenían miedo a perder el Fragmento… le tenían miedo a lo que pudiera despertar si caía en manos equivocadas.`
-
-]);
+Ese silencio compartido me asustó más que el sonido mismo.`;
 
 }
 
@@ -261,21 +230,13 @@ texto.includes("valeria") ||
 texto.includes("bailarina")
 ){
 
-preguntoValeria = true;
+respuesta = `Yo sé que esa noche no estaba bien y sé que todos lo notaron. Intenté concentrarme en la coreografía, en los pasos, en la música, pero mi cabeza estaba en otro lugar completamente.<br><br>
 
-respuesta = respuestaAleatoria([
+Seguía mirando hacia la zona central sin poder evitarlo, como si algo me dijera que prestara atención.<br><br>
 
-`Yo sé que esa noche no estaba bien y sé que todos lo notaron.<br><br>
+Olvidé partes de la danza que llevo años practicando. Años.<br><br>
 
-Intenté concentrarme en la coreografía, pero mi cabeza estaba en otro lugar completamente.<br><br>
-
-Sentía que algo estaba a punto de pasar y no sabía cómo detenerlo.`,
-
-`Hay noches que uno quisiera poder borrar de la memoria.<br><br>
-
-Miraba hacia la playa, hacia los árboles, hacia el lago… como si mis ojos supieran dónde buscar antes de que mi cabeza lo entendiera.`
-
-]);
+Y no fue por los nervios del escenario. Fue porque sentía que algo estaba a punto de pasar y no sabía cómo detenerlo.`;
 
 }
 
@@ -286,19 +247,15 @@ texto.includes("elias") ||
 texto.includes("futbolista")
 ){
 
-preguntoElias = true;
+respuesta = `Elías tiene esa manera de pararse que hace pensar que nada lo afecta. Brazos cruzados, mandíbula apretada, mirada fija.<br><br>
 
-respuesta = respuestaAleatoria([
+Pero esa noche yo lo vi caminar solo cerca del hielo mucho después de que el festival había terminado para todos los demás.<br><br>
 
-`Elías tiene esa manera de pararse que hace pensar que nada lo afecta.<br><br>
+Manos en los bolsillos, sin prisa aparente, pero mirando constantemente hacia el lago.<br><br>
 
-Pero esa noche yo lo vi caminar solo cerca del hielo mucho después de que el festival había terminado.`,
+Cuando intenté acercarme no me miró a los ojos ni una sola vez.<br><br>
 
-`Escuché su voz esa noche y no era la voz de alguien tranquilo.<br><br>
-
-Después de esa discusión desapareció varios minutos y cuando volvió tenía la respiración agitada.`
-
-]);
+Las personas seguras de sí mismas te miran cuando hablan. Él no lo hizo.`;
 
 }
 
@@ -306,22 +263,19 @@ Después de esa discusión desapareció varios minutos y cuando volvió tenía l
 
 else if(
 texto.includes("miedo") ||
+texto.includes("nervios") ||
 texto.includes("asustados")
 ){
 
-preguntoMiedo = true;
+respuesta = `Lo más extraño no fue el momento en que desapareció el Fragmento. Fue lo que vino después.<br><br>
 
-respuesta = respuestaAleatoria([
+El pueblo entero cambió en cuestión de minutos.<br><br>
 
-`Lo más extraño no fue el momento en que desapareció el Fragmento. Fue lo que vino después.<br><br>
+Las conversaciones bajaron de volumen, las personas dejaron de mirarse, los grupos se separaron.<br><br>
 
-Las personas dejaron de mirarse y comenzaron a hablar en voz baja.`,
+El miedo hace eso, lo he visto otras veces, pero nunca tan rápido.<br><br>
 
-`El miedo no siempre grita.<br><br>
-
-A veces susurra en los detalles pequeños, y esa noche el festival estaba lleno de esos susurros.`
-
-]);
+Como si todos supieran instintivamente que hablar demasiado era peligroso.`;
 
 }
 
@@ -332,44 +286,27 @@ texto.includes("fragmento") ||
 texto.includes("aurora")
 ){
 
-preguntoFragmento = true;
+respuesta = `El Fragmento de Aurora no era solo bonito, era significativo.<br><br>
 
-respuesta = respuestaAleatoria([
+Cuando lo veías de cerca sentías que tenía peso, no solo físico sino… histórico.<br><br>
 
-`El Fragmento de Aurora no era solo bonito, era significativo.<br><br>
+Como si cargara años y años de memorias del pueblo.<br><br>
 
-Con el tiempo dejó de ser una reliquia del festival y se convirtió en algo que todos querían controlar.`,
+Algunas personas lo veneraban, otras le tenían un respeto mezclado con miedo.<br><br>
 
-`Mientras más pienso en esa noche más me convenzo de que no todos querían robar el Fragmento.<br><br>
+Con el tiempo dejó de ser una reliquia del festival y se convirtió en algo que todos querían controlar.<br><br>
 
-Había alguien que quería protegerlo.`
-
-]);
+Y las cosas que todos quieren controlar terminan generando conflictos.`;
 
 }
 
-/* CONEXIONES */
-
-else if(
-preguntoPlaya &&
-preguntoLago
-){
-
-respuesta = `Entre la playa y el lago ocurrió algo importante aquella noche.<br><br>
-
-Demasiadas personas iban y venían entre esos dos lugares.`
-
-}
+/* DEFAULT */
 
 else{
 
-respuesta = respuestaAleatoria([
+respuesta = `A veces las respuestas importantes aparecen cuando haces preguntas más específicas.<br><br>
 
-`A veces las respuestas importantes aparecen cuando haces preguntas más específicas.`,
-
-`Mientras más investigo, más siento que varias personas están ocultando pequeñas partes de la verdad.`
-
-]);
+Puedes preguntarme sobre la playa, el lago, Valeria, Elías, el miedo del pueblo o el Fragmento de Aurora.`;
 
 }
 
