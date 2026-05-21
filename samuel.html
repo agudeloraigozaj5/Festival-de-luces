@@ -1,241 +1,387 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samuel - Pescador anciano</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samuel — Pescador</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #07131f;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
 
-    .container {
-      width: 90%;
-      max-width: 700px;
-      background: #102638;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.5);
-    }
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    h1 {
-      margin-top: 0;
-      color: #7dd3fc;
-    }
+body{
+background:#07131a;
+font-family:'Crimson Text', serif;
+color:white;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+}
 
-    .descripcion {
-      color: #dbeafe;
-      margin-bottom: 25px;
-      line-height: 1.6;
-    }
+.fondo{
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left, rgba(0,120,160,.15), transparent 30%),
+radial-gradient(circle at bottom right, rgba(0,80,120,.18), transparent 35%),
+linear-gradient(to bottom,#07131a,#0d1f29,#07131a);
+z-index:0;
+}
 
-    .pregunta {
-      background: #12324d;
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.container{
+width:min(900px,98vw);
+height:100vh;
+display:flex;
+flex-direction:column;
+position:relative;
+z-index:2;
+background:rgba(5,12,16,.92);
+backdrop-filter:blur(4px);
+border-left:1px solid rgba(120,180,220,.12);
+border-right:1px solid rgba(120,180,220,.12);
+}
 
-    .pregunta:hover {
-      background: #1d4f7a;
-    }
+.header{
+padding:14px 18px;
+border-bottom:1px solid rgba(120,180,220,.15);
+background:rgba(8,18,24,.95);
+}
 
-    .respuesta {
-      display: none;
-      background: #091722;
-      padding: 15px;
-      border-left: 4px solid #7dd3fc;
-      margin-top: 10px;
-      border-radius: 8px;
-      line-height: 1.8;
-      color: #e0f2fe;
-    }
+.header-row{
+display:flex;
+align-items:center;
+gap:12px;
+}
 
-    .nota {
-      margin-top: 25px;
-      padding: 15px;
-      background: #061018;
-      border-radius: 10px;
-      color: #bfdbfe;
-      line-height: 1.7;
-    }
+.avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:linear-gradient(135deg,#1e5f7a,#6ca5bf);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:20px;
+font-weight:bold;
+color:#07131a;
+font-family:'Cormorant Garamond', serif;
+}
 
-  </style>
+.header-info h1{
+font-family:'Cormorant Garamond', serif;
+font-size:24px;
+font-weight:600;
+color:#d9edf5;
+}
+
+.header-sub{
+font-size:12px;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:rgba(180,220,235,.6);
+}
+
+.frase{
+margin-top:8px;
+padding-left:12px;
+border-left:2px solid rgba(120,180,220,.3);
+font-style:italic;
+color:rgba(220,240,250,.65);
+font-size:14px;
+line-height:1.5;
+}
+
+.temas{
+padding:10px 15px;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+border-bottom:1px solid rgba(120,180,220,.08);
+background:rgba(7,15,20,.95);
+}
+
+.tema-btn{
+padding:7px 13px;
+border:none;
+border-radius:20px;
+background:rgba(70,120,150,.15);
+color:#d6edf8;
+cursor:pointer;
+font-family:'Crimson Text', serif;
+font-size:14px;
+transition:.2s;
+border:1px solid rgba(120,180,220,.12);
+}
+
+.tema-btn:hover{
+background:rgba(100,160,190,.25);
+}
+
+.chat{
+flex:1;
+overflow-y:auto;
+padding:18px;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.mensaje{
+max-width:84%;
+padding:14px 16px;
+line-height:1.8;
+font-size:16px;
+animation:fade .25s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(8px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.ia{
+align-self:flex-start;
+background:rgba(14,28,36,.95);
+border:1px solid rgba(120,180,220,.12);
+border-radius:4px 14px 14px 14px;
+color:#e2f3fa;
+}
+
+.usuario{
+align-self:flex-end;
+background:rgba(20,45,30,.9);
+border:1px solid rgba(120,180,140,.18);
+border-radius:14px 4px 14px 14px;
+color:#e2ffe8;
+}
+
+.input-area{
+display:flex;
+gap:10px;
+padding:12px;
+border-top:1px solid rgba(120,180,220,.1);
+background:rgba(5,10,14,.95);
+}
+
+.input-area input{
+flex:1;
+padding:12px;
+background:rgba(12,24,30,.9);
+border:1px solid rgba(120,180,220,.15);
+outline:none;
+color:white;
+font-family:'Crimson Text', serif;
+font-size:15px;
+border-radius:4px;
+}
+
+.input-area input::placeholder{
+color:rgba(200,220,230,.4);
+}
+
+.send-btn{
+padding:12px 20px;
+border:none;
+background:#6ca5bf;
+color:#07131a;
+font-weight:bold;
+cursor:pointer;
+border-radius:4px;
+font-family:'Cormorant Garamond', serif;
+font-size:16px;
+}
+
+.footer{
+text-align:center;
+padding:6px;
+font-size:11px;
+color:rgba(180,220,235,.35);
+background:rgba(5,10,14,.95);
+}
+</style>
 </head>
+
 <body>
+
+<div class="fondo"></div>
 
 <div class="container">
 
-  <h1>🌊 Samuel — Pescador anciano</h1>
+<div class="header">
+<div class="header-row">
+<div class="avatar">S</div>
 
-  <p class="descripcion">
-    “El lago guarda secretos más antiguos que este pueblo… y algunos secretos no quieren ser encontrados.”
-  </p>
+<div class="header-info">
+<h1>Samuel</h1>
+<div class="header-sub">Pescador Anciano · Playa</div>
+</div>
+</div>
 
+<div class="frase">
+"El agua recuerda cosas que las personas prefieren olvidar."
+</div>
+</div>
 
-  <div class="pregunta" onclick="mostrar('r1')">
-    ¿Dónde estabas la noche en que desapareció el Fragmento?
+<div class="temas">
+<button class="tema-btn" onclick="preguntar('viste')">👁️ ¿Qué viste?</button>
+<button class="tema-btn" onclick="preguntar('fragmento')">💎 Fragmento</button>
+<button class="tema-btn" onclick="preguntar('escuchaste')">🌬️ ¿Qué escuchaste?</button>
+<button class="tema-btn" onclick="preguntar('lago')">🌊 Lago</button>
+<button class="tema-btn" onclick="preguntar('pasar')">🔮 ¿Qué va a pasar?</button>
+<button class="tema-btn" onclick="preguntar('sospechas')">🧍 Sospechas</button>
+<button class="tema-btn" onclick="preguntar('hablar')">🗺️ ¿Con quién hablar?</button>
+</div>
 
-    <div class="respuesta" id="r1">
-      Ah… aquella noche.
+<div class="chat" id="chat"></div>
 
-      Yo estaba en la playa, cerca de los botes viejos.
+<div class="input-area">
+<input type="text" id="pregunta" placeholder="Pregúntale algo a Samuel..." onkeydown="if(event.key==='Enter') enviar()">
+<button class="send-btn" onclick="enviar()">Preguntar</button>
+</div>
 
-      El viento soplaba diferente.
-
-      Las olas parecían inquietas… como si el lago intentara advertirnos de algo.
-
-      Desde lejos podía verse el brillo del festival entre los árboles, pero el agua… el agua estaba demasiado silenciosa.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r2')">
-    ¿Viste algo extraño sobre el agua?
-
-    <div class="respuesta" id="r2">
-      Sí.
-
-      Luces.
-
-      Pequeños reflejos danzando sobre la superficie del lago.
-
-      No eran luces normales.
-
-      Parecían moverse siguiendo algo… o a alguien.
-
-      Hace muchos años vi esas mismas luces antes de otra desgracia en el pueblo.
-
-      Algunos creen que son simples reflejos.
-
-      Yo no estoy tan seguro.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r3')">
-    ¿Escuchaste o viste a alguien cerca de la playa?
-
-    <div class="respuesta" id="r3">
-      Escuché pasos rápidos sobre la arena húmeda.
-
-      Alguien corría.
-
-      Se detenía.
-
-      Volvía a correr.
-
-      Recuerdo también una sombra inclinándose cerca de las rocas, como si escondiera algo brillante.
-
-      Pero la noche engaña los ojos de los hombres viejos…
-
-      o tal vez revela cosas que otros prefieren ignorar.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r4')">
-    ¿Qué sabes del Fragmento de Aurora?
-
-    <div class="respuesta" id="r4">
-      El Fragmento nunca debió abandonar el lago.
-
-      Eso decían los antiguos pescadores.
-
-      No era un tesoro.
-
-      Era una advertencia.
-
-      Hay objetos que atraen ambición… miedo… obsesión.
-
-      Y cuando demasiadas personas desean poseerlos, el pueblo comienza a cambiar.
-
-      Las personas se vuelven desconfiadas.
-
-      Nerviosas.
-
-      Como ocurrió aquella noche.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r5')">
-    ¿Crees que alguien robó el Fragmento?
-
-    <div class="respuesta" id="r5">
-      Mmm…
-
-      A veces las personas no roban objetos.
-
-      A veces los objetos llaman a ciertas personas.
-
-      Tal vez alguien quiso protegerlo.
-
-      Tal vez alguien quiso esconderlo.
-
-      O tal vez el lago decidió recuperarlo.
-
-      Los jóvenes siempre buscan respuestas rápidas… pero el agua nunca revela todos sus secretos de una vez.
-    </div>
-  </div>
-
-
-  <div class="pregunta" onclick="mostrar('r6')">
-    ¿Quién podría ayudarme a entender mejor lo ocurrido?
-
-    <div class="respuesta" id="r6">
-      Habla con Tomás, el periodista.
-
-      Hace demasiadas preguntas para alguien que dice no saber nada.
-
-      Y también con Valeria.
-
-      Las personas sensibles suelen notar cosas que los demás ignoran.
-
-      Escucha no solo sus palabras…
-
-      también sus silencios.
-    </div>
-  </div>
-
-
-  <div class="nota">
-    🧠 NOTA PARA CRONISTAS:
-
-    En toda crónica existen:
-    - hechos,
-    - rumores,
-    - creencias,
-    - y emociones.
-
-    El reto no es solo descubrir qué pasó…
-
-    sino comprender por qué cada persona recuerda la historia de manera distinta.
-  </div>
+<div class="footer">
+Festival de las Luces — Investigación Narrativa
+</div>
 
 </div>
 
 <script>
-  function mostrar(id) {
-    const respuesta = document.getElementById(id);
 
-    if (respuesta.style.display === "block") {
-      respuesta.style.display = "none";
-    } else {
-      respuesta.style.display = "block";
-    }
-  }
+const chat = document.getElementById("chat");
+
+const respuestas = {
+
+viste:[
+`El mar me habla de maneras que la mayoría ya no sabe escuchar. Esa noche me habló diferente. Había luces sobre el agua que no eran reflejos de las linternas del festival… eran otras luces, más profundas, como si algo debajo se estuviera despertando. Luego escuché pasos rápidos sobre la arena húmeda. Pasos de alguien que cargaba peso. No el peso del cuerpo… el peso de una decisión.`,
+
+`Vi una sombra moverse cerca de las rocas grandes. Cargaba algo que brillaba incluso tapado. Yo conozco ese brillo. Lo reconocería aunque estuviera enterrado bajo diez metros de agua. Era el Fragmento. Estoy seguro. Pero cuando quise mirar mejor… la sombra desapareció entre los árboles como si nunca hubiera estado.`
+],
+
+fragmento:[
+`El Fragmento no es de nadie. Nunca lo fue. Emergió del lago hace más de cien años durante una tormenta que duró tres días. Los ancianos de entonces dijeron que el lago lo había escupido porque ya no podía guardarlo solo. Pero también dijeron que si alguien intentaba poseerlo como suyo… el lago reclamaría lo que le pertenece. Y el lago siempre cobra lo que le deben.`,
+
+`Yo lo tuve en mis manos una vez. Solo una. Y te digo algo que nadie más te va a decir: ese objeto tiene temperatura propia. No el frío del agua ni el calor de las manos. Algo intermedio que no corresponde a ninguna estación. Como si existiera en un tiempo diferente al nuestro. Eso no es una reliquia normal. Nunca lo fue.`
+],
+
+escuchaste:[
+`El viento en la playa tiene su propio lenguaje. Esa noche traía palabras mezcladas, voces que venían de la zona central pero llegaban rotas, como si alguien las hubiera partido antes de soltarlas al aire. Escuché dos tonos distintos. Uno grave, uno más agudo. Discutían sobre algo que no debían tener.`,
+
+`Más tarde, cuando la música del festival ya casi no se escuchaba, oí pasos sobre la madera del muelle. Lentos primero, luego rápidos, como si alguien hubiera tomado una decisión repentina. Después un golpe sordo. Y luego silencio. El tipo de silencio que no es tranquilidad… sino el silencio de algo que acaba de cambiar para siempre.`
+],
+
+lago:[
+`Hay cosas que existen para estar en ciertos lugares. El pez en el agua, el pájaro en el cielo, la raíz en la tierra. El Fragmento de Aurora existía para estar en el lago. Cuando está cerca del agua el pueblo duerme tranquilo. Cuando se aleja… las redes aparecen vacías. El ganado se pone nervioso.`,
+
+`Mi abuelo me contó que una vez, hace mucho tiempo, alguien intentó vender el Fragmento a un comerciante de la ciudad. Lo llevó lejos del lago por primera vez. Esa semana el lago creció tres metros sin que hubiera llovido. Las casas de la orilla quedaron bajo el agua. El hombre devolvió el Fragmento corriendo y no volvió a hablar del tema hasta el día que murió.`
+],
+
+pasar:[
+`El agua ya lo siente. Puedo verlo en la manera en que las olas llegan a la orilla. Más cortas, más nerviosas, como si el lago estuviera buscando algo que perdió. Los peces también lo sienten, llevan días nadando en círculos cerca de la superficie.`,
+
+`No sé qué va a pasar exactamente. Soy viejo, no adivino. Pero sé lo que he visto en setenta años viviendo frente a ese lago. Las cosas que salen de su lugar siempre buscan regresar. De una manera o de otra. El Fragmento va a volver al lago.`
+],
+
+sospechas:[
+`Sospechar es una palabra de gente joven. Yo simplemente observo. Y lo que he observado es que esa noche había personas en la playa que no tenían razón para estar ahí. El periodista estuvo rondando cerca del agua mucho antes de que empezara el festival.`,
+
+`El futbolista también estuvo por aquí. Elías. Se quedó mirando el agua un rato largo, más de lo que se mira el agua cuando uno simplemente está paseando. Tenía las manos metidas en los bolsillos y los hombros tensos.`
+],
+
+hablar:[
+`Si quieres entender lo que pasó con los ojos del presente, habla con Tomás, el periodista. Está en la zona central. Él observa todo aunque finge que solo escribe.`,
+
+`La bailarina principal, Valeria, estaba nerviosa desde antes de que empezara el festival. Yo la vi caminar por la orilla una hora antes de la ceremonia, sola, mirando el agua. Ella sabe algo que todavía no ha dicho en voz alta.`
+]
+
+};
+
+const usadas = {};
+
+function agregar(texto,tipo){
+const div=document.createElement("div");
+div.classList.add("mensaje",tipo);
+div.innerHTML=texto;
+chat.appendChild(div);
+chat.scrollTop=chat.scrollHeight;
+}
+
+function obtener(tema){
+if(!usadas[tema]) usadas[tema]=0;
+const idx=usadas[tema]%respuestas[tema].length;
+usadas[tema]++;
+return respuestas[tema][idx];
+}
+
+function detectar(texto){
+texto=texto.toLowerCase();
+
+if(texto.match(/ver|viste|sombra|noche/)) return "viste";
+if(texto.match(/fragmento|aurora|objeto/)) return "fragmento";
+if(texto.match(/escuch|sonido|voces|muelle/)) return "escuchaste";
+if(texto.match(/lago|agua/)) return "lago";
+if(texto.match(/pasar|ocurrir|futuro/)) return "pasar";
+if(texto.match(/sospecha|culpable|periodista|elias/)) return "sospechas";
+if(texto.match(/hablar|quien|investigar/)) return "hablar";
+
+return null;
+}
+
+function preguntar(tema){
+const etiquetas={
+viste:"¿Qué viste esa noche?",
+fragmento:"¿Qué sabes del Fragmento?",
+escuchaste:"¿Qué escuchaste?",
+lago:"¿Por qué el Fragmento pertenece al lago?",
+pasar:"¿Qué crees que va a pasar?",
+sospechas:"¿Sospechas de alguien?",
+hablar:"¿Con quién debería hablar?"
+};
+
+agregar(etiquetas[tema],"usuario");
+
+setTimeout(()=>{
+agregar(obtener(tema),"ia");
+},700);
+}
+
+function enviar(){
+
+const input=document.getElementById("pregunta");
+const texto=input.value.trim();
+
+if(!texto) return;
+
+agregar(texto,"usuario");
+
+input.value="";
+
+const tema=detectar(texto);
+
+setTimeout(()=>{
+
+if(tema){
+agregar(obtener(tema),"ia");
+}else{
+agregar("Samuel guarda silencio unos segundos mientras observa el agua a la distancia. “Hay preguntas que el lago responde mejor que yo… pero puedes preguntarme sobre lo que vi, el Fragmento, el lago, las voces de esa noche o las personas del festival.”","ia");
+}
+
+},700);
+
+}
+
+window.onload=()=>{
+setTimeout(()=>{
+agregar("Samuel observa el horizonte antes de hablar. “La mayoría viene buscando respuestas rápidas… pero el lago nunca entrega la verdad completa de inmediato. ¿Qué deseas saber?”","ia");
+},500);
+};
+
 </script>
 
 </body>
