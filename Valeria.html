@@ -1,214 +1,620 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Valeria - Bailarina Principal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valeria — Bailarina Principal</title>
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #1a1325;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 
-    .container {
-      width: 90%;
-      max-width: 700px;
-      background: #2d1b46;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    h1 {
-      margin-top: 0;
-      color: #f9a8d4;
-    }
+body{
+background:#0a0c10;
+font-family:'Crimson Pro', serif;
+color:white;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
 
-    .descripcion {
-      color: #f3e8ff;
-      margin-bottom: 25px;
-      line-height: 1.6;
-    }
+.luz{
+position:fixed;
+border-radius:50%;
+pointer-events:none;
+z-index:0;
+animation:flotar 8s ease-in-out infinite;
+}
 
-    .pregunta {
-      background: #4c1d95;
-      padding: 15px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
+.luz:nth-child(1){
+width:240px;
+height:240px;
+top:-40px;
+left:-30px;
+background:radial-gradient(circle, rgba(255,180,120,0.12) 0%, transparent 70%);
+}
 
-    .pregunta:hover {
-      background: #6d28d9;
-    }
+.luz:nth-child(2){
+width:180px;
+height:180px;
+bottom:-30px;
+right:-20px;
+background:radial-gradient(circle, rgba(255,120,180,0.08) 0%, transparent 70%);
+animation-delay:3s;
+}
 
-    .respuesta {
-      display: none;
-      background: #1e1b4b;
-      padding: 15px;
-      border-left: 4px solid #f9a8d4;
-      margin-top: 10px;
-      border-radius: 8px;
-      line-height: 1.7;
-      color: #ede9fe;
-    }
+@keyframes flotar{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-18px);}
+}
 
-    .nota {
-      margin-top: 25px;
-      padding: 15px;
-      background: #140f1f;
-      border-radius: 10px;
-      color: #f5d0fe;
-      line-height: 1.6;
-    }
+.container{
+width:min(860px,98vw);
+height:100vh;
+display:flex;
+flex-direction:column;
+background:linear-gradient(180deg,#120d0f 0%,#1b1216 100%);
+position:relative;
+z-index:1;
+}
 
-  </style>
+.header{
+padding:12px 18px;
+background:linear-gradient(135deg,#24151b 0%,#3a1f2d 100%);
+border-bottom:2px solid rgba(255,180,180,0.2);
+}
+
+.header-row{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.avatar{
+width:42px;
+height:42px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:'Playfair Display', serif;
+font-size:18px;
+font-weight:bold;
+background:linear-gradient(135deg,#ffb38a,#ff7ab6);
+color:#1a1015;
+box-shadow:0 0 0 2px rgba(255,180,180,0.2);
+}
+
+.header-info{
+flex:1;
+}
+
+.header-info h1{
+font-family:'Playfair Display', serif;
+font-size:18px;
+color:#ffe7d4;
+}
+
+.header-sub{
+font-size:11px;
+color:rgba(255,220,200,0.65);
+letter-spacing:.08em;
+text-transform:uppercase;
+}
+
+.zona{
+font-size:10px;
+padding:4px 10px;
+border:1px solid rgba(255,200,200,0.2);
+border-radius:3px;
+color:rgba(255,220,220,0.7);
+}
+
+.frase{
+margin-top:8px;
+font-style:italic;
+font-size:13px;
+color:rgba(255,220,220,0.6);
+border-left:2px solid rgba(255,180,180,0.3);
+padding-left:10px;
+line-height:1.5;
+}
+
+.temas-wrap{
+padding:8px 14px;
+background:rgba(30,18,24,0.95);
+border-bottom:1px solid rgba(255,180,180,0.1);
+}
+
+.temas-label{
+font-size:10px;
+text-transform:uppercase;
+letter-spacing:.1em;
+color:rgba(255,220,220,0.4);
+margin-bottom:6px;
+}
+
+.temas{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+}
+
+.tema-btn{
+padding:5px 12px;
+background:rgba(255,180,180,0.08);
+border:1px solid rgba(255,180,180,0.15);
+border-radius:20px;
+font-family:'Crimson Pro', serif;
+font-size:12px;
+cursor:pointer;
+color:#ffd8d8;
+transition:.2s;
+}
+
+.tema-btn:hover{
+background:rgba(255,180,180,0.18);
+border-color:rgba(255,180,180,0.4);
+}
+
+.chat{
+flex:1;
+overflow-y:auto;
+padding:16px;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.chat::-webkit-scrollbar{
+width:4px;
+}
+
+.chat::-webkit-scrollbar-thumb{
+background:rgba(255,180,180,0.2);
+}
+
+.mensaje{
+max-width:84%;
+padding:13px 16px;
+line-height:1.8;
+font-size:15px;
+animation:aparecer .25s ease;
+}
+
+@keyframes aparecer{
+from{
+opacity:0;
+transform:translateY(8px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.ia{
+align-self:flex-start;
+background:rgba(42,24,32,0.9);
+border:1px solid rgba(255,180,180,0.12);
+border-radius:3px 14px 14px 14px;
+color:#ffe5e5;
+}
+
+.usuario{
+align-self:flex-end;
+background:rgba(20,45,28,0.9);
+border:1px solid rgba(100,180,120,0.2);
+border-radius:14px 3px 14px 14px;
+color:#d9ffd9;
+}
+
+.typing-wrap{
+align-self:flex-start;
+}
+
+.typing{
+display:inline-flex;
+gap:5px;
+padding:10px 14px;
+background:rgba(42,24,32,0.9);
+border:1px solid rgba(255,180,180,0.12);
+border-radius:3px 14px 14px 14px;
+}
+
+.typing span{
+width:6px;
+height:6px;
+border-radius:50%;
+background:#ffb3c8;
+animation:bounce .9s infinite;
+}
+
+.typing span:nth-child(2){
+animation-delay:.15s;
+}
+
+.typing span:nth-child(3){
+animation-delay:.3s;
+}
+
+@keyframes bounce{
+0%,80%,100%{
+transform:translateY(0);
+}
+40%{
+transform:translateY(-6px);
+}
+}
+
+.input-area{
+display:flex;
+gap:8px;
+padding:12px;
+background:rgba(20,10,15,0.96);
+border-top:1px solid rgba(255,180,180,0.08);
+}
+
+.input-area input{
+flex:1;
+padding:11px 14px;
+background:rgba(45,25,32,0.9);
+border:1px solid rgba(255,180,180,0.15);
+border-radius:4px;
+outline:none;
+font-size:14px;
+font-family:'Crimson Pro', serif;
+color:#ffe8e8;
+}
+
+.input-area input:focus{
+border-color:rgba(255,180,180,0.4);
+}
+
+.input-area input::placeholder{
+color:rgba(255,220,220,0.35);
+}
+
+.send-btn{
+padding:10px 18px;
+border:none;
+border-radius:4px;
+cursor:pointer;
+font-family:'Playfair Display', serif;
+font-size:14px;
+font-weight:bold;
+background:linear-gradient(135deg,#ffb38a,#ff7ab6);
+color:#1a1015;
+}
+
+.footer{
+text-align:center;
+padding:5px;
+font-size:11px;
+color:rgba(255,220,220,0.25);
+background:rgba(20,10,15,0.96);
+}
+</style>
 </head>
+
 <body>
+
+<div class="luz"></div>
+<div class="luz"></div>
 
 <div class="container">
 
-  <h1>🩰 Valeria — Bailarina principal</h1>
+<div class="header">
+<div class="header-row">
 
-  <p class="descripcion">
-    “Algo no se sentía normal aquella noche… las luces brillaban hermoso, pero todos parecían esconder algo.”
-  </p>
+<div class="avatar">V</div>
 
+<div class="header-info">
+<h1>Valeria</h1>
+<div class="header-sub">Bailarina Principal · Festival de las Luces</div>
+</div>
 
-  <div class="pregunta" onclick="mostrar('r1')">
-    ¿Dónde estabas cuando desapareció el Fragmento de Aurora?
+<div class="zona">ZONA DE HONGOS</div>
 
-    <div class="respuesta" id="r1">
-      Estaba detrás del escenario, cerca de la zona de hongos, preparándome para salir a bailar.
-      
-      Recuerdo que las luces del festival iluminaban todo de colores morados y dorados… pero aun así el ambiente se sentía extraño.
-      
-      Escuché una discusión fuerte cerca de la zona central. No logré entender todo lo que decían, pero una de las voces sonaba desesperada.
-      
-      Después de eso vi una figura correr hacia la playa.
-    </div>
-  </div>
+</div>
 
+<div class="frase">
+"A veces el cuerpo siente el peligro antes de que la mente logre entenderlo."
+</div>
+</div>
 
-  <div class="pregunta" onclick="mostrar('r2')">
-    ¿Qué recuerdas sobre la persona que corría?
+<div class="temas-wrap">
 
-    <div class="respuesta" id="r2">
-      No pude verle bien el rostro…
-      
-      Todo pasó muy rápido.
-      
-      Pero recuerdo claramente una chaqueta oscura, casi negra, y algo brillante escondido bajo el brazo.
-      
-      La persona corría mirando hacia atrás constantemente, como si tuviera miedo de que alguien la siguiera.
-      
-      A veces pienso que quizás solo imaginé algunas cosas… pero estoy segura de que alguien ocultaba algo esa noche.
-    </div>
-  </div>
+<div class="temas-label">
+Puedes preguntarme sobre
+</div>
 
+<div class="temas">
 
-  <div class="pregunta" onclick="mostrar('r3')">
-    ¿Cómo estaba el ambiente durante el festival?
+<button class="tema-btn" onclick="preguntar('festival')">🎭 Festival</button>
 
-    <div class="respuesta" id="r3">
-      Hermoso… y aterrador al mismo tiempo.
-      
-      La música sonaba fuerte, las personas reían y bailaban, pero había demasiadas miradas nerviosas.
-      
-      El viento movía las luces colgadas entre los árboles y algunas antorchas se apagaban solas.
-      
-      Sentía como si alguien estuviera observándonos desde lejos mientras bailábamos.
-      
-      Nunca había sentido algo así durante el Festival de las Luces.
-    </div>
-  </div>
+<button class="tema-btn" onclick="preguntar('playa')">🌊 Playa</button>
 
+<button class="tema-btn" onclick="preguntar('elias')">⚽ Elías</button>
 
-  <div class="pregunta" onclick="mostrar('r4')">
-    ¿A quién viste actuar de forma extraña?
+<button class="tema-btn" onclick="preguntar('miedo')">😨 Miedo</button>
 
-    <div class="respuesta" id="r4">
-      Bueno…
-      
-      Vi al futbolista cerca de la zona de hielo mucho más tarde de lo normal.
-      
-      Parecía nervioso y caminaba rápido, como si estuviera buscando a alguien.
-      
-      También recuerdo que varias personas dejaron de bailar de repente cuando comenzó la discusión cerca de la fuente.
-      
-      Y el periodista… Tomás… observaba demasiado.
-      
-      Como si estuviera intentando conectar algo en su cabeza.
-    </div>
-  </div>
+<button class="tema-btn" onclick="preguntar('fragmento')">💎 Fragmento</button>
 
+<button class="tema-btn" onclick="preguntar('sospechas')">👀 Sospechas</button>
 
-  <div class="pregunta" onclick="mostrar('r5')">
-    ¿Crees que alguien robó el Fragmento?
+<button class="tema-btn" onclick="preguntar('hablar')">🗺️ ¿Con quién hablar?</button>
 
-    <div class="respuesta" id="r5">
-      No estoy completamente segura…
-      
-      Parte de mí cree que alguien intentó protegerlo.
-      
-      Pero otra parte piensa que todos estaban demasiado asustados para decir la verdad.
-      
-      Samuel, el pescador, siempre decía que el Fragmento nunca debió salir del agua.
-      
-      Tal vez deberías hablar con él… conoce historias antiguas del pueblo.
-    </div>
-  </div>
+<button class="tema-btn" onclick="preguntar('presentacion')">💃 Presentación</button>
 
+</div>
+</div>
 
-  <div class="pregunta" onclick="mostrar('r6')">
-    ¿Quién podría ayudarme a entender mejor lo que pasó?
+<div class="chat" id="chat"></div>
 
-    <div class="respuesta" id="r6">
-      Creo que deberías hablar con:
-      
-      ❄️ Elías, en la zona de hielo. Estoy segura de que vio más de lo que admite.
-      
-      🌊 Samuel, el pescador de la playa. Él conoce secretos antiguos sobre el Fragmento.
-      
-      📰 Y quizá Tomás, el periodista… aunque siento que oculta algo.
-      
-      Algo no se sentía normal aquella noche.
-    </div>
-  </div>
+<div class="input-area">
+<input
+type="text"
+id="pregunta"
+placeholder="Escribe tu pregunta a Valeria..."
+onkeydown="if(event.key==='Enter') enviar()"
+>
 
+<button class="send-btn" onclick="enviar()">
+Preguntar
+</button>
+</div>
 
-  <div class="nota">
-    🧠 NOTA PARA CRONISTAS:
-    
-    Las emociones también cuentan una historia.
-    
-    A veces las personas no recuerdan exactamente los hechos…
-    pero sí recuerdan el miedo, el silencio o las miradas.
-    
-    Escucha cuidadosamente cada detalle.
-  </div>
+<div class="footer">
+Festival de las Luces — Investigación Narrativa
+</div>
 
 </div>
 
 <script>
-  function mostrar(id) {
-    const respuesta = document.getElementById(id);
 
-    if (respuesta.style.display === "block") {
-      respuesta.style.display = "none";
-    } else {
-      respuesta.style.display = "block";
-    }
-  }
+const chat = document.getElementById("chat");
+const usadas = {};
+
+const respuestas = {
+
+festival: [
+
+`El festival normalmente es mi momento favorito del año. Luces, música, niños corriendo, personas riendo… todo el pueblo parece distinto. Pero esa noche el ambiente estaba pesado. Como si todos estuvieran fingiendo pasarla bien mientras esperaban que algo malo ocurriera. Y honestamente… creo que algunos ya sabían que algo iba a pasar antes de que desapareciera el Fragmento.`,
+
+`Intenté convencerme toda la noche de que eran solo nervios por la presentación… pero no lo eran. Desde antes de subir al escenario sentía algo extraño en el ambiente. Las personas hablaban demasiado bajo, como si estuvieran intentando que nadie más escuchara ciertas conversaciones. Y había miradas. Muchas miradas. De esas que duran apenas un segundo, pero te hacen sentir observada incluso después de que desaparecen.`
+
+],
+
+playa: [
+
+`No vi el rostro de la persona, pero sí recuerdo perfectamente la manera en que corría. Era una carrera desesperada, torpe, como alguien que no estaba acostumbrado a esconder cosas. Llevaba algo bajo el brazo y volteaba constantemente hacia atrás. En ese momento pensé que quizá era alguien borracho saliendo del festival… ahora ya no estoy tan segura.`,
+
+`La playa me dio miedo esa noche. Y eso es raro en mí. Siempre me gustó escuchar el mar después de bailar porque me ayudaba a tranquilizarme, pero aquella vez sentía que algo estaba mal incluso antes de acercarme. Había demasiada oscuridad… demasiadas sombras moviéndose entre las luces del festival.`
+
+],
+
+elias: [
+
+`Elías normalmente actúa como si nada pudiera alterarlo. Incluso cuando pierde un partido sigue comportándose tranquilo. Pero esa noche no era el mismo. Lo vi discutir con alguien cerca del hielo antes de la presentación principal. Movía mucho las manos y caminaba de un lado a otro como si estuviera desesperado por resolver algo rápido.`,
+
+`No quiero acusarlo de nada porque honestamente no sé toda la verdad… pero sí sé que evitó acercarse demasiado a ciertas personas después de la desaparición. Y recuerdo algo más. Cuando mencionaron el Fragmento cerca de él, dejó de sonreír inmediatamente.`
+
+],
+
+miedo: [
+
+`Sentí miedo antes de entender por qué tenía miedo. Y eso fue lo peor. Porque normalmente cuando uno tiene miedo sabe de qué está huyendo. Pero aquella noche era diferente. Era como si mi cuerpo supiera algo antes que mi cabeza.`,
+
+`Hubo un momento durante la coreografía donde olvidé completamente qué paso seguía. Nunca me pasa eso. Nunca. Pero alcé la mirada hacia la zona central y sentí una presión horrible en el pecho, como si algo estuviera a punto de romperse frente a todos.`
+
+],
+
+fragmento: [
+
+`Nunca me gustó estar demasiado cerca del Fragmento. Sé que suena absurdo porque todos en el pueblo crecimos viéndolo durante el festival, pero cuando me acercaba sentía algo extraño… una sensación difícil de explicar. Como si el objeto guardara demasiadas historias encima.`,
+
+`Hay personas que creen que el Fragmento es solo una reliquia bonita. Yo creo que significa más que eso para mucha gente del pueblo. Y cuando las personas empiezan a darle demasiado poder a un objeto… terminan haciendo cosas peligrosas por él.`
+
+],
+
+sospechas: [
+
+`Sí… creo que varias personas están ocultando cosas. El problema es que no sé si lo hacen por miedo, por culpa… o porque realmente participaron en lo que pasó esa noche. A veces siento que todos en el pueblo saben una parte pequeña de la historia, pero nadie se atreve a juntar todas las piezas.`,
+
+`Hay silencios que dicen mucho más que las palabras. Después de la desaparición del Fragmento hubo personas que dejaron de hablar de golpe apenas alguien hacía ciertas preguntas. Y eso normalmente significa que saben más de lo que admiten.`
+
+],
+
+hablar: [
+
+`Si quieres entender realmente qué ocurrió esa noche, deberías hablar con Samuel en la playa. A veces parece confundido o demasiado misterioso, pero él observa mucho más de lo que aparenta. Además… lleva demasiados años viendo lo que ocurre en este pueblo.`,
+
+`Creo que Tomás, el periodista, está conectando cosas que los demás todavía no entienden. Puede parecer tranquilo cuando habla, pero se nota que hay detalles que lo tienen obsesionado. Si yo estuviera investigando seriamente… empezaría por hablar con él.`
+
+],
+
+presentacion: [
+
+`La presentación debía ser perfecta. Llevábamos semanas practicando cada movimiento, cada paso, cada giro… pero aquella noche nada se sintió normal. Yo seguía mirando hacia la zona central sin entender por qué. Era como si una parte de mí estuviera esperando que algo terrible ocurriera.`,
+
+`Recuerdo las luces reflejándose sobre el escenario y la música sonando demasiado fuerte. Pero aun así podía escuchar murmullos entre el público. Conversaciones tensas. Personas discutiendo en voz baja. Intenté seguir bailando como si nada estuviera pasando… aunque por dentro sentía que algo estaba rompiéndose.`
+
+]
+
+};
+
+function agregar(texto, tipo){
+
+const div = document.createElement("div");
+
+div.classList.add("mensaje", tipo);
+
+div.innerHTML = texto.replace(/\n/g,"<br>");
+
+chat.appendChild(div);
+
+chat.scrollTop = chat.scrollHeight;
+
+}
+
+function mostrarTyping(){
+
+const wrap = document.createElement("div");
+
+wrap.classList.add("typing-wrap");
+
+wrap.id = "typing";
+
+wrap.innerHTML = `
+<div class="typing">
+<span></span>
+<span></span>
+<span></span>
+</div>
+`;
+
+chat.appendChild(wrap);
+
+chat.scrollTop = chat.scrollHeight;
+
+}
+
+function quitarTyping(){
+
+const t = document.getElementById("typing");
+
+if(t) t.remove();
+
+}
+
+function obtenerRespuesta(tema){
+
+const lista = respuestas[tema];
+
+if(!lista) return null;
+
+if(!usadas[tema]) usadas[tema]=0;
+
+const idx = usadas[tema] % lista.length;
+
+usadas[tema]++;
+
+return lista[idx];
+
+}
+
+function detectarTema(texto){
+
+const t = texto.toLowerCase();
+
+if(t.match(/festival|noche|fiesta/)) return "festival";
+
+if(t.match(/playa|mar|arena|orilla/)) return "playa";
+
+if(t.match(/el[ií]as|futbolista/)) return "elias";
+
+if(t.match(/miedo|asustada|temor|nervios/)) return "miedo";
+
+if(t.match(/fragmento|aurora|objeto/)) return "fragmento";
+
+if(t.match(/sospecha|mentira|ocultan|oculta/)) return "sospechas";
+
+if(t.match(/hablar|preguntar|investigar|qui[eé]n/)) return "hablar";
+
+if(t.match(/presentaci[oó]n|baile|coreograf[ií]a|danza/)) return "presentacion";
+
+return null;
+
+}
+
+function preguntar(tema){
+
+const etiquetas = {
+
+festival:"¿Cómo estuvo el festival esa noche?",
+
+playa:"¿Qué viste en la playa?",
+
+elias:"¿Qué sabes de Elías?",
+
+miedo:"¿Tuviste miedo?",
+
+fragmento:"¿Qué piensas del Fragmento?",
+
+sospechas:"¿Crees que alguien miente?",
+
+hablar:"¿Con quién debería hablar?",
+
+presentacion:"¿Cómo fue la presentación?"
+
+};
+
+agregar(etiquetas[tema], "usuario");
+
+responderTema(tema);
+
+}
+
+function responderTema(tema){
+
+mostrarTyping();
+
+setTimeout(()=>{
+
+quitarTyping();
+
+const resp = obtenerRespuesta(tema);
+
+if(resp){
+
+agregar(resp, "ia");
+
+}else{
+
+agregar("No estoy segura de cómo responder eso… todavía sigo intentando ordenar todo lo que sentí aquella noche.", "ia");
+
+}
+
+},1000);
+
+}
+
+function enviar(){
+
+const input = document.getElementById("pregunta");
+
+const texto = input.value.trim();
+
+if(!texto) return;
+
+agregar(texto, "usuario");
+
+input.value="";
+
+const tema = detectarTema(texto);
+
+responderTema(tema || "default");
+
+}
+
+window.addEventListener("load", ()=>{
+
+setTimeout(()=>{
+
+agregar("Desde aquella noche siento que algo cambió en el pueblo… y quizás también en mí. A veces pienso que vi cosas importantes, aunque todavía no logro entenderlas completamente. ¿Qué quieres preguntarme?", "ia");
+
+},500);
+
+});
+
 </script>
 
 </body>
