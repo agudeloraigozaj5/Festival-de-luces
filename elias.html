@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elías - Futbolista del pueblo</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #09121f;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      background: #102033;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #7dd3fc;
+    }
+
+    .descripcion {
+      color: #dbeafe;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .pregunta {
+      background: #1e3a5f;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .pregunta:hover {
+      background: #2563eb;
+    }
+
+    .respuesta {
+      display: none;
+      background: #0f172a;
+      padding: 15px;
+      border-left: 4px solid #7dd3fc;
+      margin-top: 10px;
+      border-radius: 8px;
+      line-height: 1.7;
+      color: #e0f2fe;
+    }
+
+    .nota {
+      margin-top: 25px;
+      padding: 15px;
+      background: #07101b;
+      border-radius: 10px;
+      color: #bfdbfe;
+      line-height: 1.6;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>⚽ Elías — Futbolista del pueblo</h1>
+
+  <p class="descripcion">
+    “Todos creen que saben lo que pasó esa noche… pero casi nadie vio realmente lo que ocurría.”
+  </p>
+
+
+  <div class="pregunta" onclick="mostrar('r1')">
+    ¿Dónde estabas cuando desapareció el Fragmento de Aurora?
+
+    <div class="respuesta" id="r1">
+      Después del festival me quedé cerca de la zona de hielo.
+
+      Hacía muchísimo frío esa noche. El viento golpeaba fuerte los árboles y el lago parecía demasiado oscuro.
+
+      Escuché varias personas hablando nerviosas cerca de la zona central, pero decidí alejarme.
+
+      No quería meterme en problemas… aunque supongo que terminé involucrado igual.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r2')">
+    ¿Viste algo sospechoso?
+
+    <div class="respuesta" id="r2">
+      Sí.
+
+      Vi al periodista del pueblo caminando rápido con una linterna.
+
+      Parecía buscar algo desesperadamente.
+
+      Iba hacia la zona central y revisaba constantemente detrás de él, como si temiera que alguien lo siguiera.
+
+      No digo que haya hecho algo malo… pero actuaba extraño.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r3')">
+    ¿Qué escuchaste cerca del hielo?
+
+    <div class="respuesta" id="r3">
+      Algo se rompió.
+
+      Fue un sonido seco… fuerte.
+
+      Como vidrio o piedra golpeándose.
+
+      Después todo quedó en silencio por unos segundos.
+
+      Incluso el viento parecía haberse detenido.
+
+      Recuerdo haber sentido que alguien me observaba desde los árboles cercanos.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r4')">
+    ¿Cómo se comportaban las personas del festival?
+
+    <div class="respuesta" id="r4">
+      Nerviosas.
+
+      Especialmente Valeria, la bailarina principal.
+
+      Antes de salir al espectáculo parecía distraída y alterada.
+
+      Varias veces miró hacia la playa y luego hacia la zona central.
+
+      Como si estuviera esperando que ocurriera algo.
+
+      Y sinceramente… creo que no era la única.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r5')">
+    ¿Tú seguiste a alguien esa noche?
+
+    <div class="respuesta" id="r5">
+      …
+
+      No exactamente.
+
+      Bueno… quizá sí.
+
+      Vi una silueta moverse rápido entre los árboles y la seguí durante unos minutos.
+
+      Pero cuando llegué cerca del viejo sendero hacia la casa del árbol… desapareció.
+
+      No sé quién era.
+
+      O tal vez prefiero no estar completamente seguro.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r6')">
+    ¿Quién podría saber más sobre lo ocurrido?
+
+    <div class="respuesta" id="r6">
+      Tal vez deberías hablar con:
+
+      📰 Tomás, el periodista. Siempre está observando demasiado.
+
+      🌲 O alguien en la casa del árbol. Hay personas que usan ese lugar para esconder cosas o hablar lejos del festival.
+
+      Solo ten cuidado.
+
+      Esa noche todos parecían ocultar algo.
+    </div>
+  </div>
+
+
+  <div class="nota">
+    🧠 NOTA PARA CRONISTAS:
+
+    Una historia no solo se construye con hechos.
+
+    También importa:
+    - cómo reaccionaban las personas,
+    - qué evitaban decir,
+    - y qué intentaban esconder.
+  </div>
+
+</div>
+
+<script>
+  function mostrar(id) {
+    const respuesta = document.getElementById(id);
+
+    if (respuesta.style.display === "block") {
+      respuesta.style.display = "none";
+    } else {
+      respuesta.style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>
