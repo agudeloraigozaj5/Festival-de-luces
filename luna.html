@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luna - Bailarina secundaria</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #1b1026;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      background: #2a163d;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #f9a8d4;
+    }
+
+    .descripcion {
+      color: #f3e8ff;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .pregunta {
+      background: #4b1f6b;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .pregunta:hover {
+      background: #7e22ce;
+    }
+
+    .respuesta {
+      display: none;
+      background: #1f1230;
+      padding: 15px;
+      border-left: 4px solid #f9a8d4;
+      margin-top: 10px;
+      border-radius: 8px;
+      line-height: 1.8;
+      color: #f5d0fe;
+    }
+
+    .nota {
+      margin-top: 25px;
+      padding: 15px;
+      background: #140b20;
+      border-radius: 10px;
+      color: #fbcfe8;
+      line-height: 1.7;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>🌙 Luna — Bailarina secundaria</h1>
+
+  <p class="descripcion">
+    “Yo sé MUCHAS cosas… aunque bueno, algunas personas dicen que hablo demasiado.”
+  </p>
+
+
+  <div class="pregunta" onclick="mostrar('r1')">
+    ¿Qué recuerdas de la noche del festival?
+
+    <div class="respuesta" id="r1">
+      Muchísimas cosas.
+
+      Todo estaba raro desde antes de que comenzara el espectáculo.
+
+      La gente sonreía… pero esas sonrisas se sentían falsas.
+
+      Vi personas entrando y saliendo de la casa del árbol constantemente, como si estuvieran escondiendo algo o reuniéndose en secreto.
+
+      Y el ambiente… no sé… se sentía pesado.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r2')">
+    ¿Escuchaste conversaciones sospechosas?
+
+    <div class="respuesta" id="r2">
+      Sí.
+
+      Escuché varias.
+
+      Pero una me llamó mucho la atención porque hablaban muy bajito y parecían nerviosos.
+
+      No logré entender todo, pero alguien dijo algo como:
+      
+      “No debía salir del lago”.
+
+      Después escuché pasos rápidos bajando por el sendero hacia la playa.
+
+      Honestamente… creo que varias personas sabían más de lo que decían.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r3')">
+    ¿Viste a alguien actuar extraño?
+
+    <div class="respuesta" id="r3">
+      Bueno…
+
+      El periodista estaba demasiado inquieto.
+
+      Caminaba rápido, escribía cosas en una libreta y miraba hacia todos lados.
+
+      Y Elías, el futbolista, discutió con alguien cerca de la zona de hielo.
+
+      No sé con quién.
+
+      Solo recuerdo que levantó la voz y luego se fue muy alterado.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r4')">
+    ¿Qué recuerdas sobre la ropa o apariencia de las personas?
+
+    <div class="respuesta" id="r4">
+      Ah sí, eso sí lo recuerdo bien.
+
+      Una persona llevaba guantes oscuros incluso cuando no hacía tanto frío.
+
+      Eso me pareció rarísimo.
+
+      También vi botas llenas de barro cerca de la escalera de la casa del árbol.
+
+      Y alguien tenía una chaqueta mojada, como si hubiera estado cerca del lago o bajo la lluvia.
+
+      Aunque… bueno… tal vez estoy mezclando algunas cosas.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r5')">
+    ¿Crees que alguien robó el Fragmento?
+
+    <div class="respuesta" id="r5">
+      No sé si “robar” sea la palabra correcta.
+
+      A veces siento que alguien intentaba esconderlo.
+
+      O protegerlo.
+
+      Pero definitivamente todos estaban demasiado nerviosos esa noche.
+
+      Incluso los bailarines dejaron de bromear antes del espectáculo.
+
+      Y eso nunca pasa.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r6')">
+    ¿Quién podría ayudarme a descubrir más?
+
+    <div class="respuesta" id="r6">
+      Deberías hablar con:
+
+      🌊 Samuel, en la playa. Ese señor sabe historias MUY raras sobre el lago.
+
+      ❄️ Elías, en la zona de hielo. Estoy segura de que no contó todo.
+
+      📰 O Tomás, el periodista. Aunque honestamente… creo que él sabe muchísimo más de lo que aparenta.
+    </div>
+  </div>
+
+
+  <div class="nota">
+    🧠 NOTA PARA CRONISTAS:
+
+    Los rumores también forman parte de una historia.
+
+    Pero un buen cronista debe aprender:
+    - qué parece verdad,
+    - qué puede ser exageración,
+    - y qué detalles se repiten entre diferentes testimonios.
+  </div>
+
+</div>
+
+<script>
+  function mostrar(id) {
+    const respuesta = document.getElementById(id);
+
+    if (respuesta.style.display === "block") {
+      respuesta.style.display = "none";
+    } else {
+      respuesta.style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>
