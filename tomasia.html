@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tomás IA Narrativa</title>
+<title>Tomás — IA Narrativa Avanzada</title>
 
 <style>
 
@@ -17,7 +17,7 @@ body{
 }
 
 .container{
-    max-width:900px;
+    max-width:950px;
     margin:auto;
     height:100vh;
     display:flex;
@@ -38,9 +38,9 @@ body{
 }
 
 .header p{
-    color:#e2e8f0;
+    color:#dbeafe;
+    line-height:1.7;
     margin-top:10px;
-    line-height:1.5;
 }
 
 .chat{
@@ -49,14 +49,14 @@ body{
     padding:20px;
     display:flex;
     flex-direction:column;
-    gap:15px;
+    gap:18px;
 }
 
 .mensaje{
-    max-width:80%;
-    padding:16px;
+    max-width:85%;
+    padding:18px;
     border-radius:18px;
-    line-height:1.7;
+    line-height:1.8;
     font-size:17px;
 }
 
@@ -99,11 +99,11 @@ button:hover{
     background:#eab308;
 }
 
-.sistema{
+.footer{
     text-align:center;
+    padding:10px;
     color:#94a3b8;
     font-size:14px;
-    padding:8px;
 }
 
 </style>
@@ -114,31 +114,39 @@ button:hover{
 <div class="container">
 
 <div class="header">
+
 <h1>📰 Tomás — Periodista del pueblo</h1>
 
 <p>
-“Toda historia tiene varias versiones… la difícil es descubrir cuál merece ser contada.”
+“La verdad rara vez aparece completa desde el principio.<br>
+Normalmente llega en fragmentos… igual que los recuerdos.”
 </p>
+
 </div>
 
 <div class="chat" id="chat">
 
 <div class="mensaje ia">
-Llegas justo cuando el pueblo empieza a desconfiar de todos.<br><br>
 
-La desaparición del Fragmento de Aurora cambió el ambiente del festival.<br><br>
+El ambiente en el pueblo cambió desde la desaparición del Fragmento de Aurora.<br><br>
+
+Las personas sonríen menos.<br>
+Hablan en voz baja.<br>
+Y algunos parecen asustados incluso cuando intentan ocultarlo.<br><br>
 
 Puedes preguntarme sobre:
 <ul>
-<li>la playa</li>
-<li>el lago</li>
 <li>Valeria</li>
 <li>Elías</li>
-<li>las luces</li>
+<li>Samuel</li>
+<li>la playa</li>
+<li>el lago</li>
 <li>la discusión</li>
+<li>las luces</li>
 <li>los sospechosos</li>
-<li>el Fragmento</li>
+<li>la casa del árbol</li>
 </ul>
+
 </div>
 
 </div>
@@ -148,8 +156,8 @@ Puedes preguntarme sobre:
 <button onclick="enviarPregunta()">Enviar</button>
 </div>
 
-<div class="sistema">
-Sistema narrativo interactivo — Festival de las Luces
+<div class="footer">
+Festival de las Luces — Sistema Narrativo Interactivo
 </div>
 
 </div>
@@ -158,7 +166,21 @@ Sistema narrativo interactivo — Festival de las Luces
 
 const chat = document.getElementById("chat");
 
-let secretosDescubiertos = 0;
+/* ========================= */
+/* MEMORIA NARRATIVA */
+/* ========================= */
+
+let preguntoValeria = false;
+let preguntoPlaya = false;
+let preguntoElias = false;
+let preguntoLago = false;
+let preguntoFragmento = false;
+let preguntoCasa = false;
+let sospechaAlta = false;
+
+/* ========================= */
+/* FUNCIONES */
+/* ========================= */
 
 function agregarMensaje(texto,tipo){
 
@@ -178,6 +200,10 @@ function respuestaAleatoria(lista){
     return lista[Math.floor(Math.random() * lista.length)];
 }
 
+/* ========================= */
+/* CHAT */
+/* ========================= */
+
 function enviarPregunta(){
 
     const input = document.getElementById("pregunta");
@@ -194,13 +220,11 @@ function enviarPregunta(){
 
     setTimeout(()=>{
 
-        let respuesta = "";
+let respuesta = "";
 
-
-
-/* -------------------------------- */
+/* ========================= */
 /* SALUDOS */
-/* -------------------------------- */
+/* ========================= */
 
 if(
 texto.includes("hola") ||
@@ -210,272 +234,326 @@ texto.includes("saludos")
 
 respuesta = respuestaAleatoria([
 
-`Las personas saludan con demasiada tranquilidad esta noche… como si intentaran fingir que nada ocurrió.`,
+`Supongo que vienes por la historia del Fragmento.<br><br>
+
+Últimamente todos quieren respuestas… aunque no estoy seguro de que el pueblo esté preparado para escucharlas.`,
+
+`Buenas.<br><br>
+
+Desde aquella noche el festival dejó de sentirse como una celebración.<br><br>
+
+Ahora todo el mundo parece vigilar a los demás.`,
 
 `Hola.<br><br>
-Supongo que vienes por la historia del Fragmento.`,
 
-`Bienvenido.<br><br>
-Ten cuidado con lo que preguntas. Algunos habitantes del pueblo se ponen nerviosos fácilmente.`
+Los habitantes del pueblo intentan actuar con normalidad, pero basta observar unos minutos para notar el miedo en sus rostros.`
 
 ]);
 
 }
 
-
-
-/* -------------------------------- */
-/* PLAYA */
-/* -------------------------------- */
-
-else if(
-texto.includes("playa") ||
-texto.includes("mar") ||
-texto.includes("agua")
-){
-
-respuesta = respuestaAleatoria([
-
-`Alguien corrió hacia la playa esa noche.<br><br>
-No pude distinguir su rostro, pero llevaba algo bajo el brazo.`,
-
-`Samuel, el pescador, asegura haber visto luces extrañas sobre el agua.<br><br>
-A veces mezcla superstición con realidad… aunque no siempre se equivoca.`,
-
-`La arena conservaba huellas incluso después de la medianoche.<br><br>
-Demasiadas personas estuvieron allí aquella noche.`
-
-]);
-
-}
-
-
-
-/* -------------------------------- */
+/* ========================= */
 /* VALERIA */
-/* -------------------------------- */
+/* ========================= */
 
 else if(
 texto.includes("valeria") ||
 texto.includes("bailarina")
 ){
 
+preguntoValeria = true;
+
 respuesta = respuestaAleatoria([
 
-`Valeria parecía nerviosa antes del espectáculo.<br><br>
-Seguía mirando hacia la zona central como si esperara a alguien.`,
+`Valeria intentaba concentrarse antes del espectáculo, pero era evidente que algo la inquietaba.<br><br>
 
-`La bailarina escuchó una discusión cerca del festival.<br><br>
-Creo que sabe más de lo que admite.`,
+Mientras los músicos afinaban y las luces comenzaban a iluminar el festival, ella no dejaba de mirar hacia la zona central.<br><br>
 
-`Las personas sensibles suelen notar detalles que los demás ignoran.<br><br>
-Habla con Valeria.`
+Recuerdo que varias veces apretó las manos como si estuviera intentando calmarse.<br><br>
+
+Cuando le pregunté si ocurría algo, simplemente respondió:<br><br>
+
+<i>“No… solo tengo un mal presentimiento.”</i>`,
+
+`La mayoría de las personas estaba distraída con la música y las decoraciones… pero Valeria observaba demasiado.<br><br>
+
+Miraba hacia los árboles.<br>
+Hacia la playa.<br>
+Hacia el lago.<br><br>
+
+Como si esperara que algo ocurriera.`
 
 ]);
 
 }
 
+/* ========================= */
+/* PLAYA */
+/* ========================= */
+
+else if(
+texto.includes("playa") ||
+texto.includes("agua") ||
+texto.includes("mar")
+){
+
+preguntoPlaya = true;
+
+if(preguntoValeria){
+
+respuesta = `Ahora que mencionas la playa… recuerdo algo extraño sobre Valeria.<br><br>
+
+Antes del espectáculo ella miraba constantemente hacia esa dirección.<br><br>
+
+Al principio pensé que simplemente estaba nerviosa por bailar frente al pueblo.<br><br>
+
+Pero luego vi una figura correr hacia la arena llevando algo bajo el brazo.<br><br>
+
+Después de eso, Valeria dejó de sonreír por completo.`;
 
 
-/* -------------------------------- */
+}else{
+
+respuesta = respuestaAleatoria([
+
+`La playa estaba demasiado silenciosa aquella noche.<br><br>
+
+Incluso las olas parecían más lentas.<br><br>
+
+Vi una silueta correr cerca de la orilla cargando algo brillante.<br><br>
+
+No pude distinguir quién era.`,
+
+`Samuel afirma que las luces sobre el agua no eran normales.<br><br>
+
+Personalmente no creo en supersticiones… aunque admito que aquella noche el lago tenía algo inquietante.`
+
+]);
+
+}
+
+}
+
+/* ========================= */
 /* ELIAS */
-/* -------------------------------- */
+/* ========================= */
 
 else if(
 texto.includes("elias") ||
 texto.includes("futbolista")
 ){
 
+preguntoElias = true;
+
 respuesta = respuestaAleatoria([
 
-`Elías actúa con demasiada seguridad.<br><br>
-Las personas defensivas suelen ocultar algo.`,
+`Elías aparenta seguridad, pero las personas demasiado defensivas suelen esconder algo.<br><br>
 
-`Escuché que discutió con alguien cerca del hielo.`,
+Lo vi discutir cerca del hielo poco antes de que desapareciera el Fragmento.<br><br>
 
-`El futbolista asegura haber seguido una sombra entre los árboles.<br><br>
-No estoy seguro de que contara toda la verdad.`
+No escuché todas las palabras… solo recuerdo tensión en su voz.`,
+
+`Después del festival encontré a Elías caminando solo cerca del lago.<br><br>
+
+Tenía las manos temblando por el frío… o quizá por otra razón.<br><br>
+
+Cuando intenté preguntarle qué había visto, evitó mirarme directamente.`
 
 ]);
 
 }
 
-
-
-/* -------------------------------- */
+/* ========================= */
 /* LAGO */
-/* -------------------------------- */
+/* ========================= */
 
 else if(
 texto.includes("lago") ||
 texto.includes("hielo")
 ){
 
+preguntoLago = true;
+
+if(preguntoElias){
+
+respuesta = `Ahora que mencionas el lago… recuerdo que Elías estuvo allí más tiempo del normal.<br><br>
+
+El viento era fuerte y el hielo crujía bajo los pasos.<br><br>
+
+En un momento escuchamos algo romperse cerca de la orilla.<br><br>
+
+Después todo quedó en silencio.<br><br>
+
+Un silencio incómodo… como si alguien estuviera esperando que nos fuéramos.`;
+
+
+}else{
+
 respuesta = respuestaAleatoria([
 
-`El lago estaba demasiado silencioso aquella noche.`,
+`El lago siempre refleja las luces del festival… pero aquella noche los reflejos parecían deformes.<br><br>
 
-`Cerca del hielo alguien dejó marcas extrañas sobre el suelo húmedo.`,
+Varias personas aseguraron haber visto sombras moviéndose sobre el agua.`,
 
-`Escuché algo romperse cerca del lago.<br><br>
-Después… silencio.`
+`Cerca del hielo encontré marcas sobre el suelo húmedo.<br><br>
+
+Parecía que alguien había arrastrado algo pesado.`
 
 ]);
 
 }
 
+}
 
-
-/* -------------------------------- */
+/* ========================= */
 /* FRAGMENTO */
-/* -------------------------------- */
+/* ========================= */
 
 else if(
 texto.includes("fragmento") ||
 texto.includes("aurora")
 ){
 
-secretosDescubiertos++;
-
-if(secretosDescubiertos >= 3){
-
-respuesta = `Cuanto más investigo el Fragmento de Aurora… más entiendo por qué algunos habitantes querían esconderlo.<br><br>
-
-No era simplemente un objeto valioso.<br><br>
-
-Generaba miedo.`;
-
-}else{
+preguntoFragmento = true;
 
 respuesta = respuestaAleatoria([
 
-`Desde que desapareció el Fragmento, el pueblo cambió.`,
+`El Fragmento de Aurora no era solo una reliquia del festival.<br><br>
 
-`Algunos creen que el Fragmento nunca debió salir del lago.`,
+Con el tiempo las personas comenzaron a obsesionarse con él.<br><br>
 
-`Las personas no solo deseaban el Fragmento.<br><br>
-También le temían.`
+Algunos decían que traía prosperidad.<br>
+Otros creían que debía permanecer oculto en el lago.`,
+
+`He investigado muchas historias en este pueblo… pero ninguna provocó tanto miedo como el Fragmento.<br><br>
+
+La noche de su desaparición varias personas parecían más preocupadas por ocultar información que por encontrarlo.`
 
 ]);
 
 }
 
-}
-
-
-
-/* -------------------------------- */
-/* SOSPECHOSOS */
-/* -------------------------------- */
+/* ========================= */
+/* CASA DEL ARBOL */
+/* ========================= */
 
 else if(
-texto.includes("sospech") ||
+texto.includes("casa") ||
+texto.includes("arbol")
+){
+
+preguntoCasa = true;
+
+respuesta = respuestaAleatoria([
+
+`La casa del árbol siempre fue un lugar de reuniones durante el festival.<br><br>
+
+Pero aquella noche demasiadas personas entraban y salían en silencio.<br><br>
+
+Como si intentaran evitar ser vistas.`,
+
+`Escuché conversaciones extrañas cerca de la casa del árbol.<br><br>
+
+Voces bajas.<br>
+Pasos rápidos.<br>
+Y alguien diciendo:<br><br>
+
+<i>“Esto nunca debió salir del lago.”</i>`
+
+]);
+
+}
+
+/* ========================= */
+/* SOSPECHOSOS */
+/* ========================= */
+
+else if(
 texto.includes("culpable") ||
+texto.includes("sospech") ||
 texto.includes("robo")
 ){
 
+sospechaAlta = true;
+
 respuesta = respuestaAleatoria([
 
-`Un buen periodista no acusa sin pruebas.`,
+`Un periodista aprende rápido que las personas mienten más por miedo que por maldad.<br><br>
 
-`Todos parecen sospechosos cuando una historia tiene miedo de ser descubierta.`,
+Y aquella noche… todos parecían asustados.`,
 
-`La verdadera pregunta no es quién lo robó… sino por qué alguien quería ocultarlo.`
+`No estoy seguro de que exista un único culpable.<br><br>
+
+A veces una tragedia ocurre porque demasiadas personas ocultan pequeñas verdades.`,
+
+`Cuanto más investigo… más siento que alguien intentaba proteger el Fragmento y no simplemente robarlo.`
 
 ]);
 
 }
 
-
-
-/* -------------------------------- */
+/* ========================= */
 /* DISCUSION */
-/* -------------------------------- */
+/* ========================= */
 
 else if(
 texto.includes("discusion") ||
-texto.includes("pelea") ||
-texto.includes("gritos")
+texto.includes("gritos") ||
+texto.includes("pelea")
 ){
 
 respuesta = respuestaAleatoria([
 
-`Escuché voces alteradas cerca de la zona central.`,
+`La discusión comenzó antes de la presentación principal.<br><br>
 
-`Alguien discutía antes del espectáculo.<br><br>
-La música apenas dejaba escuchar las palabras.`,
+La música apenas permitía escuchar las palabras, pero era evidente que alguien estaba furioso.`,
 
-`La tensión comenzó mucho antes de que desapareciera el Fragmento.`
+`Recuerdo haber visto personas observando hacia la zona central mientras intentaban fingir normalidad.<br><br>
+
+Eso suele ocurrir cuando el miedo empieza a expandirse entre un grupo.`
 
 ]);
 
 }
 
-
-
-/* -------------------------------- */
-/* LUCES */
-/* -------------------------------- */
+/* ========================= */
+/* CONEXION AVANZADA */
+/* ========================= */
 
 else if(
-texto.includes("luces") ||
-texto.includes("sombras")
+preguntoValeria &&
+preguntoPlaya &&
+preguntoElias &&
+preguntoLago
 ){
 
-respuesta = respuestaAleatoria([
+respuesta = `Cuanto más conecto los testimonios… más extraño se vuelve todo.<br><br>
 
-`Las luces del festival hacían que las sombras parecieran moverse.`,
+Valeria observaba la playa.<br>
+Elías permanecía cerca del lago.<br>
+Y varias personas parecían reunirse en secreto en la casa del árbol.<br><br>
 
-`Varias personas afirman haber visto reflejos extraños sobre el agua.`,
+No creo que aquella noche haya sido un simple robo.<br><br>
 
-`Aquella noche las luces ocultaban más de lo que revelaban.`
-
-]);
+Creo que alguien intentaba impedir que el Fragmento terminara en las manos equivocadas.`
 
 }
 
-
-
-/* -------------------------------- */
-/* AYUDA */
-/* -------------------------------- */
-
-else if(
-texto.includes("ayuda") ||
-texto.includes("donde") ||
-texto.includes("quien")
-){
-
-respuesta = respuestaAleatoria([
-
-`Podrías hablar con Samuel en la playa.`,
-
-`Valeria observó demasiadas cosas durante el festival.`,
-
-`La casa del árbol guarda conversaciones que nadie debía escuchar.`
-
-]);
-
-}
-
-
-
-/* -------------------------------- */
+/* ========================= */
 /* RESPUESTA DEFAULT */
-/* -------------------------------- */
+/* ========================= */
 
 else{
 
 respuesta = respuestaAleatoria([
 
-`Mmm… no estoy seguro de entender tu pregunta.<br><br>
-Tal vez deberías investigar otro lugar del pueblo.`,
-
-`A veces las respuestas aparecen cuando haces mejores preguntas.`,
-
 `Los detalles pequeños suelen ser los más importantes en una investigación.`,
 
-`No todo el pueblo recuerda la noche del festival de la misma manera.`
+`A veces las personas revelan más información por cómo hablan que por lo que dicen.`,
+
+`El pueblo entero parece recordar aquella noche de forma distinta.`,
+
+`Quizá deberías seguir investigando otros lugares antes de sacar conclusiones.`
 
 ]);
 
