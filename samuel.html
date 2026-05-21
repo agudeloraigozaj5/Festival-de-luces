@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Samuel - Pescador anciano</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #07131f;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      background: #102638;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #7dd3fc;
+    }
+
+    .descripcion {
+      color: #dbeafe;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .pregunta {
+      background: #12324d;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .pregunta:hover {
+      background: #1d4f7a;
+    }
+
+    .respuesta {
+      display: none;
+      background: #091722;
+      padding: 15px;
+      border-left: 4px solid #7dd3fc;
+      margin-top: 10px;
+      border-radius: 8px;
+      line-height: 1.8;
+      color: #e0f2fe;
+    }
+
+    .nota {
+      margin-top: 25px;
+      padding: 15px;
+      background: #061018;
+      border-radius: 10px;
+      color: #bfdbfe;
+      line-height: 1.7;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>🌊 Samuel — Pescador anciano</h1>
+
+  <p class="descripcion">
+    “El lago guarda secretos más antiguos que este pueblo… y algunos secretos no quieren ser encontrados.”
+  </p>
+
+
+  <div class="pregunta" onclick="mostrar('r1')">
+    ¿Dónde estabas la noche en que desapareció el Fragmento?
+
+    <div class="respuesta" id="r1">
+      Ah… aquella noche.
+
+      Yo estaba en la playa, cerca de los botes viejos.
+
+      El viento soplaba diferente.
+
+      Las olas parecían inquietas… como si el lago intentara advertirnos de algo.
+
+      Desde lejos podía verse el brillo del festival entre los árboles, pero el agua… el agua estaba demasiado silenciosa.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r2')">
+    ¿Viste algo extraño sobre el agua?
+
+    <div class="respuesta" id="r2">
+      Sí.
+
+      Luces.
+
+      Pequeños reflejos danzando sobre la superficie del lago.
+
+      No eran luces normales.
+
+      Parecían moverse siguiendo algo… o a alguien.
+
+      Hace muchos años vi esas mismas luces antes de otra desgracia en el pueblo.
+
+      Algunos creen que son simples reflejos.
+
+      Yo no estoy tan seguro.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r3')">
+    ¿Escuchaste o viste a alguien cerca de la playa?
+
+    <div class="respuesta" id="r3">
+      Escuché pasos rápidos sobre la arena húmeda.
+
+      Alguien corría.
+
+      Se detenía.
+
+      Volvía a correr.
+
+      Recuerdo también una sombra inclinándose cerca de las rocas, como si escondiera algo brillante.
+
+      Pero la noche engaña los ojos de los hombres viejos…
+
+      o tal vez revela cosas que otros prefieren ignorar.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r4')">
+    ¿Qué sabes del Fragmento de Aurora?
+
+    <div class="respuesta" id="r4">
+      El Fragmento nunca debió abandonar el lago.
+
+      Eso decían los antiguos pescadores.
+
+      No era un tesoro.
+
+      Era una advertencia.
+
+      Hay objetos que atraen ambición… miedo… obsesión.
+
+      Y cuando demasiadas personas desean poseerlos, el pueblo comienza a cambiar.
+
+      Las personas se vuelven desconfiadas.
+
+      Nerviosas.
+
+      Como ocurrió aquella noche.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r5')">
+    ¿Crees que alguien robó el Fragmento?
+
+    <div class="respuesta" id="r5">
+      Mmm…
+
+      A veces las personas no roban objetos.
+
+      A veces los objetos llaman a ciertas personas.
+
+      Tal vez alguien quiso protegerlo.
+
+      Tal vez alguien quiso esconderlo.
+
+      O tal vez el lago decidió recuperarlo.
+
+      Los jóvenes siempre buscan respuestas rápidas… pero el agua nunca revela todos sus secretos de una vez.
+    </div>
+  </div>
+
+
+  <div class="pregunta" onclick="mostrar('r6')">
+    ¿Quién podría ayudarme a entender mejor lo ocurrido?
+
+    <div class="respuesta" id="r6">
+      Habla con Tomás, el periodista.
+
+      Hace demasiadas preguntas para alguien que dice no saber nada.
+
+      Y también con Valeria.
+
+      Las personas sensibles suelen notar cosas que los demás ignoran.
+
+      Escucha no solo sus palabras…
+
+      también sus silencios.
+    </div>
+  </div>
+
+
+  <div class="nota">
+    🧠 NOTA PARA CRONISTAS:
+
+    En toda crónica existen:
+    - hechos,
+    - rumores,
+    - creencias,
+    - y emociones.
+
+    El reto no es solo descubrir qué pasó…
+
+    sino comprender por qué cada persona recuerda la historia de manera distinta.
+  </div>
+
+</div>
+
+<script>
+  function mostrar(id) {
+    const respuesta = document.getElementById(id);
+
+    if (respuesta.style.display === "block") {
+      respuesta.style.display = "none";
+    } else {
+      respuesta.style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>
