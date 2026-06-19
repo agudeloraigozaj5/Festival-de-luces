@@ -3,394 +3,421 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valeria — Bailarina del Festival</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Samuel — Control de Lectura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  background:#0a0510;
-  font-family:'Crimson Pro', Georgia, serif;
-  color:white;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-.luz { position:fixed; border-radius:50%; pointer-events:none; z-index:0;
-  animation:flotar 7s ease-in-out infinite; }
-.luz:nth-child(1){width:250px;height:250px;top:0;left:0;
-  background:radial-gradient(circle,rgba(180,80,220,0.1) 0%,transparent 70%);animation-delay:0s;}
-.luz:nth-child(2){width:180px;height:180px;top:10%;right:5%;
-  background:radial-gradient(circle,rgba(200,100,180,0.08) 0%,transparent 70%);animation-delay:3s;}
-.luz:nth-child(3){width:120px;height:120px;bottom:8%;left:10%;
-  background:radial-gradient(circle,rgba(150,60,200,0.08) 0%,transparent 70%);animation-delay:5s;}
-@keyframes flotar{0%,100%{transform:translateY(0);opacity:.6;}50%{transform:translateY(-20px);opacity:1;}}
-
-.container {
-  width:min(860px,98vw);
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  position:relative;
-  z-index:1;
+body{
+background:#07131a;
+font-family:'Crimson Text', serif;
+color:white;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
 }
 
-/* HEADER */
-.header {
-  padding:20px 26px 16px;
-  background:linear-gradient(135deg,#1a0825 0%,#2d1040 100%);
-  border-bottom:2px solid rgba(200,100,220,0.3);
-  flex-shrink:0;
-}
-.header-row { display:flex; align-items:center; gap:14px; }
-.avatar {
-  width:56px; height:56px; border-radius:50%;
-  background:linear-gradient(135deg,#9b30b0,#d060e0);
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Playfair Display',serif; font-size:24px;
-  color:#fff; font-weight:600; flex-shrink:0;
-  box-shadow:0 0 0 2px rgba(200,120,220,0.5), 0 0 20px rgba(180,80,220,0.2);
-}
-.header-info { flex:1; }
-.header h1 {
-  font-family:'Playfair Display',serif;
-  font-size:24px; color:#f0d0ff; margin:0; font-weight:600;
-}
-.header-sub {
-  font-size:12px; color:rgba(200,150,220,0.8);
-  letter-spacing:0.08em; text-transform:uppercase; margin-top:3px;
-}
-.zona-badge {
-  font-size:11px; color:rgba(200,150,220,0.7);
-  border:1px solid rgba(200,120,220,0.25);
-  padding:4px 12px; border-radius:2px; letter-spacing:0.06em;
-}
-.header-cita {
-  margin-top:12px; font-style:italic;
-  color:rgba(220,180,240,0.6); font-size:14.5px;
-  border-left:3px solid rgba(200,100,220,0.4);
-  padding-left:14px; line-height:1.5;
+.fondo{
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left, rgba(0,120,160,.15), transparent 30%),
+radial-gradient(circle at bottom right, rgba(0,80,120,.18), transparent 35%),
+linear-gradient(to bottom,#07131a,#0d1f29,#07131a);
+z-index:0;
 }
 
-/* TEMAS */
-.temas-wrap {
-  padding:12px 20px 8px;
-  background:rgba(26,8,37,0.8);
-  border-bottom:1px solid rgba(200,100,220,0.15);
-  flex-shrink:0;
-}
-.temas-label {
-  font-size:11px; color:rgba(200,150,220,0.5);
-  letter-spacing:0.1em; text-transform:uppercase; margin-bottom:8px;
-}
-.temas {
-  display:flex; flex-wrap:wrap; gap:7px;
-}
-.tema-btn {
-  padding:5px 13px;
-  background:rgba(155,48,176,0.12);
-  border:1px solid rgba(200,100,220,0.25);
-  border-radius:20px; cursor:pointer;
-  font-family:'Crimson Pro',Georgia,serif;
-  font-size:13.5px; color:rgba(220,180,240,0.8);
-  transition:all .2s;
-}
-.tema-btn:hover {
-  background:rgba(155,48,176,0.3);
-  border-color:rgba(200,100,220,0.6);
-  color:#f0d0ff;
+.container{
+width:min(900px,98vw);
+height:100vh;
+display:flex;
+flex-direction:column;
+position:relative;
+z-index:2;
+background:rgba(5,12,16,.92);
+backdrop-filter:blur(4px);
+border-left:1px solid rgba(120,180,220,.12);
+border-right:1px solid rgba(120,180,220,.12);
 }
 
-/* CHAT */
-.chat {
-  flex:1; overflow-y:auto; padding:20px;
-  display:flex; flex-direction:column; gap:16px;
-  scrollbar-width:thin;
-  scrollbar-color:rgba(155,48,176,0.3) transparent;
-}
-.chat::-webkit-scrollbar{width:4px;}
-.chat::-webkit-scrollbar-thumb{background:rgba(155,48,176,0.3);border-radius:2px;}
-
-.mensaje { max-width:82%; padding:14px 18px; border-radius:4px; line-height:1.8; font-size:15.5px; animation:aparecer .3s ease; }
-@keyframes aparecer{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-
-.ia {
-  background:rgba(45,16,64,0.7);
-  border:1px solid rgba(200,100,220,0.2);
-  border-radius:2px 14px 14px 14px;
-  align-self:flex-start; color:#ead8f5;
-}
-.usuario {
-  background:rgba(30,46,30,0.9);
-  border:1px solid rgba(78,120,78,0.3);
-  border-radius:14px 2px 14px 14px;
-  align-self:flex-end; color:#cde8cd;
+.header{
+padding:14px 18px;
+border-bottom:1px solid rgba(120,180,220,.15);
+background:rgba(8,18,24,.95);
 }
 
-.typing-wrap { align-self:flex-start; }
-.typing {
-  display:inline-flex; align-items:center; gap:5px;
-  padding:12px 16px;
-  background:rgba(45,16,64,0.7);
-  border:1px solid rgba(200,100,220,0.2);
-  border-radius:2px 14px 14px 14px;
+.header-row{
+display:flex;
+align-items:center;
+gap:12px;
 }
-.typing span {
-  width:7px; height:7px; border-radius:50%;
-  background:#9b30b0; display:inline-block;
-  animation:bounce .9s infinite;
+
+.avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:linear-gradient(135deg,#1e5f7a,#6ca5bf);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:20px;
+font-weight:bold;
+color:#07131a;
+font-family:'Cormorant Garamond', serif;
 }
+
+.header-info h1{
+font-family:'Cormorant Garamond', serif;
+font-size:24px;
+font-weight:600;
+color:#d9edf5;
+}
+
+.header-sub{
+font-size:12px;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:rgba(180,220,235,.6);
+}
+
+.zona{
+font-size:11px;
+padding:4px 10px;
+border:1px solid rgba(120,180,220,0.2);
+border-radius:3px;
+color:rgba(180,220,235,.7);
+font-family:'Cormorant Garamond', serif;
+}
+
+.frase{
+margin-top:8px;
+padding-left:12px;
+border-left:2px solid rgba(120,180,220,.3);
+font-style:italic;
+color:rgba(220,240,250,.65);
+font-size:14px;
+line-height:1.5;
+}
+
+.chat{
+flex:1;
+overflow-y:auto;
+padding:18px;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.chat::-webkit-scrollbar{
+width:4px;
+}
+
+.chat::-webkit-scrollbar-thumb{
+background:rgba(120,180,220,0.18);
+}
+
+.mensaje{
+max-width:84%;
+padding:14px 16px;
+line-height:1.8;
+font-size:16px;
+animation:fade .25s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(8px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.ia{
+align-self:flex-start;
+background:rgba(14,28,36,.95);
+border:1px solid rgba(120,180,220,.12);
+border-radius:4px 14px 14px 14px;
+color:#e2f3fa;
+}
+
+.usuario{
+align-self:flex-end;
+background:rgba(20,45,30,.9);
+border:1px solid rgba(120,180,140,.18);
+border-radius:14px 4px 14px 14px;
+color:#e2ffe8;
+}
+
+.typing-wrap{
+align-self:flex-start;
+}
+
+.typing{
+display:inline-flex;
+gap:5px;
+padding:10px 14px;
+background:rgba(14,28,36,.95);
+border:1px solid rgba(120,180,220,.12);
+border-radius:4px 14px 14px 14px;
+}
+
+.typing span{
+width:6px;
+height:6px;
+border-radius:50%;
+background:#6ca5bf;
+animation:bounce .9s infinite;
+}
+
 .typing span:nth-child(2){animation-delay:.15s;}
 .typing span:nth-child(3){animation-delay:.3s;}
-@keyframes bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-7px);}}
 
-/* INPUT */
-.input-area {
-  display:flex; gap:10px; padding:14px 18px;
-  background:rgba(10,5,16,0.95);
-  border-top:1px solid rgba(200,100,220,0.15);
-  flex-shrink:0;
+@keyframes bounce{
+0%,80%,100%{transform:translateY(0);}
+40%{transform:translateY(-6px);}
 }
-.input-area input {
-  flex:1; padding:12px 16px;
-  background:rgba(45,16,64,0.5);
-  border:1px solid rgba(200,100,220,0.25);
-  border-radius:3px;
-  font-family:'Crimson Pro',Georgia,serif;
-  font-size:15px; color:#ead8f5; outline:none;
-  transition:border-color .2s;
-}
-.input-area input:focus { border-color:rgba(200,100,220,0.6); }
-.input-area input::placeholder { color:rgba(200,150,220,0.35); }
-.send-btn {
-  padding:12px 22px;
-  background:linear-gradient(135deg,#9b30b0,#d060e0);
-  border:none; border-radius:3px; cursor:pointer;
-  font-family:'Playfair Display',serif;
-  font-size:15px; color:#fff; font-weight:600;
-  transition:opacity .2s, transform .15s;
-}
-.send-btn:hover{opacity:.85;}
-.send-btn:active{transform:scale(.97);}
 
-.footer {
-  text-align:center; padding:8px;
-  color:rgba(150,100,170,0.4); font-size:12px;
-  background:rgba(10,5,16,0.95);
-  flex-shrink:0;
+.input-area{
+display:flex;
+flex-direction:column;
+gap:8px;
+padding:12px;
+border-top:1px solid rgba(120,180,220,.1);
+background:rgba(5,10,14,.95);
+}
+
+.opciones-container {
+display:grid;
+grid-template-columns:1fr;
+gap:8px;
+width:100%;
+}
+
+@media(min-width: 600px){
+  .opciones-container {
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+.opcion-btn {
+padding:12px 14px;
+background:rgba(120,180,220,0.05);
+border:1px solid rgba(120,180,220,0.15);
+border-radius:6px;
+color:#eaf6ff;
+font-family:'Crimson Text', serif;
+font-size:15px;
+text-align:left;
+cursor:pointer;
+transition:0.2s;
+}
+
+.opcion-btn:hover:not(:disabled) {
+background:rgba(120,180,220,0.15);
+border-color:rgba(120,180,220,0.4);
+}
+
+.opcion-btn:disabled {
+opacity:0.5;
+cursor:not-allowed;
+}
+
+.footer{
+text-align:center;
+padding:6px;
+font-size:11px;
+color:rgba(180,220,235,.35);
+background:rgba(5,10,14,.95);
+}
+
+.progreso-barra {
+height:4px;
+background:rgba(120,180,220,0.1);
+width:100%;
+position:relative;
+}
+
+.progreso-llenado {
+height:100%;
+background:linear-gradient(90deg,#1e5f7a,#6ca5bf);
+width:0%;
+transition:width 0.3s ease;
 }
 </style>
 </head>
+
 <body>
 
-<div class="luz"></div><div class="luz"></div><div class="luz"></div>
+<div class="fondo"></div>
 
 <div class="container">
 
-  <div class="header">
-    <div class="header-row">
-      <div class="avatar">V</div>
-      <div class="header-info">
-        <h1>Valeria</h1>
-        <div class="header-sub">Bailarina Principal · Festival de las Luces</div>
-      </div>
-      <div class="zona-badge">ZONA DE HONGOS</div>
-    </div>
-    <div class="header-cita">"Hay noches que uno quisiera poder borrar de la memoria… no porque fueron terribles, sino porque te cambian algo adentro."</div>
-  </div>
+<div class="header">
+<div class="header-row">
+<div class="avatar">🌊</div>
+<div class="header-info">
+<h1>Samuel</h1>
+<div class="header-sub">Control de Lectura · Bloque del Hogar</div>
+</div>
+<div class="zona" id="estacion-tag">ESTACIÓN 1 / 2</div>
+</div>
+<div class="frase">
+"El agua recuerda cosas que las personas prefieren olvidar."
+</div>
+</div>
 
-  <div class="temas-wrap">
-    <div class="temas-label">Puedes preguntarme sobre</div>
-    <div class="temas">
-      <button class="tema-btn" onclick="preguntar('playa')">🌊 Playa</button>
-      <button class="tema-btn" onclick="preguntar('lago')">❄️ Lago</button>
-      <button class="tema-btn" onclick="preguntar('elías')">⚽ Elías</button>
-      <button class="tema-btn" onclick="preguntar('fragmento')">💎 Fragmento</button>
-      <button class="tema-btn" onclick="preguntar('miedo')">😨 Miedo</button>
-      <button class="tema-btn" onclick="preguntar('discusión')">🗣️ Discusión</button>
-      <button class="tema-btn" onclick="preguntar('oscuridad')">🌑 Oscuridad</button>
-      <button class="tema-btn" onclick="preguntar('periodista')">📰 Periodista</button>
-      <button class="tema-btn" onclick="preguntar('luces')">✨ Luces</button>
-      <button class="tema-btn" onclick="preguntar('sospechas')">🔍 Sospechas</button>
-    </div>
-  </div>
+<div class="progreso-barra">
+<div class="progreso-llenado" id="barra"></div>
+</div>
 
-  <div class="chat" id="chat"></div>
+<div class="chat" id="chat"></div>
 
-  <div class="input-area">
-    <input type="text" id="pregunta" placeholder="Escribe tu pregunta a Valeria..." onkeydown="if(event.key==='Enter') enviar()">
-    <button class="send-btn" onclick="enviar()">Preguntar</button>
-  </div>
+<div class="input-area">
+<div class="opciones-container" id="opciones-block">
+<!-- Opciones dinámicas -->
+</div>
+</div>
 
-  <div class="footer">Festival de las Luces — Investigación Narrativa</div>
+<div class="footer">
+Evidencia de Lectura — Sistema de Comprobación
+</div>
 
 </div>
 
 <script>
 const chat = document.getElementById("chat");
-const usadas = {};
+const opcionesBlock = document.getElementById("opciones-block");
+const barra = document.getElementById("barra");
+const estacionTag = document.getElementById("estacion-tag");
 
-const respuestas = {
+let estacionActual = 0;
+let frasesRecolectadas = [];
 
-playa: [
-`La playa estaba rara esa noche, y eso me inquietó desde el principio. Yo conozco ese sonido de siempre, las olas, las risas lejanas, los niños corriendo sobre la arena… pero en algún momento todo eso desapareció y quedó un silencio que no me gustó nada. Vi una figura correr, eso sí lo vi con mis propios ojos. Cargaba algo bajo el brazo y se detenía cada tres pasos para mirar hacia atrás. La gente que mira hacia atrás así… tiene miedo de algo. O de alguien.`,
+const bancoPreguntas = [
+  {
+    pregunta: "Estación 1: En los recuerdos sobre la madre y las dinámicas en la mesa, ¿qué preparaba meticulosamente la señora de la casa y qué hacía la madre mientras los demás almorzaban o realizaban sus tareas?",
+    opciones: [
+      { inciso: "A", texto: "La señora de la casa preparaba jugos cítricos y la madre tejía en silencio en la sala.", correcta: false },
+      { inciso: "B", texto: "La señora de la casa servía pescado frito mientras la madre leía la Biblia en voz alta.", correcta: false },
+      { inciso: "C", texto: "La señora de la casa organizaba la mesa de noche, mientras la madre salía apresurada a la fábrica de textiles.", correcta: false },
+      { inciso: "D", texto: "La señora de la casa preparaba jugos naturales quitándoles las pepas, mientras la madre subía al segundo piso a limpiar la máquina de escribir.", correcta: true }
+    ],
+    frasePremio: "«Las pepas de los jugos caían en el colador, igual que los viejos secretos de la casa...»"
+  },
+  {
+    pregunta: "Estación 2: Con respecto a los días de mercado y el abastecimiento del hogar, ¿qué elemento guardaba con recelo la señora de la casa en la despensa y qué instrucciones específicas repetía constantemente sobre su uso?",
+    opciones: [
+      { inciso: "A", texto: "Guardaba arroz integral y exigía cocinarlo únicamente los domingos por la mañana.", correcta: false },
+      { inciso: "B", texto: "Guardaba con recelo una botella de aceite de oliva español, advirtiendo que solo debía usarse en gotas contadas para las ensaladas especiales.", correcta: true },
+      { inciso: "C", texto: "Ocultaba panela y pedía que nadie la tocara para evitar que los niños sufrieran de caries.", correcta: false },
+      { inciso: "D", texto: "Almacenaba sal marina importada que únicamente se abría cuando Frank traía invitados de la capital.", correcta: false }
+    ],
+    frasePremio: "«Cada gota de aceite era contada con el rigor de un reloj de arena en medio de la cocina.»"
+  }
+];
 
-`Siempre le reía a Samuel cuando decía que la playa guardaba secretos. Me parecía cosa de viejos, de personas que llevan demasiado tiempo solos mirando el agua. Pero esa noche empecé a entenderlo. Las sombras cerca de la orilla se movían de una manera que no correspondía con el viento. Y las personas se alejaban de allá sin explicar por qué, como si algo las empujara sin tocarlas. Cuando un lugar se vacía así de rápido durante una fiesta… es porque alguien vio algo que no estaba listo para ver.`,
-
-`Encontré huellas cerca de la orilla mientras intentaba entender qué había pasado. No parecían marcas de alguien que paseaba tranquilo. Eran profundas, desordenadas, como de alguien que corría nervioso o asustado. Lo más extraño fue que terminaban justo cerca de las rocas grandes… y después desaparecían completamente. Como si la persona hubiera dejado de existir en ese punto.`
-],
-
-lago: [
-`El lago siempre fue mi lugar favorito del festival. El agua quieta, las linternas reflejadas, todo parecía más lento y más bonito ahí. Pero esa noche el hielo crujía de una manera que me ponía la piel de gallina. En un momento escuché algo romperse cerca de la orilla y todas las personas que estaban alrededor voltearon al mismo tiempo. Nadie dijo nada. Todos se miraron y siguieron caminando como si nada. Ese silencio compartido me asustó más que el sonido mismo.`,
-
-`Samuel insiste en que el Fragmento nunca debió salir del lago. Antes lo escuchaba y pensaba que era un anciano aferrado a sus creencias. Pero después de esa noche empecé a preguntarme si quizás él sabe algo que los demás preferimos ignorar. Había personas esa noche que no le tenían miedo a perder el Fragmento… le tenían miedo a lo que pudiera despertar si caía en manos equivocadas. Eso es muy diferente. Y esa diferencia me sigue quitando el sueño.`,
-
-`Cerca del hielo encontré marcas extrañas sobre el suelo húmedo. Parecía que alguien había arrastrado algo pesado durante varios metros. El problema es que las huellas desaparecían abruptamente cerca de unos árboles, como si la persona hubiera cambiado de dirección o hubiera sido ayudada por alguien más. Y honestamente… eso fue lo que comenzó a preocuparme de verdad.`
-],
-
-elías: [
-`Elías tiene esa manera de pararse que hace pensar que nada lo afecta. Brazos cruzados, mandíbula apretada, mirada fija. Pero esa noche yo lo vi caminar solo cerca del hielo mucho después de que el festival había terminado para todos los demás. Manos en los bolsillos, sin prisa aparente, pero mirando constantemente hacia el lago. Cuando intenté acercarme no me miró a los ojos ni una sola vez. Las personas seguras de sí mismas te miran cuando hablan. Él no lo hizo.`,
-
-`Escuché su voz esa noche y no era la voz de alguien tranquilo. Era la voz de alguien que está perdiendo el control de una situación que él mismo creó. No pude entender las palabras exactas porque el viento se llevaba todo, pero el tono… ese tono no se olvida. Después de esa discusión desapareció varios minutos y cuando volvió tenía la respiración agitada y evitaba acercarse a ciertos lugares del festival. Algo pasó en esos minutos que él no ha contado.`,
-
-`Hay algo extraño en la forma en que Elías habla de aquella noche. Cada vez que alguien menciona el Fragmento cambia rápidamente de tema o intenta desviar la conversación hacia otra persona. Y yo he aprendido que quienes dirigen demasiado las conversaciones… normalmente están escondiendo algo importante.`
-],
-
-fragmento: [
-`El Fragmento de Aurora no era solo bonito, era significativo. Cuando lo veías de cerca sentías que tenía peso, no solo físico sino histórico. Como si cargara años y años de memorias del pueblo. Algunas personas lo veneraban, otras le tenían un respeto mezclado con miedo. Con el tiempo dejó de ser una reliquia del festival y se convirtió en algo que todos querían controlar. Y las cosas que todos quieren controlar terminan generando conflictos.`,
-
-`Mientras más pienso en esa noche más me convenzo de que no todos querían robar el Fragmento. Había alguien que quería venderlo, sí. Pero había otra persona que quería protegerlo. Eso me lo decía el instinto esa noche, dos intenciones completamente distintas moviéndose al mismo tiempo en el mismo lugar. Lo que no sé es cuál de las dos terminó ganando. Y eso es lo que más me preocupa.`,
-
-`Lo extraño es que casi nadie hablaba del Fragmento directamente antes de su desaparición. Las conversaciones se detenían cuando alguien hacía ciertas preguntas. Era como si todo el pueblo compartiera un secreto incómodo que nadie quería ser el primero en pronunciar en voz alta.`
-],
-
-miedo: [
-`Lo más extraño no fue el momento en que desapareció el Fragmento. Fue lo que vino después. El pueblo entero cambió en cuestión de minutos. Las conversaciones bajaron de volumen, las personas dejaron de mirarse, los grupos se separaron. El miedo hace eso, lo he visto otras veces, pero nunca tan rápido. Como si todos supieran instintivamente que hablar demasiado era peligroso.`,
-
-`Yo soy bailarina, estoy entrenada para leer cuerpos. Y esa noche los cuerpos de las personas decían cosas que sus bocas no se atrevían a pronunciar. Manos que temblaban levemente. Ojos que esquivaban. Sonrisas que no llegaban hasta los ojos. El miedo no siempre grita. A veces susurra en los detalles pequeños, y esa noche el festival estaba lleno de esos susurros.`,
-
-`Todavía no duermo bien. Me despierto pensando en esa figura con la chaqueta oscura. ¿Me vio ella a mí? ¿Sabe que yo la vi? A veces siento que si hablo demasiado, algo malo puede pasarme. No sé si es paranoia… pero hay cosas que prefiero no recordar en voz alta.`
-],
-
-discusión: [
-`La escuché claramente, aunque no quería escuchar. Dos voces, una más grave que la otra. Decían algo sobre un precio, sobre que era demasiado arriesgado, sobre que alguien podría verlos. Yo me quedé quieta detrás del árbol grande de la zona central, sin respirar casi. Cuando terminaron, se fueron en direcciones opuestas.`,
-
-`Lo que más me impactó de esa discusión no fue lo que dijeron sino cómo lo dijeron. Con una desesperación que yo nunca le había escuchado a nadie en el festival. Era como si algo se les estuviera escapando de las manos. Como si hubieran planeado algo que ya no podían controlar y el miedo los estuviera consumiendo.`,
-
-`Después de la discusión cerca de la zona central noté que todo cambió. Las personas que antes se saludaban dejaron de hacerlo. Había una tensión invisible entre ciertos grupos. Yo intenté actuar normal durante la presentación pero por dentro estaba temblando. Algo en esa conversación me dijo que esa noche no iba a terminar bien.`
-],
-
-oscuridad: [
-`Esa noche hubo un momento en que todas las antorchas se apagaron al mismo tiempo. El viento, dijeron después. Pero yo no sentí viento en ese instante. Fueron como diez segundos de oscuridad total. Y en esos diez segundos escuché pasos, un ruido sordo como de algo cayendo, y luego nada. Cuando volvió la luz todo parecía igual. Pero algo había cambiado. Yo lo sentí en el pecho.`,
-
-`La oscuridad en el festival siempre fue mágica, las luces del Fragmento iluminaban todo con ese color entre dorado y azul. Pero cuando desapareció, la oscuridad se sintió diferente. Más pesada. Como si el pueblo entero hubiera perdido algo que lo protegía. Suena exagerado, lo sé. Pero todos lo sentimos esa noche aunque nadie lo diga en voz alta.`,
-
-`Hay algo que no le he contado a casi nadie. En uno de esos momentos de oscuridad vi una luz pequeña moverse entre los árboles. No era una linterna normal. Era algo más brillante, más intenso, y se movía con demasiada intención para ser el viento. Duró apenas unos segundos y luego desapareció. Todavía me pregunto qué era.`
-],
-
-periodista: [
-`Tomás me pone nerviosa. Siempre está tomando notas, siempre está observando, siempre llega justo cuando pasan las cosas importantes. Esa noche lo vi merodeando cerca de donde estaba el Fragmento mucho antes de la ceremonia. Cuando le pregunté qué hacía me dijo que era su trabajo. Pero había algo en sus ojos que no cuadraba con esa respuesta.`,
-
-`Los periodistas dicen que buscan la verdad pero en realidad protegen sus fuentes, sus secretos, sus versiones. Tomás sabe más de lo que escribe, estoy convencida de eso. Si quieres respuestas reales, ve a hablar con él y observa bien cómo reacciona cuando le preguntas directamente por el Fragmento. Las personas que saben cosas tienen una manera muy particular de esquivar las preguntas.`,
-
-`Hay algo que me resulta difícil de ignorar. Tomás fue el único que no parecía sorprendido cuando anunciaron la desaparición. Todos los demás gritaron, corrieron, preguntaron. Él sacó su libreta y empezó a escribir. Como si ya supiera lo que iba a pasar. Como si ya tuviera la historia lista antes de que ocurriera.`
-],
-
-luces: [
-`Las luces del festival eran lo más hermoso que había en ese pueblo una vez al año. Cada familia colgaba sus propias linternas y el Fragmento de Aurora las hacía brillar con un color que no puedo describir bien. Era como si el cielo bajara un momento al pueblo. Esa noche, cuando todo pasó, las luces siguieron encendidas pero se sentían vacías. Como decoración nada más. Como una fiesta a la que se le fue el alma.`,
-
-`Yo bailaba mirando las luces. Era mi ancla durante la presentación, cuando me perdía en los pasos levantaba los ojos y las luces me devolvían al presente. Esa noche, justo en el momento más importante de mi coreografía, vi una luz moverse rápido entre los árboles. No era una linterna normal. Era algo más brillante, más intenso. Y se movía con demasiada intención para ser el viento.`,
-
-`Sin el Fragmento las luces del festival perdieron algo que no sé nombrar exactamente. Técnicamente seguían encendidas. Pero ya no tenían esa calidez, ese brillo particular que hacía que la gente se quedara mirando hacia arriba con esa expresión de asombro. El pueblo lo notó. Y creo que eso fue lo que más dolió de todo.`
-],
-
-sospechas: [
-`Mira, no quiero acusar a nadie sin estar segura. Pero si me obligas a decir algo… hay demasiadas coincidencias alrededor de ciertas personas. El pescador que no se movió de la playa en toda la noche. El futbolista que estaba donde no debía. El periodista que lo sabe todo pero no dice nada. Demasiadas coincidencias para ser casualidad.`,
-
-`Lo que más me confunde es que todas las personas involucradas esa noche se conocen desde hace años. No es un extraño quien hizo esto. Es alguien del pueblo. Alguien que conoce el festival, que sabe dónde estaba el Fragmento, que conoce los horarios y las rutinas. Eso es lo que me quita el sueño. Que pueda ser alguien en quien todos confiamos.`,
-
-`A veces pienso que la respuesta está justo frente a nosotros y no la vemos porque no queremos verla. Porque aceptarla significaría admitir que alguien cercano nos traicionó. Y eso duele más que no saber la verdad.`
-]
-
-};
-
-function agregar(texto, tipo) {
+function agregarMensaje(texto, tipo){
   const div = document.createElement("div");
   div.classList.add("mensaje", tipo);
-  div.innerHTML = texto.replace(/\n/g, '<br>');
+  div.innerHTML = texto.replace(/\n/g, "<br>");
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
 
-function mostrarTyping() {
+function mostrarTyping(callback){
   const wrap = document.createElement("div");
-  wrap.classList.add("typing-wrap"); wrap.id = "typing";
+  wrap.classList.add("typing-wrap");
+  wrap.id = "typing";
   wrap.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
-  chat.appendChild(wrap); chat.scrollTop = chat.scrollHeight;
-}
-
-function quitarTyping() { const t = document.getElementById("typing"); if(t) t.remove(); }
-
-function obtenerRespuesta(tema) {
-  const lista = respuestas[tema];
-  if (!lista) return null;
-  if (!usadas[tema]) usadas[tema] = 0;
-  const idx = usadas[tema] % lista.length;
-  usadas[tema]++;
-  return lista[idx];
-}
-
-function detectarTema(texto) {
-  const t = texto.toLowerCase();
-  if (t.match(/playa|arena|orilla|mar|arena/)) return "playa";
-  if (t.match(/lago|hielo|agua|helad/)) return "lago";
-  if (t.match(/el[ií]as|futbolista/)) return "elías";
-  if (t.match(/fragmento|aurora|reliquia/)) return "fragmento";
-  if (t.match(/miedo|nervios|asusta|terror|pavor/)) return "miedo";
-  if (t.match(/discusi[oó]n|pelea|voces|grit|discutir/)) return "discusión";
-  if (t.match(/oscuridad|oscuro|apag|tiniebla|negr/)) return "oscuridad";
-  if (t.match(/peri[oó]dista|tom[aá]s|reportero/)) return "periodista";
-  if (t.match(/luc[ei]|linterna|brillo|ilumina/)) return "luces";
-  if (t.match(/sospechas|culpable|sospechoso|culpa|quién/)) return "sospechas";
-  return null;
-}
-
-function preguntar(tema) {
-  agregar(tema.charAt(0).toUpperCase() + tema.slice(1), "usuario");
-  responderTema(tema);
-}
-
-function responderTema(tema) {
-  mostrarTyping();
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+  
   setTimeout(() => {
-    quitarTyping();
-    const resp = obtenerRespuesta(tema);
-    if (resp) {
-      agregar(resp, "ia");
-    } else {
-      agregar("No estoy completamente segura de qué me estás preguntando… ¿podrías ser más específico? Puedo hablarte de la playa, el lago, Elías, el Fragmento, el miedo, la discusión, la oscuridad, el periodista, las luces o mis sospechas.", "ia");
-    }
-  }, 900);
+    const t = document.getElementById("typing");
+    if(t) t.remove();
+    callback();
+  }, 1000);
 }
 
-function enviar() {
-  const input = document.getElementById("pregunta");
-  const texto = input.value.trim();
-  if (!texto) return;
-  agregar(texto, "usuario");
-  input.value = "";
-  const tema = detectarTema(texto);
-  responderTema(tema || "default");
+function cargarEstacion() {
+  if (estacionActual < bancoPreguntas.length) {
+    estacionTag.innerText = `ESTACIÓN ${estacionActual + 1} / 2`;
+    barra.style.width = `${(estacionActual / bancoPreguntas.length) * 100}%`;
+    
+    const configuracion = bancoPreguntas[estacionActual];
+    
+    mostrarTyping(() => {
+      agregarMensaje(configuracion.pregunta, "ia");
+      renderizarOpciones(configuracion.opciones);
+    });
+  } else {
+    estacionTag.innerText = `COMPLETO`;
+    barra.style.width = "100%";
+    opcionesBlock.innerHTML = "";
+    
+    mostrarTyping(() => {
+      agregarMensaje("🌊 ¡Las corrientes de la memoria están despejadas! Has completado el último bloque de lectura. Tus fragmentos recolectados:", "ia");
+      
+      let mensajeFinal = frasesRecolectadas.map((f, index) => `${index + 1}. ${f}`).join("\n\n");
+      
+      setTimeout(() => {
+        agregarMensaje(mensajeFinal, "ia");
+        setTimeout(() => {
+          agregarMensaje("🔒 **COMPROBACIÓN FINALIZADA:** Muestra el resultado de los 4 códigos a tu profesor para tu nota completa.", "ia");
+        }, 800);
+      }, 500);
+    });
+  }
 }
 
-// Mensaje de bienvenida
+function renderizarOpciones(opciones) {
+  opcionesBlock.innerHTML = "";
+  opciones.forEach(opc => {
+    const boton = document.createElement("button");
+    boton.classList.add("opcion-btn");
+    boton.innerHTML = `<strong>${opc.inciso}.</strong> ${opc.texto}`;
+    boton.onclick = () => procesarRespuesta(opc);
+    opcionesBlock.appendChild(boton);
+  });
+}
+
+function procesarRespuesta(opcionSeleccionada) {
+  const botones = opcionesBlock.querySelectorAll(".opcion-btn");
+  botones.forEach(b => b.disabled = true);
+
+  agregarMensaje(`Elegí la opción ${opcionSeleccionada.inciso}: ${opcionSeleccionada.texto}`, "usuario");
+
+  const configActual = bancoPreguntas[estacionActual];
+
+  if (opcionSeleccionada.correcta) {
+    mostrarTyping(() => {
+      agregarMensaje(`🔵 El agua no miente. Respuesta correcta. Recibes un testimonio clave:\n\n"${configActual.frasePremio}"`, "ia");
+      frasesRecolectadas.push(configActual.frasePremio);
+      estacionActual++;
+      setTimeout(cargarEstacion, 1500);
+    });
+  } else {
+    mostrarTyping(() => {
+      agregarMensaje("❌ El reflejo del agua muestra un error. Ese detalle no coincide con los recuerdos de la despensa o de la mesa. ¡Prueba otra opción!", "ia");
+      setTimeout(() => {
+        renderizarOpciones(configActual.opciones);
+      }, 1000);
+    });
+  }
+}
+
 window.addEventListener("load", () => {
-  setTimeout(() => {
-    agregar("Oh… no esperaba que alguien viniera a hablar conmigo hoy. Esa noche todavía me pesa en el pecho. Hay cosas que vi, cosas que escuché… que no sé muy bien cómo explicar. Puedes preguntarme lo que quieras, pero te advierto que algunas respuestas podrían complicar más las cosas que aclararlas.", "ia");
-  }, 500);
+  mostrarTyping(() => {
+    agregarMensaje("Soy Samuel. Las respuestas profundas tardan en llegar, pero con estas últimas 2 estaciones desvelaremos los detalles finales del hogar de Frank, la cocina y los misterios familiares. Elige sabiamente.", "ia");
+    setTimeout(cargarEstacion, 1500);
+  });
 });
 </script>
+
 </body>
 </html>
