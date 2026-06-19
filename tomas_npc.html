@@ -3,268 +3,421 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tomás — Periodista</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Samuel — Control de Lectura</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  background:#0a0c10;
-  font-family:'Crimson Pro', Georgia, serif;
-  color:white; min-height:100vh;
-  display:flex; align-items:center; justify-content:center;
-}
-.luz { position:fixed; border-radius:50%; pointer-events:none; z-index:0; animation:flotar 7s ease-in-out infinite; }
-.luz:nth-child(1){width:220px;height:220px;top:0;left:0;background:radial-gradient(circle,rgba(196,151,31,0.1) 0%,transparent 70%);animation-delay:0s;}
-.luz:nth-child(2){width:160px;height:160px;top:10%;right:5%;background:radial-gradient(circle,rgba(180,140,20,0.08) 0%,transparent 70%);animation-delay:3s;}
-@keyframes flotar{0%,100%{transform:translateY(0);opacity:.5;}50%{transform:translateY(-18px);opacity:1;}}
-
-.container {
-  width:min(860px,98vw); height:100vh;
-  display:flex; flex-direction:column;
-  position:relative; z-index:1;
-  background:linear-gradient(170deg,#0f0c08 0%,#1a1410 100%);
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-/* HEADER COMPACTO */
-.header {
-  padding:10px 18px 8px;
-  background:linear-gradient(135deg,#1a1208 0%,#2d1f0a 100%);
-  border-bottom:2px solid rgba(196,151,31,0.3);
-  flex-shrink:0;
+body{
+background:#07131a;
+font-family:'Crimson Text', serif;
+color:white;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
 }
-.header-row { display:flex; align-items:center; gap:10px; }
-.avatar {
-  width:40px; height:40px; border-radius:50%;
-  background:linear-gradient(135deg,#8b6914,#c4971f);
-  display:flex; align-items:center; justify-content:center;
-  font-family:'Playfair Display',serif; font-size:17px;
-  color:#1a1208; font-weight:700; flex-shrink:0;
-  box-shadow:0 0 0 2px rgba(196,151,31,0.4);
-}
-.header-info { flex:1; }
-.header-info h1 { font-family:'Playfair Display',serif; font-size:17px; color:#f0e4c0; margin:0; font-weight:600; line-height:1.2; }
-.header-sub { font-size:10px; color:rgba(196,151,31,0.75); letter-spacing:0.07em; text-transform:uppercase; }
-.zona-badge { font-size:10px; color:rgba(196,151,31,0.65); border:1px solid rgba(196,151,31,0.25); padding:2px 8px; border-radius:2px; white-space:nowrap; }
-.header-cita { margin-top:5px; font-style:italic; color:rgba(220,190,120,0.55); font-size:12px; border-left:2px solid rgba(196,151,31,0.35); padding-left:10px; line-height:1.4; }
 
-/* TEMAS */
-.temas-wrap {
-  padding:7px 14px 6px;
-  background:rgba(20,15,8,0.9);
-  border-bottom:1px solid rgba(196,151,31,0.12);
-  flex-shrink:0;
+.fondo{
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top left, rgba(0,120,160,.15), transparent 30%),
+radial-gradient(circle at bottom right, rgba(0,80,120,.18), transparent 35%),
+linear-gradient(to bottom,#07131a,#0d1f29,#07131a);
+z-index:0;
 }
-.temas-label { font-size:10px; color:rgba(196,151,31,0.45); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:5px; }
-.temas { display:flex; flex-wrap:wrap; gap:5px; }
-.tema-btn {
-  padding:4px 11px;
-  background:rgba(139,105,20,0.1);
-  border:1px solid rgba(196,151,31,0.2);
-  border-radius:20px; cursor:pointer;
-  font-family:'Crimson Pro',Georgia,serif;
-  font-size:12px; color:rgba(220,190,140,0.8);
-  transition:all .2s;
+
+.container{
+width:min(900px,98vw);
+height:100vh;
+display:flex;
+flex-direction:column;
+position:relative;
+z-index:2;
+background:rgba(5,12,16,.92);
+backdrop-filter:blur(4px);
+border-left:1px solid rgba(120,180,220,.12);
+border-right:1px solid rgba(120,180,220,.12);
 }
-.tema-btn:hover { background:rgba(139,105,20,0.3); border-color:rgba(196,151,31,0.6); color:#f0e4c0; }
 
-/* CHAT */
-.chat {
-  flex:1; overflow-y:auto; padding:14px 18px;
-  display:flex; flex-direction:column; gap:13px;
-  scrollbar-width:thin; scrollbar-color:rgba(139,105,20,0.3) transparent;
+.header{
+padding:14px 18px;
+border-bottom:1px solid rgba(120,180,220,.15);
+background:rgba(8,18,24,.95);
 }
-.chat::-webkit-scrollbar{width:4px;}
-.chat::-webkit-scrollbar-thumb{background:rgba(139,105,20,0.3);border-radius:2px;}
 
-.mensaje { max-width:84%; padding:12px 16px; line-height:1.78; font-size:15px; animation:aparecer .3s ease; }
-@keyframes aparecer{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
-.ia { background:rgba(30,22,8,0.85); border:1px solid rgba(196,151,31,0.18); border-radius:2px 12px 12px 12px; align-self:flex-start; color:#e8d9b0; }
-.usuario { background:rgba(20,35,20,0.9); border:1px solid rgba(78,120,78,0.3); border-radius:12px 2px 12px 12px; align-self:flex-end; color:#cde8cd; }
+.header-row{
+display:flex;
+align-items:center;
+gap:12px;
+}
 
-.typing-wrap { align-self:flex-start; }
-.typing { display:inline-flex; align-items:center; gap:5px; padding:10px 14px; background:rgba(30,22,8,0.85); border:1px solid rgba(196,151,31,0.18); border-radius:2px 12px 12px 12px; }
-.typing span { width:6px; height:6px; border-radius:50%; background:#8b6914; display:inline-block; animation:bounce .9s infinite; }
+.avatar{
+width:48px;
+height:48px;
+border-radius:50%;
+background:linear-gradient(135deg,#1e5f7a,#6ca5bf);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:20px;
+font-weight:bold;
+color:#07131a;
+font-family:'Cormorant Garamond', serif;
+}
+
+.header-info h1{
+font-family:'Cormorant Garamond', serif;
+font-size:24px;
+font-weight:600;
+color:#d9edf5;
+}
+
+.header-sub{
+font-size:12px;
+letter-spacing:.08em;
+text-transform:uppercase;
+color:rgba(180,220,235,.6);
+}
+
+.zona{
+font-size:11px;
+padding:4px 10px;
+border:1px solid rgba(120,180,220,0.2);
+border-radius:3px;
+color:rgba(180,220,235,.7);
+font-family:'Cormorant Garamond', serif;
+}
+
+.frase{
+margin-top:8px;
+padding-left:12px;
+border-left:2px solid rgba(120,180,220,.3);
+font-style:italic;
+color:rgba(220,240,250,.65);
+font-size:14px;
+line-height:1.5;
+}
+
+.chat{
+flex:1;
+overflow-y:auto;
+padding:18px;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.chat::-webkit-scrollbar{
+width:4px;
+}
+
+.chat::-webkit-scrollbar-thumb{
+background:rgba(120,180,220,0.18);
+}
+
+.mensaje{
+max-width:84%;
+padding:14px 16px;
+line-height:1.8;
+font-size:16px;
+animation:fade .25s ease;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(8px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.ia{
+align-self:flex-start;
+background:rgba(14,28,36,.95);
+border:1px solid rgba(120,180,220,.12);
+border-radius:4px 14px 14px 14px;
+color:#e2f3fa;
+}
+
+.usuario{
+align-self:flex-end;
+background:rgba(20,45,30,.9);
+border:1px solid rgba(120,180,140,.18);
+border-radius:14px 4px 14px 14px;
+color:#e2ffe8;
+}
+
+.typing-wrap{
+align-self:flex-start;
+}
+
+.typing{
+display:inline-flex;
+gap:5px;
+padding:10px 14px;
+background:rgba(14,28,36,.95);
+border:1px solid rgba(120,180,220,.12);
+border-radius:4px 14px 14px 14px;
+}
+
+.typing span{
+width:6px;
+height:6px;
+border-radius:50%;
+background:#6ca5bf;
+animation:bounce .9s infinite;
+}
+
 .typing span:nth-child(2){animation-delay:.15s;}
 .typing span:nth-child(3){animation-delay:.3s;}
-@keyframes bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-6px);}}
 
-/* INPUT */
-.input-area { display:flex; gap:8px; padding:10px 14px; background:rgba(10,8,4,0.95); border-top:1px solid rgba(196,151,31,0.12); flex-shrink:0; }
-.input-area input { flex:1; padding:10px 14px; background:rgba(30,22,8,0.7); border:1px solid rgba(196,151,31,0.22); border-radius:3px; font-family:'Crimson Pro',Georgia,serif; font-size:14.5px; color:#e8d9b0; outline:none; transition:border-color .2s; }
-.input-area input:focus { border-color:rgba(196,151,31,0.55); }
-.input-area input::placeholder { color:rgba(180,150,80,0.35); }
-.send-btn { padding:10px 18px; background:linear-gradient(135deg,#8b6914,#c4971f); border:none; border-radius:3px; font-family:'Playfair Display',serif; font-size:14px; color:#1a1208; font-weight:700; cursor:pointer; transition:opacity .2s; }
-.send-btn:hover{opacity:.85;}
+@keyframes bounce{
+0%,80%,100%{transform:translateY(0);}
+40%{transform:translateY(-6px);}
+}
 
-.footer { text-align:center; padding:5px; color:rgba(139,105,20,0.3); font-size:11px; background:rgba(10,8,4,0.95); flex-shrink:0; }
+.input-area{
+display:flex;
+flex-direction:column;
+gap:8px;
+padding:12px;
+border-top:1px solid rgba(120,180,220,.1);
+background:rgba(5,10,14,.95);
+}
+
+.opciones-container {
+display:grid;
+grid-template-columns:1fr;
+gap:8px;
+width:100%;
+}
+
+@media(min-width: 600px){
+  .opciones-container {
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+.opcion-btn {
+padding:12px 14px;
+background:rgba(120,180,220,0.05);
+border:1px solid rgba(120,180,220,0.15);
+border-radius:6px;
+color:#eaf6ff;
+font-family:'Crimson Text', serif;
+font-size:15px;
+text-align:left;
+cursor:pointer;
+transition:0.2s;
+}
+
+.opcion-btn:hover:not(:disabled) {
+background:rgba(120,180,220,0.15);
+border-color:rgba(120,180,220,0.4);
+}
+
+.opcion-btn:disabled {
+opacity:0.5;
+cursor:not-allowed;
+}
+
+.footer{
+text-align:center;
+padding:6px;
+font-size:11px;
+color:rgba(180,220,235,.35);
+background:rgba(5,10,14,.95);
+}
+
+.progreso-barra {
+height:4px;
+background:rgba(120,180,220,0.1);
+width:100%;
+position:relative;
+}
+
+.progreso-llenado {
+height:100%;
+background:linear-gradient(90deg,#1e5f7a,#6ca5bf);
+width:0%;
+transition:width 0.3s ease;
+}
 </style>
 </head>
+
 <body>
-<div class="luz"></div><div class="luz"></div>
+
+<div class="fondo"></div>
 
 <div class="container">
-  <div class="header">
-    <div class="header-row">
-      <div class="avatar">T</div>
-      <div class="header-info">
-        <h1>Tomás</h1>
-        <div class="header-sub">Periodista Local · Festival de las Luces</div>
-      </div>
-      <div class="zona-badge">ZONA CENTRAL</div>
-    </div>
-    <div class="header-cita">"La verdad rara vez aparece completa desde el principio."</div>
-  </div>
 
-  <div class="temas-wrap">
-    <div class="temas-label">Puedes preguntarme sobre</div>
-    <div class="temas">
-      <button class="tema-btn" onclick="preguntar('viste')">👁️ ¿Qué viste?</button>
-      <button class="tema-btn" onclick="preguntar('fragmento')">💎 Fragmento</button>
-      <button class="tema-btn" onclick="preguntar('elias')">⚽ Elías</button>
-      <button class="tema-btn" onclick="preguntar('playa')">🌊 Playa</button>
-      <button class="tema-btn" onclick="preguntar('valeria')">💃 Valeria</button>
-      <button class="tema-btn" onclick="preguntar('miedo')">😨 Miedo</button>
-      <button class="tema-btn" onclick="preguntar('quien')">🔍 ¿Quién tiene el Fragmento?</button>
-      <button class="tema-btn" onclick="preguntar('hablar')">🗺️ ¿Con quién hablar?</button>
-    </div>
-  </div>
+<div class="header">
+<div class="header-row">
+<div class="avatar">🌊</div>
+<div class="header-info">
+<h1>Samuel</h1>
+<div class="header-sub">Control de Lectura · Bloque del Hogar</div>
+</div>
+<div class="zona" id="estacion-tag">ESTACIÓN 1 / 2</div>
+</div>
+<div class="frase">
+"El agua recuerda cosas que las personas prefieren olvidar."
+</div>
+</div>
 
-  <div class="chat" id="chat"></div>
+<div class="progreso-barra">
+<div class="progreso-llenado" id="barra"></div>
+</div>
 
-  <div class="input-area">
-    <input type="text" id="pregunta" placeholder="Escribe tu pregunta a Tomás..." onkeydown="if(event.key==='Enter') enviar()">
-    <button class="send-btn" onclick="enviar()">Preguntar</button>
-  </div>
-  <div class="footer">Festival de las Luces — Investigación Narrativa</div>
+<div class="chat" id="chat"></div>
+
+<div class="input-area">
+<div class="opciones-container" id="opciones-block">
+<!-- Opciones dinámicas -->
+</div>
+</div>
+
+<div class="footer">
+Evidencia de Lectura — Sistema de Comprobación
+</div>
+
 </div>
 
 <script>
 const chat = document.getElementById("chat");
-const usadas = {};
+const opcionesBlock = document.getElementById("opciones-block");
+const barra = document.getElementById("barra");
+const estacionTag = document.getElementById("estacion-tag");
 
-const respuestas = {
+let estacionActual = 0;
+let frasesRecolectadas = [];
 
-viste: [
-`Vi demasiadas cosas pequeñas que en ese momento parecían insignificantes… y ahora no puedo dejar de unirlas en mi cabeza. Vi personas caminando rápido sin razón aparente. Vi conversaciones que se detenían apenas alguien se acercaba. Vi miradas nerviosas dirigidas hacia el lago. Pero hubo algo específico que todavía me persigue: una figura corriendo cerca de la playa con algo escondido bajo el brazo. No parecía alguien huyendo con miedo solamente… parecía alguien que sabía exactamente lo que llevaba consigo.`,
+const bancoPreguntas = [
+  {
+    pregunta: "Estación 1: En los recuerdos sobre la madre y las dinámicas en la mesa, ¿qué preparaba meticulosamente la señora de la casa y qué hacía la madre mientras los demás almorzaban o realizaban sus tareas?",
+    opciones: [
+      { inciso: "A", texto: "La señora de la casa preparaba jugos cítricos y la madre tejía en silencio en la sala.", correcta: false },
+      { inciso: "B", texto: "La señora de la casa servía pescado frito mientras la madre leía la Biblia en voz alta.", correcta: false },
+      { inciso: "C", texto: "La señora de la casa organizaba la mesa de noche, mientras la madre salía apresurada a la fábrica de textiles.", correcta: false },
+      { inciso: "D", texto: "La señora de la casa preparaba jugos naturales quitándoles las pepas, mientras la madre subía al segundo piso a limpiar la máquina de escribir.", correcta: true }
+    ],
+    frasePremio: "«Las pepas de los jugos caían en el colador, igual que los viejos secretos de la casa...»"
+  },
+  {
+    pregunta: "Estación 2: Con respecto a los días de mercado y el abastecimiento del hogar, ¿qué elemento guardaba con recelo la señora de la casa en la despensa y qué instrucciones específicas repetía constantemente sobre su uso?",
+    opciones: [
+      { inciso: "A", texto: "Guardaba arroz integral y exigía cocinarlo únicamente los domingos por la mañana.", correcta: false },
+      { inciso: "B", texto: "Guardaba con recelo una botella de aceite de oliva español, advirtiendo que solo debía usarse en gotas contadas para las ensaladas especiales.", correcta: true },
+      { inciso: "C", texto: "Ocultaba panela y pedía que nadie la tocara para evitar que los niños sufrieran de caries.", correcta: false },
+      { inciso: "D", texto: "Almacenaba sal marina importada que únicamente se abría cuando Frank traía invitados de la capital.", correcta: false }
+    ],
+    frasePremio: "«Cada gota de aceite era contada con el rigor de un reloj de arena en medio de la cocina.»"
+  }
+];
 
-`Lo extraño de esa noche no fue un gran momento dramático. No hubo gritos enormes ni nada que llamara la atención de todos. Fue peor. Fue una sensación constante de que algo estaba mal y nadie quería decirlo en voz alta. Recuerdo mirar alrededor durante el festival y notar que las personas evitaban ciertos lugares. Como si el pueblo entero estuviera obedeciendo un miedo silencioso que nadie había declarado.`
-],
-
-fragmento: [
-`La mayoría de turistas piensa que el Fragmento es simplemente una reliquia bonita del festival, algo decorativo. Pero para la gente del pueblo nunca fue solo eso. Hay personas que creen que protege el equilibrio del lago. Otros piensan que es solo una vieja superstición. Yo no sé qué creer todavía… pero sí sé algo: la noche que desapareció, demasiadas personas actuaron como si perderlo fuera mucho más grave que perder una joya.`,
-
-`Tuve la oportunidad de verlo de cerca una vez. Parece absurdo decirlo, pero el objeto generaba una sensación extraña. Pesada. Como si cargara historia encima. Había habitantes del pueblo que ni siquiera querían acercarse demasiado. Y otros que parecían obsesionados con controlarlo. Las cosas que despiertan obsesión en las personas rara vez terminan bien.`
-],
-
-elias: [
-`Aprendí hace tiempo que las personas realmente tranquilas no necesitan aparentar seguridad todo el tiempo. Elías actuaba como si nada pudiera afectarlo, pero esa noche sus movimientos lo traicionaban. Caminaba rápido. Miraba constantemente hacia atrás. Evitaba quedarse demasiado tiempo en un mismo lugar. Y cuando intenté hablar con él cerca del hielo, no sostuvo mi mirada ni dos segundos.`,
-
-`No diría que sospecho completamente de él… todavía. Pero sí creo que oculta algo importante. Escuché una discusión cerca del lago y reconocí su voz entre el viento. No entendí todas las palabras, pero sí entendí el tono: miedo mezclado con rabia. Después desapareció varios minutos. Y nadie parece saber realmente dónde estuvo durante ese tiempo.`
-],
-
-playa: [
-`La playa fue el primer lugar que empezó a sentirse vacío esa noche. Y eso no era normal. Durante el Festival de las Luces siempre hay personas caminando por la arena hasta tarde. Música, risas, fogatas pequeñas… vida. Pero en algún momento todo se apagó. Recuerdo el sonido del mar y nada más. Y en medio de ese silencio vi una silueta correr cerca de la orilla cargando algo contra el pecho.`,
-
-`Samuel siempre dice que la playa escucha cosas que el pueblo intenta esconder. Yo solía reírme de esas frases. Ya no. Esa noche las sombras cerca del agua parecían moverse diferente. Varias personas se alejaban de la orilla sin explicar por qué, como si algo las hubiera asustado profundamente. Y cuando un lugar se vacía así durante una fiesta… es porque alguien vio algo que no debía ver.`
-],
-
-valeria: [
-`Sí, estoy casi seguro de que sabe algo. La observé antes de la presentación principal y era evidente que estaba distraída. Seguía mirando hacia la zona central como si esperara que algo ocurriera. Incluso olvidó pasos de la coreografía. Y según me dijeron, eso nunca le pasa. Hay personas que intentan esconder el miedo sonriendo. Ella era una de ellas esa noche.`,
-
-`Lo interesante de Valeria no es lo que dice. Es lo que evita decir. Cuando mencioné el lago, inmediatamente cambió el tema. Cuando hablé de la playa, dejó de mirarme a los ojos. No creo que sea culpable de nada… pero sí creo que vio algo que todavía no sabe cómo contar. Tal vez si alguien se acerca con calma y sin presionarla demasiado, ella pueda recordar detalles importantes.`
-],
-
-miedo: [
-`Sí. Y cualquier persona que esté investigando esto seriamente debería tenerlo. Porque mientras más preguntas hago, más entiendo que el pueblo entero está escondiendo pequeñas partes de la historia. Y cuando demasiadas personas guardan secretos al mismo tiempo… alguien termina lastimado. No es una amenaza. Es simplemente lo que he visto en años de periodismo.`,
-
-`Lo que me asusta no es el Fragmento en sí. Lo que me asusta es la manera en que cambió el comportamiento de todos después de la desaparición. Personas dejando conversaciones a medias. Miradas nerviosas. Silencios incómodos donde antes había conversación. He cubierto conflictos antes. Y el miedo colectivo siempre se siente igual: como un aire que todos respiran pero nadie nombra.`
-],
-
-quien: [
-`Honestamente… ya no creo que una sola persona tenga toda la verdad. Tengo la sensación de que varias personas participaron de formas distintas sin entender completamente lo que estaba ocurriendo. Algunos querían proteger el Fragmento. Otros querían aprovecharse de él. Y en medio de todo eso… algo salió mal. La respuesta no está en una sola persona. Está repartida entre todos.`,
-
-`Si quieres mi opinión personal, creo que alguien intentó esconder el Fragmento más que robarlo. Había demasiado nerviosismo para que esto fuera un simple robo por dinero. Las personas actuaban como si el verdadero peligro no fuera perder el objeto… sino que alguien específico lo encontrara primero. Eso cambia completamente la naturaleza del caso.`
-],
-
-hablar: [
-`Si realmente quieres entender lo que pasó esa noche, hay dos personas con las que debes hablar sin falta. La primera es Samuel, el pescador. Lo encuentras en la playa. Lleva décadas en este pueblo y conoce historias del Fragmento que la mayoría prefiere ignorar. No habla fácilmente, pero si le haces las preguntas correctas… dice cosas que valen mucho. La segunda es Luna, la bailarina secundaria. Está en la casa del árbol. Escuchó conversaciones esa noche que no debía escuchar. Ella sabe más de lo que aparenta.`,
-
-`Mira, yo puedo contarte lo que observé. Pero hay límites en lo que vi personalmente. Samuel en la playa tiene una perspectiva completamente diferente, lleva años estudiando la historia antigua del Fragmento. Y Luna, en la casa del árbol, estuvo en el lugar correcto en el momento correcto para escuchar cosas importantes. Si conectas lo que ellos dos saben con lo que yo te he contado… las piezas empiezan a encajar.`
-]
-
-};
-
-function agregar(texto, tipo) {
+function agregarMensaje(texto, tipo){
   const div = document.createElement("div");
   div.classList.add("mensaje", tipo);
-  div.innerHTML = texto.replace(/\n/g,'<br>');
+  div.innerHTML = texto.replace(/\n/g, "<br>");
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
 
-function mostrarTyping() {
+function mostrarTyping(callback){
   const wrap = document.createElement("div");
-  wrap.classList.add("typing-wrap"); wrap.id = "typing";
+  wrap.classList.add("typing-wrap");
+  wrap.id = "typing";
   wrap.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
-  chat.appendChild(wrap); chat.scrollTop = chat.scrollHeight;
-}
-function quitarTyping() { const t = document.getElementById("typing"); if(t) t.remove(); }
-
-function obtenerRespuesta(tema) {
-  const lista = respuestas[tema];
-  if (!lista) return null;
-  if (!usadas[tema]) usadas[tema] = 0;
-  const idx = usadas[tema] % lista.length;
-  usadas[tema]++;
-  return lista[idx];
-}
-
-function detectarTema(texto) {
-  const t = texto.toLowerCase();
-  if (t.match(/viste|vio|noche|pas[oó]|ocurri/)) return "viste";
-  if (t.match(/fragmento|aurora|reliquia|objeto/)) return "fragmento";
-  if (t.match(/el[ií]as|futbolista/)) return "elias";
-  if (t.match(/playa|arena|orilla|mar/)) return "playa";
-  if (t.match(/valeria|bailarina/)) return "valeria";
-  if (t.match(/miedo|nervios|asusta|temes/)) return "miedo";
-  if (t.match(/qui[eé]n|tiene|rob[oó]|culpable/)) return "quien";
-  if (t.match(/hablar|preguntar|investigar|siguiente|con qui[eé]n/)) return "hablar";
-  return null;
-}
-
-function preguntar(tema) {
-  const etiquetas = {viste:"¿Qué viste esa noche?", fragmento:"¿Qué sabes del Fragmento?", elias:"¿Por qué sospechas de Elías?", playa:"¿Qué pasó en la playa?", valeria:"¿Valeria sabe algo?", miedo:"¿Tienes miedo?", quien:"¿Quién crees que tiene el Fragmento?", hablar:"¿Con quién debería hablar?"};
-  agregar(etiquetas[tema] || tema, "usuario");
-  responderTema(tema);
-}
-
-function responderTema(tema) {
-  mostrarTyping();
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+  
   setTimeout(() => {
-    quitarTyping();
-    const resp = obtenerRespuesta(tema);
-    if (resp) {
-      agregar(resp, "ia");
-    } else {
-      agregar("Interesante pregunta… pero creo que necesito más contexto para responderte bien. Puedes preguntarme sobre lo que vi esa noche, el Fragmento, Elías, la playa, Valeria, el miedo del pueblo, o quién podría tener el Fragmento ahora.", "ia");
-    }
+    const t = document.getElementById("typing");
+    if(t) t.remove();
+    callback();
   }, 1000);
 }
 
-function enviar() {
-  const input = document.getElementById("pregunta");
-  const texto = input.value.trim();
-  if (!texto) return;
-  agregar(texto, "usuario");
-  input.value = "";
-  responderTema(detectarTema(texto) || "default");
+function cargarEstacion() {
+  if (estacionActual < bancoPreguntas.length) {
+    estacionTag.innerText = `ESTACIÓN ${estacionActual + 1} / 2`;
+    barra.style.width = `${(estacionActual / bancoPreguntas.length) * 100}%`;
+    
+    const configuracion = bancoPreguntas[estacionActual];
+    
+    mostrarTyping(() => {
+      agregarMensaje(configuracion.pregunta, "ia");
+      renderizarOpciones(configuracion.opciones);
+    });
+  } else {
+    estacionTag.innerText = `COMPLETO`;
+    barra.style.width = "100%";
+    opcionesBlock.innerHTML = "";
+    
+    mostrarTyping(() => {
+      agregarMensaje("🌊 ¡Las corrientes de la memoria están despejadas! Has completado el último bloque de lectura. Tus fragmentos recolectados:", "ia");
+      
+      let mensajeFinal = frasesRecolectadas.map((f, index) => `${index + 1}. ${f}`).join("\n\n");
+      
+      setTimeout(() => {
+        agregarMensaje(mensajeFinal, "ia");
+        setTimeout(() => {
+          agregarMensaje("🔒 **COMPROBACIÓN FINALIZADA:** Muestra el resultado de los 4 códigos a tu profesor para tu nota completa.", "ia");
+        }, 800);
+      }, 500);
+    });
+  }
+}
+
+function renderizarOpciones(opciones) {
+  opcionesBlock.innerHTML = "";
+  opciones.forEach(opc => {
+    const boton = document.createElement("button");
+    boton.classList.add("opcion-btn");
+    boton.innerHTML = `<strong>${opc.inciso}.</strong> ${opc.texto}`;
+    boton.onclick = () => procesarRespuesta(opc);
+    opcionesBlock.appendChild(boton);
+  });
+}
+
+function procesarRespuesta(opcionSeleccionada) {
+  const botones = opcionesBlock.querySelectorAll(".opcion-btn");
+  botones.forEach(b => b.disabled = true);
+
+  agregarMensaje(`Elegí la opción ${opcionSeleccionada.inciso}: ${opcionSeleccionada.texto}`, "usuario");
+
+  const configActual = bancoPreguntas[estacionActual];
+
+  if (opcionSeleccionada.correcta) {
+    mostrarTyping(() => {
+      agregarMensaje(`🔵 El agua no miente. Respuesta correcta. Recibes un testimonio clave:\n\n"${configActual.frasePremio}"`, "ia");
+      frasesRecolectadas.push(configActual.frasePremio);
+      estacionActual++;
+      setTimeout(cargarEstacion, 1500);
+    });
+  } else {
+    mostrarTyping(() => {
+      agregarMensaje("❌ El reflejo del agua muestra un error. Ese detalle no coincide con los recuerdos de la despensa o de la mesa. ¡Prueba otra opción!", "ia");
+      setTimeout(() => {
+        renderizarOpciones(configActual.opciones);
+      }, 1000);
+    });
+  }
 }
 
 window.addEventListener("load", () => {
-  setTimeout(() => {
-    agregar("He estado investigando la desaparición del Fragmento de Aurora desde que ocurrió. Hay cosas que vi esa noche que todavía no consigo ordenar completamente. ¿Qué quieres saber?", "ia");
-  }, 500);
+  mostrarTyping(() => {
+    agregarMensaje("Soy Samuel. Las respuestas profundas tardan en llegar, pero con estas últimas 2 estaciones desvelaremos los detalles finales del hogar de Frank, la cocina y los misterios familiares. Elige sabiamente.", "ia");
+    setTimeout(cargarEstacion, 1500);
+  });
 });
 </script>
+
 </body>
 </html>
