@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valeria — Bailarina Principal</title>
+<title>Evidencia de Lectura — El día en que Frank desapareció</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -46,7 +46,7 @@ width:180px;
 height:180px;
 bottom:-30px;
 right:-20px;
-background:radial-gradient(circle, rgba(255,120,180,0.08) 0%, transparent 70%);
+background:radial-gradient(circle, rgba(120,180,255,0.08) 0%, transparent 70%);
 animation-delay:3s;
 }
 
@@ -60,15 +60,15 @@ width:min(860px,98vw);
 height:100vh;
 display:flex;
 flex-direction:column;
-background:linear-gradient(180deg,#120d0f 0%,#1b1216 100%);
+background:linear-gradient(180deg,#0f1115 0%,#161920 100%);
 position:relative;
 z-index:1;
 }
 
 .header{
 padding:12px 18px;
-background:linear-gradient(135deg,#24151b 0%,#3a1f2d 100%);
-border-bottom:2px solid rgba(255,180,180,0.2);
+background:linear-gradient(135deg,#1a202c 0%,#2d3748 100%);
+border-bottom:2px solid rgba(180,210,255,0.2);
 }
 
 .header-row{
@@ -87,9 +87,9 @@ justify-content:center;
 font-family:'Playfair Display', serif;
 font-size:18px;
 font-weight:bold;
-background:linear-gradient(135deg,#ffb38a,#ff7ab6);
-color:#1a1015;
-box-shadow:0 0 0 2px rgba(255,180,180,0.2);
+background:linear-gradient(135deg,#8ae4ff,#769eff);
+color:#0f141d;
+box-shadow:0 0 0 2px rgba(180,210,255,0.2);
 }
 
 .header-info{
@@ -99,12 +99,12 @@ flex:1;
 .header-info h1{
 font-family:'Playfair Display', serif;
 font-size:18px;
-color:#ffe7d4;
+color:#e2f1ff;
 }
 
 .header-sub{
 font-size:11px;
-color:rgba(255,220,200,0.65);
+color:rgba(200,225,255,0.65);
 letter-spacing:.08em;
 text-transform:uppercase;
 }
@@ -112,32 +112,32 @@ text-transform:uppercase;
 .zona{
 font-size:10px;
 padding:4px 10px;
-border:1px solid rgba(255,200,200,0.2);
+border:1px solid rgba(200,225,255,0.2);
 border-radius:3px;
-color:rgba(255,220,220,0.7);
+color:rgba(220,235,255,0.7);
 }
 
 .frase{
 margin-top:8px;
 font-style:italic;
 font-size:13px;
-color:rgba(255,220,220,0.6);
-border-left:2px solid rgba(255,180,180,0.3);
+color:rgba(220,235,255,0.6);
+border-left:2px solid rgba(180,210,255,0.3);
 padding-left:10px;
 line-height:1.5;
 }
 
 .temas-wrap{
 padding:8px 14px;
-background:rgba(30,18,24,0.95);
-border-bottom:1px solid rgba(255,180,180,0.1);
+background:rgba(18,22,30,0.95);
+border-bottom:1px solid rgba(180,210,255,0.1);
 }
 
 .temas-label{
 font-size:10px;
 text-transform:uppercase;
 letter-spacing:.1em;
-color:rgba(255,220,220,0.4);
+color:rgba(220,235,255,0.4);
 margin-bottom:6px;
 }
 
@@ -145,23 +145,6 @@ margin-bottom:6px;
 display:flex;
 flex-wrap:wrap;
 gap:6px;
-}
-
-.tema-btn{
-padding:5px 12px;
-background:rgba(255,180,180,0.08);
-border:1px solid rgba(255,180,180,0.15);
-border-radius:20px;
-font-family:'Crimson Pro', serif;
-font-size:12px;
-cursor:pointer;
-color:#ffd8d8;
-transition:.2s;
-}
-
-.tema-btn:hover{
-background:rgba(255,180,180,0.18);
-border-color:rgba(255,180,180,0.4);
 }
 
 .chat{
@@ -178,7 +161,7 @@ width:4px;
 }
 
 .chat::-webkit-scrollbar-thumb{
-background:rgba(255,180,180,0.2);
+background:rgba(180,210,255,0.2);
 }
 
 .mensaje{
@@ -202,10 +185,10 @@ transform:translateY(0);
 
 .ia{
 align-self:flex-start;
-background:rgba(42,24,32,0.9);
-border:1px solid rgba(255,180,180,0.12);
+background:rgba(24,30,42,0.9);
+border:1px solid rgba(180,210,255,0.12);
 border-radius:3px 14px 14px 14px;
-color:#ffe5e5;
+color:#e5f1ff;
 }
 
 .usuario{
@@ -224,8 +207,8 @@ align-self:flex-start;
 display:inline-flex;
 gap:5px;
 padding:10px 14px;
-background:rgba(42,24,32,0.9);
-border:1px solid rgba(255,180,180,0.12);
+background:rgba(24,30,42,0.9);
+border:1px solid rgba(180,210,255,0.12);
 border-radius:3px 14px 14px 14px;
 }
 
@@ -233,7 +216,7 @@ border-radius:3px 14px 14px 14px;
 width:6px;
 height:6px;
 border-radius:50%;
-background:#ffb3c8;
+background:#8ae4ff;
 animation:bounce .9s infinite;
 }
 
@@ -246,60 +229,75 @@ animation-delay:.3s;
 }
 
 @keyframes bounce{
-0%,80%,100%{
-transform:translateY(0);
-}
-40%{
-transform:translateY(-6px);
-}
+0%,80%,100%{transform:translateY(0);}
+40%{transform:translateY(-6px);}
 }
 
 .input-area{
 display:flex;
+flex-direction:column;
 gap:8px;
 padding:12px;
-background:rgba(20,10,15,0.96);
-border-top:1px solid rgba(255,180,180,0.08);
+background:rgba(10,12,18,0.96);
+border-top:1px solid rgba(180,210,255,0.08);
 }
 
-.input-area input{
-flex:1;
-padding:11px 14px;
-background:rgba(45,25,32,0.9);
-border:1px solid rgba(255,180,180,0.15);
-border-radius:4px;
-outline:none;
-font-size:14px;
+.opciones-container {
+display:grid;
+grid-template-columns:1fr;
+gap:8px;
+width:100%;
+}
+
+@media(min-width: 600px){
+  .opciones-container {
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+.opcion-btn {
+padding:12px 14px;
+background:rgba(180,210,255,0.05);
+border:1px solid rgba(180,210,255,0.15);
+border-radius:6px;
+color:#e2f1ff;
 font-family:'Crimson Pro', serif;
-color:#ffe8e8;
-}
-
-.input-area input:focus{
-border-color:rgba(255,180,180,0.4);
-}
-
-.input-area input::placeholder{
-color:rgba(255,220,220,0.35);
-}
-
-.send-btn{
-padding:10px 18px;
-border:none;
-border-radius:4px;
-cursor:pointer;
-font-family:'Playfair Display', serif;
 font-size:14px;
-font-weight:bold;
-background:linear-gradient(135deg,#ffb38a,#ff7ab6);
-color:#1a1015;
+text-align:left;
+cursor:pointer;
+transition:0.2s;
+}
+
+.opcion-btn:hover:not(:disabled) {
+background:rgba(180,210,255,0.15);
+border-color:rgba(180,210,255,0.4);
+}
+
+.opcion-btn:disabled {
+opacity:0.5;
+cursor:not-allowed;
 }
 
 .footer{
 text-align:center;
 padding:5px;
 font-size:11px;
-color:rgba(255,220,220,0.25);
-background:rgba(20,10,15,0.96);
+color:rgba(180,210,255,0.25);
+background:rgba(10,12,18,0.96);
+}
+
+.progreso-barra {
+height:4px;
+background:rgba(180,210,255,0.1);
+width:100%;
+position:relative;
+}
+
+.progreso-llenado {
+height:100%;
+background:linear-gradient(90deg,#8ae4ff,#769eff);
+width:0%;
+transition:width 0.3s ease;
 }
 </style>
 </head>
@@ -313,308 +311,190 @@ background:rgba(20,10,15,0.96);
 
 <div class="header">
 <div class="header-row">
-
-<div class="avatar">V</div>
-
+<div class="avatar">🤖</div>
 <div class="header-info">
-<h1>Valeria</h1>
-<div class="header-sub">Bailarina Principal · Festival de las Luces</div>
+<h1>Validador de Lectura</h1>
+<div class="header-sub">Control de Comprensión · Cuatro Estaciones</div>
 </div>
-
-<div class="zona">ZONA DE HONGOS</div>
-
+<div class="zona" id="estacion-tag">ESTACIÓN 1 / 4</div>
 </div>
-
-<div class="frase">
-"A veces el cuerpo siente el peligro antes de que la mente logre entenderlo."
+<div class="frase" id="frase-dinamica">
+"La memoria es el único rastro que queda cuando la historia intenta borrar los hechos."
 </div>
 </div>
 
-<div class="temas-wrap">
-
-<div class="temas-label">
-Puedes preguntarme sobre
-</div>
-
-<div class="temas">
-
-<button class="tema-btn" onclick="preguntar('festival')">🎭 Festival</button>
-
-<button class="tema-btn" onclick="preguntar('playa')">🌊 Playa</button>
-
-<button class="tema-btn" onclick="preguntar('elias')">⚽ Elías</button>
-
-<button class="tema-btn" onclick="preguntar('miedo')">😨 Miedo</button>
-
-<button class="tema-btn" onclick="preguntar('fragmento')">💎 Fragmento</button>
-
-<button class="tema-btn" onclick="preguntar('sospechas')">👀 Sospechas</button>
-
-<button class="tema-btn" onclick="preguntar('hablar')">🗺️ ¿Con quién hablar?</button>
-
-<button class="tema-btn" onclick="preguntar('presentacion')">💃 Presentación</button>
-
-</div>
+<div class="progreso-barra">
+<div class="progreso-llenado" id="barra"></div>
 </div>
 
 <div class="chat" id="chat"></div>
 
 <div class="input-area">
-<input
-type="text"
-id="pregunta"
-placeholder="Escribe tu pregunta a Valeria..."
-onkeydown="if(event.key==='Enter') enviar()"
->
-
-<button class="send-btn" onclick="enviar()">
-Preguntar
-</button>
+<div class="opciones-container" id="opciones-block">
+<!-- Los botones de opciones múltiples se inyectarán aquí dinámicamente -->
+</div>
 </div>
 
 <div class="footer">
-Festival de las Luces — Investigación Narrativa
+Evidencia de Aprendizaje — Sistema de Control Narrativo
 </div>
 
 </div>
 
 <script>
-
 const chat = document.getElementById("chat");
-const usadas = {};
+const opcionesBlock = document.getElementById("opciones-block");
+const barra = document.getElementById("barra");
+const estacionTag = document.getElementById("estacion-tag");
 
-const respuestas = {
+let estacionActual = 0;
+let frasesRecolectadas = [];
 
-festival: [
+// Las 4 preguntas basadas estrictamente en las 4 páginas del documento proveído
+const bancoPreguntas = [
+  {
+    pregunta: "Estación 1: ¿A qué se dedicaba Frank Rodríguez y cuál era su gran anhelo profesional según el inicio del relato?",
+    opciones: [
+      { inciso: "A", texto: "Era un graduado de abogacía que trabajaba de mensajero en un banco.", correcta: false },
+      { inciso: "B", texto: "Era estudiante de Derecho en octavo semestre, trabajaba apoyando procesos en el Palacio y anhelaba ser magistrado.", correcta: true },
+      { inciso: "C", texto: "Era un periodista de la Corte Suprema que investigaba violaciones de derechos humanos.", correcta: false },
+      { inciso: "D", texto: "Era conductor asignado de los altos magistrados de la Corte.", correcta: false }
+    ],
+    frasePremio: "«Un hilo de humo negro ascendía desde el centro de la ciudad...»"
+  },
+  {
+    pregunta: "Estación 2: Cuando Adela se entera por los medios de comunicación del caos en el Palacio de Justicia, ¿qué decide hacer inmediatamente movida por el presentimiento?",
+    opciones: [
+      { inciso: "A", texto: "Se queda en la casa esperando llamadas telefónicas de los compañeros de Frank.", correcta: false },
+      { inciso: "B", texto: "Apaga la televisión para que los gemelos Miguel y Alex no se asusten con las imágenes.", correcta: false },
+      { inciso: "C", texto: "Busca a los niños al colegio, regresa a casa, organiza el lugar y enciende la televisión y la radio.", correcta: true },
+      { inciso: "D", texto: "Viaja de inmediato a Chía a pedirle ayuda a la abuela Carmen.", correcta: false }
+    ],
+    frasePremio: "«...dejando una profunda e insoportable impotencia en las almas...»"
+  },
+  {
+    pregunta: "Estación 3: Tras la toma, Adela logra ingresar al Palacio de Justicia devastado. ¿Qué elemento crucial intenta rescatar antes de ser detenida por un policía?",
+    opciones: [
+      { inciso: "A", texto: "Una máquina de escribir carbonizada.", correcta: false },
+      { inciso: "B", texto: "Un maletín colgante de cuero que siempre usaba Frank.", correcta: true },
+      { inciso: "C", texto: "Un listado oficial de las víctimas rescatadas.", correcta: false },
+      { inciso: "D", texto: "Un par de anteojos y un rosario abandonado.", correcta: false }
+    ],
+    frasePremio: "«...donde la incertidumbre y el dolor se vuelven ceniza...»"
+  },
+  {
+    pregunta: "Estación 4: Semanas después de la desaparición, mientras la familia vive la angustia en su hogar, ¿qué desastre natural de magnitudes históricas ocurre en el país y es seguido por los gemelos en el atlas?",
+    opciones: [
+      { inciso: "A", texto: "Un terremoto en el sur del país que destruyó las carreteras principales.", correcta: false },
+      { inciso: "B", texto: "Las inundaciones provocadas por el desborde del río Bogotá.", correcta: false },
+      { inciso: "C", texto: "La erupción del volcán Nevado del Ruiz que afectó gravemente a Armero.", correcta: true },
+      { inciso: "D", texto: "Un fuerte invierno que incomunicó por completo el municipio de Chía.", correcta: false }
+    ],
+    frasePremio: "«...unidos por la tragedia de un mes para olvidar.»"
+  }
+];
 
-`El festival normalmente es mi momento favorito del año. Luces, música, niños corriendo, personas riendo… todo el pueblo parece distinto. Pero esa noche el ambiente estaba pesado. Como si todos estuvieran fingiendo pasarla bien mientras esperaban que algo malo ocurriera. Y honestamente… creo que algunos ya sabían que algo iba a pasar antes de que desapareciera el Fragmento.`,
-
-`Intenté convencerme toda la noche de que eran solo nervios por la presentación… pero no lo eran. Desde antes de subir al escenario sentía algo extraño en el ambiente. Las personas hablaban demasiado bajo, como si estuvieran intentando que nadie más escuchara ciertas conversaciones. Y había miradas. Muchas miradas. De esas que duran apenas un segundo, pero te hacen sentir observada incluso después de que desaparecen.`
-
-],
-
-playa: [
-
-`No vi el rostro de la persona, pero sí recuerdo perfectamente la manera en que corría. Era una carrera desesperada, torpe, como alguien que no estaba acostumbrado a esconder cosas. Llevaba algo bajo el brazo y volteaba constantemente hacia atrás. En ese momento pensé que quizá era alguien borracho saliendo del festival… ahora ya no estoy tan segura.`,
-
-`La playa me dio miedo esa noche. Y eso es raro en mí. Siempre me gustó escuchar el mar después de bailar porque me ayudaba a tranquilizarme, pero aquella vez sentía que algo estaba mal incluso antes de acercarme. Había demasiada oscuridad… demasiadas sombras moviéndose entre las luces del festival.`
-
-],
-
-elias: [
-
-`Elías normalmente actúa como si nada pudiera alterarlo. Incluso cuando pierde un partido sigue comportándose tranquilo. Pero esa noche no era el mismo. Lo vi discutir con alguien cerca del hielo antes de la presentación principal. Movía mucho las manos y caminaba de un lado a otro como si estuviera desesperado por resolver algo rápido.`,
-
-`No quiero acusarlo de nada porque honestamente no sé toda la verdad… pero sí sé que evitó acercarse demasiado a ciertas personas después de la desaparición. Y recuerdo algo más. Cuando mencionaron el Fragmento cerca de él, dejó de sonreír inmediatamente.`
-
-],
-
-miedo: [
-
-`Sentí miedo antes de entender por qué tenía miedo. Y eso fue lo peor. Porque normalmente cuando uno tiene miedo sabe de qué está huyendo. Pero aquella noche era diferente. Era como si mi cuerpo supiera algo antes que mi cabeza.`,
-
-`Hubo un momento durante la coreografía donde olvidé completamente qué paso seguía. Nunca me pasa eso. Nunca. Pero alcé la mirada hacia la zona central y sentí una presión horrible en el pecho, como si algo estuviera a punto de romperse frente a todos.`
-
-],
-
-fragmento: [
-
-`Nunca me gustó estar demasiado cerca del Fragmento. Sé que suena absurdo porque todos en el pueblo crecimos viéndolo durante el festival, pero cuando me acercaba sentía algo extraño… una sensación difícil de explicar. Como si el objeto guardara demasiadas historias encima.`,
-
-`Hay personas que creen que el Fragmento es solo una reliquia bonita. Yo creo que significa más que eso para mucha gente del pueblo. Y cuando las personas empiezan a darle demasiado poder a un objeto… terminan haciendo cosas peligrosas por él.`
-
-],
-
-sospechas: [
-
-`Sí… creo que varias personas están ocultando cosas. El problema es que no sé si lo hacen por miedo, por culpa… o porque realmente participaron en lo que pasó esa noche. A veces siento que todos en el pueblo saben una parte pequeña de la historia, pero nadie se atreve a juntar todas las piezas.`,
-
-`Hay silencios que dicen mucho más que las palabras. Después de la desaparición del Fragmento hubo personas que dejaron de hablar de golpe apenas alguien hacía ciertas preguntas. Y eso normalmente significa que saben más de lo que admiten.`
-
-],
-
-hablar: [
-
-`Si quieres entender realmente qué ocurrió esa noche, deberías hablar con Samuel en la playa. A veces parece confundido o demasiado misterioso, pero él observa mucho más de lo que aparenta. Además… lleva demasiados años viendo lo que ocurre en este pueblo.`,
-
-`Creo que Tomás, el periodista, está conectando cosas que los demás todavía no entienden. Puede parecer tranquilo cuando habla, pero se nota que hay detalles que lo tienen obsesionado. Si yo estuviera investigando seriamente… empezaría por hablar con él.`
-
-],
-
-presentacion: [
-
-`La presentación debía ser perfecta. Llevábamos semanas practicando cada movimiento, cada paso, cada giro… pero aquella noche nada se sintió normal. Yo seguía mirando hacia la zona central sin entender por qué. Era como si una parte de mí estuviera esperando que algo terrible ocurriera.`,
-
-`Recuerdo las luces reflejándose sobre el escenario y la música sonando demasiado fuerte. Pero aun así podía escuchar murmullos entre el público. Conversaciones tensas. Personas discutiendo en voz baja. Intenté seguir bailando como si nada estuviera pasando… aunque por dentro sentía que algo estaba rompiéndose.`
-
-]
-
-};
-
-function agregar(texto, tipo){
-
-const div = document.createElement("div");
-
-div.classList.add("mensaje", tipo);
-
-div.innerHTML = texto.replace(/\n/g,"<br>");
-
-chat.appendChild(div);
-
-chat.scrollTop = chat.scrollHeight;
-
+function agregarMensaje(texto, tipo){
+  const div = document.createElement("div");
+  div.classList.add("mensaje", tipo);
+  div.innerHTML = texto.replace(/\n/g, "<br>");
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
 }
 
-function mostrarTyping(){
-
-const wrap = document.createElement("div");
-
-wrap.classList.add("typing-wrap");
-
-wrap.id = "typing";
-
-wrap.innerHTML = `
-<div class="typing">
-<span></span>
-<span></span>
-<span></span>
-</div>
-`;
-
-chat.appendChild(wrap);
-
-chat.scrollTop = chat.scrollHeight;
-
+function mostrarTyping(callback){
+  const wrap = document.createElement("div");
+  wrap.classList.add("typing-wrap");
+  wrap.id = "typing";
+  wrap.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+  
+  setTimeout(() => {
+    const t = document.getElementById("typing");
+    if(t) t.remove();
+    callback();
+  }, 1000);
 }
 
-function quitarTyping(){
-
-const t = document.getElementById("typing");
-
-if(t) t.remove();
-
+function cargarEstacion() {
+  if (estacionActual < bancoPreguntas.length) {
+    estacionTag.innerText = `ESTACIÓN ${estacionActual + 1} / 4`;
+    barra.style.width = `${(estacionActual / bancoPreguntas.length) * 100}%`;
+    
+    const configuracion = bancoPreguntas[estacionActual];
+    
+    mostrarTyping(() => {
+      agregarMensaje(configuracion.pregunta, "ia");
+      renderizarOpciones(configuracion.opciones);
+    });
+  } else {
+    // Fin del juego - Consolidación de frases
+    estacionTag.innerText = "VERIFICADO";
+    barra.style.width = "100%";
+    opcionesBlock.innerHTML = "";
+    
+    mostrarTyping(() => {
+      agregarMensaje("✨ ¡Has completado las 4 estaciones de lectura con éxito! Aquí tienes tus fragmentos recolectados:", "ia");
+      
+      let mensajeFinal = frasesRecolectadas.map((f, index) => `${index + 1}. ${f}`).join("\n\n");
+      
+      setTimeout(() => {
+        agregarMensaje(mensajeFinal, "ia");
+        setTimeout(() => {
+          agregarMensaje("🔒 **EVIDENCIA DE LECTURA COMPLETA:** Muestra esta pantalla a tu profesor para validar que has comprendido el texto a la perfección.", "ia");
+        }, 800);
+      }, 500);
+    });
+  }
 }
 
-function obtenerRespuesta(tema){
-
-const lista = respuestas[tema];
-
-if(!lista) return null;
-
-if(!usadas[tema]) usadas[tema]=0;
-
-const idx = usadas[tema] % lista.length;
-
-usadas[tema]++;
-
-return lista[idx];
-
+function renderizarOpciones(opciones) {
+  opcionesBlock.innerHTML = "";
+  opciones.forEach(opc => {
+    const boton = document.createElement("button");
+    boton.classList.add("opcion-btn");
+    boton.innerHTML = `<strong>${opc.inciso}.</strong> ${opc.texto}`;
+    boton.onclick = () => procesarRespuesta(opc);
+    opcionesBlock.appendChild(boton);
+  });
 }
 
-function detectarTema(texto){
+function procesarRespuesta(opcionSeleccionada) {
+  // Desactivar botones momentáneamente
+  const botones = opcionesBlock.querySelectorAll(".opcion-btn");
+  botones.forEach(b => b.disabled = true);
 
-const t = texto.toLowerCase();
+  // Añadir la respuesta elegida por el usuario en pantalla
+  agregarMensaje(`Elegí la opción ${opcionSeleccionada.inciso}: ${opcionSeleccionada.texto}`, "usuario");
 
-if(t.match(/festival|noche|fiesta/)) return "festival";
+  const configActual = bancoPreguntas[estacionActual];
 
-if(t.match(/playa|mar|arena|orilla/)) return "playa";
-
-if(t.match(/el[ií]as|futbolista/)) return "elias";
-
-if(t.match(/miedo|asustada|temor|nervios/)) return "miedo";
-
-if(t.match(/fragmento|aurora|objeto/)) return "fragmento";
-
-if(t.match(/sospecha|mentira|ocultan|oculta/)) return "sospechas";
-
-if(t.match(/hablar|preguntar|investigar|qui[eé]n/)) return "hablar";
-
-if(t.match(/presentaci[oó]n|baile|coreograf[ií]a|danza/)) return "presentacion";
-
-return null;
-
+  if (opcionSeleccionada.correcta) {
+    mostrarTyping(() => {
+      agregarMensaje(`🟢 ¡Correcto! Has desbloqueado una frase del libro para tu informe final:\n"${configActual.frasePremio}"`, "ia");
+      frasesRecolectadas.push(configActual.frasePremio);
+      estacionActual++;
+      setTimeout(cargarEstacion, 1500);
+    });
+  } else {
+    mostrarTyping(() => {
+      agregarMensaje("🔴 Esa respuesta no coincide exactamente con los acontecimientos narrados en la lectura. Revisa el texto e inténtalo nuevamente.", "ia");
+      // Reactivar opciones para que vuelva a intentar
+      setTimeout(() => {
+        renderizarOpciones(configActual.opciones);
+      }, 1000);
+    });
+  }
 }
 
-function preguntar(tema){
-
-const etiquetas = {
-
-festival:"¿Cómo estuvo el festival esa noche?",
-
-playa:"¿Qué viste en la playa?",
-
-elias:"¿Qué sabes de Elías?",
-
-miedo:"¿Tuviste miedo?",
-
-fragmento:"¿Qué piensas del Fragmento?",
-
-sospechas:"¿Crees que alguien miente?",
-
-hablar:"¿Con quién debería hablar?",
-
-presentacion:"¿Cómo fue la presentación?"
-
-};
-
-agregar(etiquetas[tema], "usuario");
-
-responderTema(tema);
-
-}
-
-function responderTema(tema){
-
-mostrarTyping();
-
-setTimeout(()=>{
-
-quitarTyping();
-
-const resp = obtenerRespuesta(tema);
-
-if(resp){
-
-agregar(resp, "ia");
-
-}else{
-
-agregar("No estoy segura de cómo responder eso… todavía sigo intentando ordenar todo lo que sentí aquella noche.", "ia");
-
-}
-
-},1000);
-
-}
-
-function enviar(){
-
-const input = document.getElementById("pregunta");
-
-const texto = input.value.trim();
-
-if(!texto) return;
-
-agregar(texto, "usuario");
-
-input.value="";
-
-const tema = detectarTema(texto);
-
-responderTema(tema || "default");
-
-}
-
-window.addEventListener("load", ()=>{
-
-setTimeout(()=>{
-
-agregar("Desde aquella noche siento que algo cambió en el pueblo… y quizás también en mí. A veces pienso que vi cosas importantes, aunque todavía no logro entenderlas completamente. ¿Qué quieres preguntarme?", "ia");
-
-},500);
-
+// Inicialización del sistema al cargar la página
+window.addEventListener("load", () => {
+  mostrarTyping(() => {
+    agregarMensaje("Hola. Soy tu asistente de control de lectura. Para verificar que has leído y comprendido a fondo el texto sobre Frank Rodríguez, la toma del Palacio de Justicia y los sucesos de 1985, te guiaré a través de 4 estaciones de preguntas de opción múltiple. ¡Comenzamos!", "ia");
+    setTimeout(cargarEstacion, 1500);
+  });
 });
-
 </script>
 
 </body>
