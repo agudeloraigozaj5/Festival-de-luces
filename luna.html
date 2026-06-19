@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luna — Casa del Árbol</title>
+<title>Luna — Control de Lectura</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Crimson+Pro:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -89,6 +88,14 @@ text-transform:uppercase;
 color:rgba(255,220,255,.55);
 }
 
+.zona{
+font-size:10px;
+padding:4px 10px;
+border:1px solid rgba(255,200,255,0.2);
+border-radius:3px;
+color:rgba(255,220,255,0.7);
+}
+
 .frase{
 margin-top:8px;
 padding-left:12px;
@@ -99,32 +106,6 @@ font-size:14px;
 line-height:1.5;
 }
 
-.temas{
-padding:10px 15px;
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-border-bottom:1px solid rgba(255,255,255,.06);
-background:rgba(20,14,26,.95);
-}
-
-.tema-btn{
-padding:7px 13px;
-border:none;
-border-radius:20px;
-background:rgba(178,108,255,.12);
-color:#f5dcff;
-cursor:pointer;
-font-family:'Crimson Pro', serif;
-font-size:14px;
-transition:.2s;
-border:1px solid rgba(255,255,255,.08);
-}
-
-.tema-btn:hover{
-background:rgba(255,155,210,.22);
-}
-
 .chat{
 flex:1;
 overflow-y:auto;
@@ -132,6 +113,14 @@ padding:18px;
 display:flex;
 flex-direction:column;
 gap:14px;
+}
+
+.chat::-webkit-scrollbar{
+width:4px;
+}
+
+.chat::-webkit-scrollbar-thumb{
+background:rgba(178,108,255,0.2);
 }
 
 .mensaje{
@@ -163,40 +152,83 @@ border-radius:14px 4px 14px 14px;
 color:#e8ffe8;
 }
 
+.typing-wrap{
+align-self:flex-start;
+}
+
+.typing{
+display:inline-flex;
+gap:5px;
+padding:10px 14px;
+background:rgba(35,22,42,.95);
+border:1px solid rgba(255,255,255,.08);
+border-radius:4px 14px 14px 14px;
+}
+
+.typing span{
+width:6px;
+height:6px;
+border-radius:50%;
+background:#b26cff;
+animation:bounce .9s infinite;
+}
+
+.typing span:nth-child(2){
+animation-delay:.15s;
+}
+
+.typing span:nth-child(3){
+animation-delay:.3s;
+}
+
+@keyframes bounce{
+0%,80%,100%{transform:translateY(0);}
+40%{transform:translateY(-6px);}
+}
+
 .input-area{
 display:flex;
-gap:10px;
+flex-direction:column;
+gap:8px;
 padding:12px;
 border-top:1px solid rgba(255,255,255,.08);
 background:rgba(14,10,20,.96);
 }
 
-.input-area input{
-flex:1;
-padding:12px;
-background:rgba(30,20,40,.9);
-border:1px solid rgba(255,255,255,.08);
-outline:none;
-color:white;
+.opciones-container {
+display:grid;
+grid-template-columns:1fr;
+gap:8px;
+width:100%;
+}
+
+@media(min-width: 600px){
+  .opciones-container {
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+.opcion-btn {
+padding:12px 14px;
+background:rgba(178,108,255,0.05);
+border:1px solid rgba(178,108,255,0.15);
+border-radius:6px;
+color:#f5dcff;
 font-family:'Crimson Pro', serif;
 font-size:15px;
-border-radius:4px;
-}
-
-.input-area input::placeholder{
-color:rgba(255,255,255,.35);
-}
-
-.send-btn{
-padding:12px 20px;
-border:none;
-background:#d68cff;
-color:#1b1124;
-font-weight:bold;
+text-align:left;
 cursor:pointer;
-border-radius:4px;
-font-family:'Playfair Display', serif;
-font-size:16px;
+transition:0.2s;
+}
+
+.opcion-btn:hover:not(:disabled) {
+background:rgba(178,108,255,0.15);
+border-color:rgba(178,108,255,0.4);
+}
+
+.opcion-btn:disabled {
+opacity:0.5;
+cursor:not-allowed;
 }
 
 .footer{
@@ -207,6 +239,19 @@ color:rgba(255,255,255,.28);
 background:rgba(14,10,20,.95);
 }
 
+.progreso-barra {
+height:4px;
+background:rgba(178,108,255,0.1);
+width:100%;
+position:relative;
+}
+
+.progreso-llenado {
+height:100%;
+background:linear-gradient(90deg,#b26cff,#ff9bd2);
+width:0%;
+transition:width 0.3s ease;
+}
 </style>
 </head>
 
@@ -218,214 +263,165 @@ background:rgba(14,10,20,.95);
 
 <div class="header">
 <div class="header-row">
-
 <div class="avatar">L</div>
-
 <div class="header-info">
 <h1>Luna</h1>
-<div class="header-sub">Bailarina Secundaria · Casa del Árbol</div>
+<div class="header-sub">Validadora de Lectura · Fase Final</div>
 </div>
-
+<div class="zona" id="estacion-tag">ESTACIÓN 1 / 2</div>
 </div>
-
 <div class="frase">
 “La gente cree que no pongo atención… y por eso escucho absolutamente todo.”
 </div>
 </div>
 
-<div class="temas">
-<button class="tema-btn" onclick="preguntar('escuchaste')">👂 ¿Qué escuchaste?</button>
-<button class="tema-btn" onclick="preguntar('casa')">🌳 Casa del árbol</button>
-<button class="tema-btn" onclick="preguntar('tomas')">📰 Tomás</button>
-<button class="tema-btn" onclick="preguntar('guantes')">🧤 Guantes</button>
-<button class="tema-btn" onclick="preguntar('elias')">⚽ Elías</button>
-<button class="tema-btn" onclick="preguntar('festival')">🎭 Antes del festival</button>
-<button class="tema-btn" onclick="preguntar('hablar')">🗺️ ¿Con quién hablar?</button>
+<div class="progreso-barra">
+<div class="progreso-llenado" id="barra"></div>
 </div>
 
 <div class="chat" id="chat"></div>
 
 <div class="input-area">
-<input type="text" id="pregunta" placeholder="Pregúntale algo a Luna..." onkeydown="if(event.key==='Enter') enviar()">
-<button class="send-btn" onclick="enviar()">Preguntar</button>
+<div class="opciones-container" id="opciones-block">
+<!-- Botones inyectados dinámicamente -->
+</div>
 </div>
 
 <div class="footer">
-Festival de las Luces — Investigación Narrativa
+Evidencia de Lectura — "Dónde está Frank.docx"
 </div>
 
 </div>
 
 <script>
-
 const chat = document.getElementById("chat");
+const opcionesBlock = document.getElementById("opciones-block");
+const barra = document.getElementById("barra");
+const estacionTag = document.getElementById("estacion-tag");
 
-const respuestas = {
+let estacionActual = 0;
+let frasesRecolectadas = [];
 
-escuchaste:[
-`Mira, yo no estaba espiando, ¿okay? Simplemente estaba en el lugar correcto en el momento correcto. Estaba subida en la casa del árbol esperando que empezara el festival cuando escuché dos voces abajo. Hablaban bajito pero con esa urgencia que tienen las personas cuando algo se les está yendo de las manos.`,
+// Banco de preguntas centrado en la segunda mitad del texto
+const bancoPreguntas = [
+  {
+    pregunta: "Estación 1: Con el paso de las semanas, ¿qué hacía Adela todas las tardes al finalizar la jornada laboral para intentar encontrar pistas sobre el paradero de Frank?",
+    opciones: [
+      { inciso: "A", texto: "Iba a la zona de Chía a buscar en hospitales y estaciones de tren.", correcta: false },
+      { inciso: "B", texto: "Iba a las inmediaciones del Palacio, de la Policía, de la morgue, al Cantón Norte y al Batallón Charley Solano preguntando con una fotografía.", correcta: true },
+      { inciso: "C", texto: "Llamaba telefónicamente a todas las estaciones de radio del país para dar un anuncio de recompensa.", correcta: false },
+      { inciso: "D", texto: "Se quedaba revisando los cuadernos escolares de religión de sus gemelos Miguel y Alex.", correcta: false }
+    ],
+    frasePremio: "«Con los días, con las semanas que pasaban indefectibles, cada tarde preguntaba por Frank con una foto...»"
+  },
+  {
+    pregunta: "Estación 2: Mientras la angustia por Frank continuaba en el hogar de los Rodríguez, ¿qué suceso de impacto nacional narraba el locutor Jairo en el programa 'Fútbol y Pasión' de Radio Panamericana?",
+    opciones: [
+      { inciso: "A", texto: "La gran victoria del Deportivo Cali en la final de la Copa Libertadores de América.", correcta: false },
+      { inciso: "B", texto: "La movilización de tropas del Ejército desde el sur de Bogotá hacia la Plaza de Bolívar.", correcta: false },
+      { inciso: "C", texto: "Las desgarradoras escenas de las personas cubiertas de lodo tras el desastre natural en Armero y Cambao.", correcta: true },
+      { inciso: "D", texto: "El inicio de las vacaciones de fin de año de todas las escuelas públicas del país.", correcta: false }
+    ],
+    frasePremio: "«...mientras las ondas radiales mezclaban la pasión del deporte con el lodo de la peor tragedia natural.»"
+  }
+];
 
-`Lo que más me impactó no fue lo que dijeron sino cómo lo dijeron. Con un nerviosismo que yo nunca había escuchado en el festival. Normalmente todo el mundo está feliz, emocionado, cantando. Pero esas voces sonaban como si estuvieran negociando algo que sabían que estaba mal.`
-],
-
-casa:[
-`Esa noche entró y salió gente de la casa del árbol que normalmente no va ahí. Y yo los conozco a todos, llevo toda la vida en este pueblo. Primero entró alguien con una chaqueta oscura y guantes negros. Y hacía calor esa noche. Eso ya era rarísimo.`,
-
-`Vi al menos tres personas distintas pasar por la casa del árbol en menos de una hora. Ninguna se saludó entre sí aunque se cruzaron. Eso me pareció superextraño porque en el festival todo el mundo se saluda.`
-],
-
-tomas:[
-`Tomás estaba rarísimo esa noche. Normalmente es súper calmado, siempre con esa cara de que ya sabe todo antes de que pase. Pero esa noche lo vi caminar rápido dos veces entre la zona central y la casa del árbol. Sin su libreta.`,
-
-`En un momento lo vi parado solo cerca del árbol grande mirando hacia el lago con esa expresión que tienen las personas cuando están calculando algo en su cabeza. Y cuando alguien lo saludó se sobresaltó. Tomás nunca se sobresalta.`
-],
-
-guantes:[
-`Eso no se me va de la cabeza. ¿Quién usa guantes negros en una noche de festival? Los guantes oscuros son para el invierno o para cuando no quieres dejar huellas en algo. Y yo no digo más porque no quiero meterme en problemas.`,
-
-`Lo que sí puedo decirte es que esa persona con guantes era alguien del pueblo. Lo sé porque conocía el camino entre los árboles sin necesitar luz para orientarse.`
-],
-
-elias:[
-`Ay, Elías. Mira, yo no tengo nada contra él personalmente, pero esa noche estaba insoportable de raro. Lo vi discutir con alguien cerca de la zona de hielo y te juro que pensé que iban a llegar a los golpes.`,
-
-`Después de la discusión Elías desapareció como veinte minutos y cuando volvió estaba diferente. Más tranquilo, pero de esa tranquilidad falsa que tienen las personas cuando acaban de tomar una decisión y ya no hay vuelta atrás.`
-],
-
-festival:[
-`Desde la tarde ya había cosas raras. Valeria estaba supernerviosa y eso no es normal en ella antes de una presentación. La vi ir y venir varias veces entre la zona de hongos y la zona central como si estuviera esperando a alguien.`,
-
-`También noté que había personas que no son del festival ayudando a mover cosas cerca del escenario principal. Caras que yo no reconocía. Y en un pueblo pequeño como este uno reconoce todas las caras.`
-],
-
-hablar:[
-`Si quieres saber qué pasó en la playa esa noche, habla con Samuel. Está ahí todos los días desde que tengo memoria. Habla raro a veces, pero siempre dice cosas importantes si lo escuchas con paciencia.`,
-
-`Para lo del periodista, ve directo a la zona central y busca a Tomás. Y si quieres saber más de Elías, búscalo en la zona de hielo. Pero ve con preguntas concretas porque se pone muy a la defensiva.`
-]
-
-};
-
-const usadas = {};
-
-function agregar(texto,tipo){
-
-const div=document.createElement("div");
-
-div.classList.add("mensaje",tipo);
-
-div.innerHTML=texto;
-
-chat.appendChild(div);
-
-chat.scrollTop=chat.scrollHeight;
-
+function agregarMensaje(texto, tipo){
+  const div = document.createElement("div");
+  div.classList.add("mensaje", tipo);
+  div.innerHTML = texto.replace(/\n/g, "<br>");
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
 }
 
-function obtener(tema){
-
-if(!usadas[tema]) usadas[tema]=0;
-
-const idx=usadas[tema]%respuestas[tema].length;
-
-usadas[tema]++;
-
-return respuestas[tema][idx];
-
+function mostrarTyping(callback){
+  const wrap = document.createElement("div");
+  wrap.classList.add("typing-wrap");
+  wrap.id = "typing";
+  wrap.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+  
+  setTimeout(() => {
+    const t = document.getElementById("typing");
+    if(t) t.remove();
+    callback();
+  }, 1000);
 }
 
-function detectar(texto){
-
-texto=texto.toLowerCase();
-
-if(texto.match(/escuch|voz|conversaci/)) return "escuchaste";
-
-if(texto.match(/casa|árbol|arbol/)) return "casa";
-
-if(texto.match(/tom[aá]s|periodista/)) return "tomas";
-
-if(texto.match(/guantes|negros|huellas/)) return "guantes";
-
-if(texto.match(/el[ií]as|futbolista/)) return "elias";
-
-if(texto.match(/festival|antes|valeria/)) return "festival";
-
-if(texto.match(/hablar|preguntar|investigar|quien/)) return "hablar";
-
-return null;
-
+function cargarEstacion() {
+  if (estacionActual < bancoPreguntas.length) {
+    estacionTag.innerText = `ESTACIÓN ${estacionActual + 1} / 2`;
+    barra.style.width = `${(estacionActual / bancoPreguntas.length) * 100}%`;
+    
+    const configuracion = bancoPreguntas[estacionActual];
+    
+    mostrarTyping(() => {
+      agregarMensaje(configuracion.pregunta, "ia");
+      renderizarOpciones(configuracion.opciones);
+    });
+  } else {
+    estacionTag.innerText = "FINALIZADO";
+    barra.style.width = "100%";
+    opcionesBlock.innerHTML = "";
+    
+    mostrarTyping(() => {
+      agregarMensaje("🔮 ¡Excelente! Has superado las 2 estaciones de lectura de Luna. Aquí están tus fragmentos recuperados:", "ia");
+      
+      let mensajeFinal = frasesRecolectadas.map((f, index) => `${index + 1}. ${f}`).join("\n\n");
+      
+      setTimeout(() => {
+        agregarMensaje(mensajeFinal, "ia");
+        setTimeout(() => {
+          agregarMensaje("🔒 **COMPROBACIÓN EXITOSA:** Captura esta pantalla como evidencia de que has completado el análisis de la lectura.", "ia");
+        }, 800);
+      }, 500);
+    });
+  }
 }
 
-function preguntar(tema){
-
-const etiquetas={
-
-escuchaste:"¿Qué escuchaste esa noche?",
-
-casa:"¿Qué viste en la casa del árbol?",
-
-tomas:"¿Qué notaste del periodista?",
-
-guantes:"¿Qué recuerdas de los guantes oscuros?",
-
-elias:"¿Qué sabes de Elías?",
-
-festival:"¿Qué notaste antes del festival?",
-
-hablar:"¿Con quién debería hablar?"
-
-};
-
-agregar(etiquetas[tema],"usuario");
-
-setTimeout(()=>{
-
-agregar(obtener(tema),"ia");
-
-},700);
-
+function renderizarOpciones(opciones) {
+  opcionesBlock.innerHTML = "";
+  opciones.forEach(opc => {
+    const boton = document.createElement("button");
+    boton.classList.add("opcion-btn");
+    boton.innerHTML = `<strong>${opc.inciso}.</strong> ${opc.texto}`;
+    boton.onclick = () => procesarRespuesta(opc);
+    opcionesBlock.appendChild(boton);
+  });
 }
 
-function enviar(){
+function procesarRespuesta(opcionSeleccionada) {
+  const botones = opcionesBlock.querySelectorAll(".opcion-btn");
+  botones.forEach(b => b.disabled = true);
 
-const input=document.getElementById("pregunta");
+  agregarMensaje(`Elegí la opción ${opcionSeleccionada.inciso}: ${opcionSeleccionada.texto}`, "usuario");
 
-const texto=input.value.trim();
+  const configActual = bancoPreguntas[estacionActual];
 
-if(!texto) return;
-
-agregar(texto,"usuario");
-
-input.value="";
-
-const tema=detectar(texto);
-
-setTimeout(()=>{
-
-if(tema){
-
-agregar(obtener(tema),"ia");
-
-}else{
-
-agregar("Luna se acomoda el cabello y baja la voz. “Okay… eso sí está raro. Pero pregúntame mejor sobre lo que escuché, la casa del árbol, Tomás, Elías o las personas extrañas del festival.”","ia");
-
+  if (opcionSeleccionada.correcta) {
+    mostrarTyping(() => {
+      agregarMensaje(`🟣 ¡Respuesta correcta! Luna te entrega una frase clave de la lectura:\n\n"${configActual.frasePremio}"`, "ia");
+      frasesRecolectadas.push(configActual.frasePremio);
+      estacionActual++;
+      setTimeout(cargarEstacion, 1500);
+    });
+  } else {
+    mostrarTyping(() => {
+      agregarMensaje("❌ Mmm, eso no cuadra con lo que pasó en el libro. Recuerda bien los recorridos de Adela o los reportes de la radio. ¡Inténtalo de nuevo!", "ia");
+      setTimeout(() => {
+        renderizarOpciones(configActual.opciones);
+      }, 1000);
+    });
+  }
 }
 
-},700);
-
-}
-
-window.onload=()=>{
-
-setTimeout(()=>{
-
-agregar("Luna sonríe apenas te acercas. “Por fin alguien quiere investigar en serio lo que pasó esa noche. Porque créeme… demasiadas cosas raras ocurrieron antes de que desapareciera el Fragmento.”","ia");
-
-},500);
-
-};
-
+window.addEventListener("load", () => {
+  mostrarTyping(() => {
+    agregarMensaje("¡Hola! Soy Luna. Ya que dicen que me entero de todo, te pondré a prueba con 2 estaciones clave sobre el desenlace del documento de Frank Rodríguez. Selecciona la opción correcta para avanzar.", "ia");
+    setTimeout(cargarEstacion, 1500);
+  });
+});
 </script>
 
 </body>
