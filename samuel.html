@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Samuel — Pescador</title>
+<title>Samuel — Control de Lectura</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
 
@@ -88,6 +88,15 @@ text-transform:uppercase;
 color:rgba(180,220,235,.6);
 }
 
+.zona{
+font-size:11px;
+padding:4px 10px;
+border:1px solid rgba(120,180,220,0.2);
+border-radius:3px;
+color:rgba(180,220,235,.7);
+font-family:'Cormorant Garamond', serif;
+}
+
 .frase{
 margin-top:8px;
 padding-left:12px;
@@ -98,32 +107,6 @@ font-size:14px;
 line-height:1.5;
 }
 
-.temas{
-padding:10px 15px;
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-border-bottom:1px solid rgba(120,180,220,.08);
-background:rgba(7,15,20,.95);
-}
-
-.tema-btn{
-padding:7px 13px;
-border:none;
-border-radius:20px;
-background:rgba(70,120,150,.15);
-color:#d6edf8;
-cursor:pointer;
-font-family:'Crimson Text', serif;
-font-size:14px;
-transition:.2s;
-border:1px solid rgba(120,180,220,.12);
-}
-
-.tema-btn:hover{
-background:rgba(100,160,190,.25);
-}
-
 .chat{
 flex:1;
 overflow-y:auto;
@@ -131,6 +114,14 @@ padding:18px;
 display:flex;
 flex-direction:column;
 gap:14px;
+}
+
+.chat::-webkit-scrollbar{
+width:4px;
+}
+
+.chat::-webkit-scrollbar-thumb{
+background:rgba(120,180,220,0.18);
 }
 
 .mensaje{
@@ -162,40 +153,78 @@ border-radius:14px 4px 14px 14px;
 color:#e2ffe8;
 }
 
+.typing-wrap{
+align-self:flex-start;
+}
+
+.typing{
+display:inline-flex;
+gap:5px;
+padding:10px 14px;
+background:rgba(14,28,36,.95);
+border:1px solid rgba(120,180,220,.12);
+border-radius:4px 14px 14px 14px;
+}
+
+.typing span{
+width:6px;
+height:6px;
+border-radius:50%;
+background:#6ca5bf;
+animation:bounce .9s infinite;
+}
+
+.typing span:nth-child(2){animation-delay:.15s;}
+.typing span:nth-child(3){animation-delay:.3s;}
+
+@keyframes bounce{
+0%,80%,100%{transform:translateY(0);}
+40%{transform:translateY(-6px);}
+}
+
 .input-area{
 display:flex;
-gap:10px;
+flex-direction:column;
+gap:8px;
 padding:12px;
 border-top:1px solid rgba(120,180,220,.1);
 background:rgba(5,10,14,.95);
 }
 
-.input-area input{
-flex:1;
-padding:12px;
-background:rgba(12,24,30,.9);
-border:1px solid rgba(120,180,220,.15);
-outline:none;
-color:white;
+.opciones-container {
+display:grid;
+grid-template-columns:1fr;
+gap:8px;
+width:100%;
+}
+
+@media(min-width: 600px){
+  .opciones-container {
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+.opcion-btn {
+padding:12px 14px;
+background:rgba(120,180,220,0.05);
+border:1px solid rgba(120,180,220,0.15);
+border-radius:6px;
+color:#eaf6ff;
 font-family:'Crimson Text', serif;
 font-size:15px;
-border-radius:4px;
-}
-
-.input-area input::placeholder{
-color:rgba(200,220,230,.4);
-}
-
-.send-btn{
-padding:12px 20px;
-border:none;
-background:#6ca5bf;
-color:#07131a;
-font-weight:bold;
+text-align:left;
 cursor:pointer;
-border-radius:4px;
-font-family:'Cormorant Garamond', serif;
-font-size:16px;
+transition:0.2s;
+}
+
+.opcion-btn:hover:not(:disabled) {
+background:rgba(120,180,220,0.15);
+border-color:rgba(120,180,220,0.4);
+}
+
+.opcion-btn:disabled {
+opacity:0.5;
+cursor:not-allowed;
 }
 
 .footer{
@@ -204,6 +233,20 @@ padding:6px;
 font-size:11px;
 color:rgba(180,220,235,.35);
 background:rgba(5,10,14,.95);
+}
+
+.progreso-barra {
+height:4px;
+background:rgba(120,180,220,0.1);
+width:100%;
+position:relative;
+}
+
+.progreso-llenado {
+height:100%;
+background:linear-gradient(90deg,#1e5f7a,#6ca5bf);
+width:0%;
+transition:width 0.3s ease;
 }
 </style>
 </head>
@@ -216,172 +259,164 @@ background:rgba(5,10,14,.95);
 
 <div class="header">
 <div class="header-row">
-<div class="avatar">S</div>
-
+<div class="avatar">🌊</div>
 <div class="header-info">
 <h1>Samuel</h1>
-<div class="header-sub">Pescador Anciano · Playa</div>
+<div class="header-sub">Control de Lectura · Bloque del Hogar</div>
 </div>
+<div class="zona" id="estacion-tag">ESTACIÓN 1 / 2</div>
 </div>
-
 <div class="frase">
 "El agua recuerda cosas que las personas prefieren olvidar."
 </div>
 </div>
 
-<div class="temas">
-<button class="tema-btn" onclick="preguntar('viste')">👁️ ¿Qué viste?</button>
-<button class="tema-btn" onclick="preguntar('fragmento')">💎 Fragmento</button>
-<button class="tema-btn" onclick="preguntar('escuchaste')">🌬️ ¿Qué escuchaste?</button>
-<button class="tema-btn" onclick="preguntar('lago')">🌊 Lago</button>
-<button class="tema-btn" onclick="preguntar('pasar')">🔮 ¿Qué va a pasar?</button>
-<button class="tema-btn" onclick="preguntar('sospechas')">🧍 Sospechas</button>
-<button class="tema-btn" onclick="preguntar('hablar')">🗺️ ¿Con quién hablar?</button>
+<div class="progreso-barra">
+<div class="progreso-llenado" id="barra"></div>
 </div>
 
 <div class="chat" id="chat"></div>
 
 <div class="input-area">
-<input type="text" id="pregunta" placeholder="Pregúntale algo a Samuel..." onkeydown="if(event.key==='Enter') enviar()">
-<button class="send-btn" onclick="enviar()">Preguntar</button>
+<div class="opciones-container" id="opciones-block">
+<!-- Opciones dinámicas -->
+</div>
 </div>
 
 <div class="footer">
-Festival de las Luces — Investigación Narrativa
+Evidencia de Lectura — Sistema de Comprobación
 </div>
 
 </div>
 
 <script>
-
 const chat = document.getElementById("chat");
+const opcionesBlock = document.getElementById("opciones-block");
+const barra = document.getElementById("barra");
+const estacionTag = document.getElementById("estacion-tag");
 
-const respuestas = {
+let estacionActual = 0;
+let frasesRecolectadas = [];
 
-viste:[
-`El mar me habla de maneras que la mayoría ya no sabe escuchar. Esa noche me habló diferente. Había luces sobre el agua que no eran reflejos de las linternas del festival… eran otras luces, más profundas, como si algo debajo se estuviera despertando. Luego escuché pasos rápidos sobre la arena húmeda. Pasos de alguien que cargaba peso. No el peso del cuerpo… el peso de una decisión.`,
+const bancoPreguntas = [
+  {
+    pregunta: "Estación 1: En los recuerdos sobre la madre y las dinámicas en la mesa, ¿qué preparaba meticulosamente la señora de la casa y qué hacía la madre mientras los demás almorzaban o realizaban sus tareas?",
+    opciones: [
+      { inciso: "A", texto: "La señora de la casa preparaba jugos cítricos y la madre tejía en silencio en la sala.", correcta: false },
+      { inciso: "B", texto: "La señora de la casa servía pescado frito mientras la madre leía la Biblia en voz alta.", correcta: false },
+      { inciso: "C", texto: "La señora de la casa organizaba la mesa de noche, mientras la madre salía apresurada a la fábrica de textiles.", correcta: false },
+      { inciso: "D", texto: "La señora de la casa preparaba jugos naturales quitándoles las pepas, mientras la madre subía al segundo piso a limpiar la máquina de escribir.", correcta: true }
+    ],
+    frasePremio: "«Las pepas de los jugos caían en el colador, igual que los viejos secretos de la casa...»"
+  },
+  {
+    pregunta: "Estación 2: Con respecto a los días de mercado y el abastecimiento del hogar, ¿qué elemento guardaba con recelo la señora de la casa en la despensa y qué instrucciones específicas repetía constantemente sobre su uso?",
+    opciones: [
+      { inciso: "A", texto: "Guardaba arroz integral y exigía cocinarlo únicamente los domingos por la mañana.", correcta: false },
+      { inciso: "B", texto: "Guardaba con recelo una botella de aceite de oliva español, advirtiendo que solo debía usarse en gotas contadas para las ensaladas especiales.", correcta: true },
+      { inciso: "C", texto: "Ocultaba panela y pedía que nadie la tocara para evitar que los niños sufrieran de caries.", correcta: false },
+      { inciso: "D", texto: "Almacenaba sal marina importada que únicamente se abría cuando Frank traía invitados de la capital.", correcta: false }
+    ],
+    frasePremio: "«Cada gota de aceite era contada con el rigor de un reloj de arena en medio de la cocina.»"
+  }
+];
 
-`Vi una sombra moverse cerca de las rocas grandes. Cargaba algo que brillaba incluso tapado. Yo conozco ese brillo. Lo reconocería aunque estuviera enterrado bajo diez metros de agua. Era el Fragmento. Estoy seguro. Pero cuando quise mirar mejor… la sombra desapareció entre los árboles como si nunca hubiera estado.`
-],
-
-fragmento:[
-`El Fragmento no es de nadie. Nunca lo fue. Emergió del lago hace más de cien años durante una tormenta que duró tres días. Los ancianos de entonces dijeron que el lago lo había escupido porque ya no podía guardarlo solo. Pero también dijeron que si alguien intentaba poseerlo como suyo… el lago reclamaría lo que le pertenece. Y el lago siempre cobra lo que le deben.`,
-
-`Yo lo tuve en mis manos una vez. Solo una. Y te digo algo que nadie más te va a decir: ese objeto tiene temperatura propia. No el frío del agua ni el calor de las manos. Algo intermedio que no corresponde a ninguna estación. Como si existiera en un tiempo diferente al nuestro. Eso no es una reliquia normal. Nunca lo fue.`
-],
-
-escuchaste:[
-`El viento en la playa tiene su propio lenguaje. Esa noche traía palabras mezcladas, voces que venían de la zona central pero llegaban rotas, como si alguien las hubiera partido antes de soltarlas al aire. Escuché dos tonos distintos. Uno grave, uno más agudo. Discutían sobre algo que no debían tener.`,
-
-`Más tarde, cuando la música del festival ya casi no se escuchaba, oí pasos sobre la madera del muelle. Lentos primero, luego rápidos, como si alguien hubiera tomado una decisión repentina. Después un golpe sordo. Y luego silencio. El tipo de silencio que no es tranquilidad… sino el silencio de algo que acaba de cambiar para siempre.`
-],
-
-lago:[
-`Hay cosas que existen para estar en ciertos lugares. El pez en el agua, el pájaro en el cielo, la raíz en la tierra. El Fragmento de Aurora existía para estar en el lago. Cuando está cerca del agua el pueblo duerme tranquilo. Cuando se aleja… las redes aparecen vacías. El ganado se pone nervioso.`,
-
-`Mi abuelo me contó que una vez, hace mucho tiempo, alguien intentó vender el Fragmento a un comerciante de la ciudad. Lo llevó lejos del lago por primera vez. Esa semana el lago creció tres metros sin que hubiera llovido. Las casas de la orilla quedaron bajo el agua. El hombre devolvió el Fragmento corriendo y no volvió a hablar del tema hasta el día que murió.`
-],
-
-pasar:[
-`El agua ya lo siente. Puedo verlo en la manera en que las olas llegan a la orilla. Más cortas, más nerviosas, como si el lago estuviera buscando algo que perdió. Los peces también lo sienten, llevan días nadando en círculos cerca de la superficie.`,
-
-`No sé qué va a pasar exactamente. Soy viejo, no adivino. Pero sé lo que he visto en setenta años viviendo frente a ese lago. Las cosas que salen de su lugar siempre buscan regresar. De una manera o de otra. El Fragmento va a volver al lago.`
-],
-
-sospechas:[
-`Sospechar es una palabra de gente joven. Yo simplemente observo. Y lo que he observado es que esa noche había personas en la playa que no tenían razón para estar ahí. El periodista estuvo rondando cerca del agua mucho antes de que empezara el festival.`,
-
-`El futbolista también estuvo por aquí. Elías. Se quedó mirando el agua un rato largo, más de lo que se mira el agua cuando uno simplemente está paseando. Tenía las manos metidas en los bolsillos y los hombros tensos.`
-],
-
-hablar:[
-`Si quieres entender lo que pasó con los ojos del presente, habla con Tomás, el periodista. Está en la zona central. Él observa todo aunque finge que solo escribe.`,
-
-`La bailarina principal, Valeria, estaba nerviosa desde antes de que empezara el festival. Yo la vi caminar por la orilla una hora antes de la ceremonia, sola, mirando el agua. Ella sabe algo que todavía no ha dicho en voz alta.`
-]
-
-};
-
-const usadas = {};
-
-function agregar(texto,tipo){
-const div=document.createElement("div");
-div.classList.add("mensaje",tipo);
-div.innerHTML=texto;
-chat.appendChild(div);
-chat.scrollTop=chat.scrollHeight;
+function agregarMensaje(texto, tipo){
+  const div = document.createElement("div");
+  div.classList.add("mensaje", tipo);
+  div.innerHTML = texto.replace(/\n/g, "<br>");
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
 }
 
-function obtener(tema){
-if(!usadas[tema]) usadas[tema]=0;
-const idx=usadas[tema]%respuestas[tema].length;
-usadas[tema]++;
-return respuestas[tema][idx];
+function mostrarTyping(callback){
+  const wrap = document.createElement("div");
+  wrap.classList.add("typing-wrap");
+  wrap.id = "typing";
+  wrap.innerHTML = `<div class="typing"><span></span><span></span><span></span></div>`;
+  chat.appendChild(wrap);
+  chat.scrollTop = chat.scrollHeight;
+  
+  setTimeout(() => {
+    const t = document.getElementById("typing");
+    if(t) t.remove();
+    callback();
+  }, 1000);
 }
 
-function detectar(texto){
-texto=texto.toLowerCase();
-
-if(texto.match(/ver|viste|sombra|noche/)) return "viste";
-if(texto.match(/fragmento|aurora|objeto/)) return "fragmento";
-if(texto.match(/escuch|sonido|voces|muelle/)) return "escuchaste";
-if(texto.match(/lago|agua/)) return "lago";
-if(texto.match(/pasar|ocurrir|futuro/)) return "pasar";
-if(texto.match(/sospecha|culpable|periodista|elias/)) return "sospechas";
-if(texto.match(/hablar|quien|investigar/)) return "hablar";
-
-return null;
+function cargarEstacion() {
+  if (estacionActual < bancoPreguntas.length) {
+    estacionTag.innerText = `ESTACIÓN ${estacionActual + 1} / 2`;
+    barra.style.width = `${(estacionActual / bancoPreguntas.length) * 100}%`;
+    
+    const configuracion = bancoPreguntas[estacionActual];
+    
+    mostrarTyping(() => {
+      agregarMensaje(configuracion.pregunta, "ia");
+      renderizarOpciones(configuracion.opciones);
+    });
+  } else {
+    estacionTag.innerText = `COMPLETO`;
+    barra.style.width = "100%";
+    opcionesBlock.innerHTML = "";
+    
+    mostrarTyping(() => {
+      agregarMensaje("🌊 ¡Las corrientes de la memoria están despejadas! Has completado el último bloque de lectura. Tus fragmentos recolectados:", "ia");
+      
+      let mensajeFinal = frasesRecolectadas.map((f, index) => `${index + 1}. ${f}`).join("\n\n");
+      
+      setTimeout(() => {
+        agregarMensaje(mensajeFinal, "ia");
+        setTimeout(() => {
+          agregarMensaje("🔒 **COMPROBACIÓN FINALIZADA:** Muestra el resultado de los 4 códigos a tu profesor para tu nota completa.", "ia");
+        }, 800);
+      }, 500);
+    });
+  }
 }
 
-function preguntar(tema){
-const etiquetas={
-viste:"¿Qué viste esa noche?",
-fragmento:"¿Qué sabes del Fragmento?",
-escuchaste:"¿Qué escuchaste?",
-lago:"¿Por qué el Fragmento pertenece al lago?",
-pasar:"¿Qué crees que va a pasar?",
-sospechas:"¿Sospechas de alguien?",
-hablar:"¿Con quién debería hablar?"
-};
-
-agregar(etiquetas[tema],"usuario");
-
-setTimeout(()=>{
-agregar(obtener(tema),"ia");
-},700);
+function renderizarOpciones(opciones) {
+  opcionesBlock.innerHTML = "";
+  opciones.forEach(opc => {
+    const boton = document.createElement("button");
+    boton.classList.add("opcion-btn");
+    boton.innerHTML = `<strong>${opc.inciso}.</strong> ${opc.texto}`;
+    boton.onclick = () => procesarRespuesta(opc);
+    opcionesBlock.appendChild(boton);
+  });
 }
 
-function enviar(){
+function procesarRespuesta(opcionSeleccionada) {
+  const botones = opcionesBlock.querySelectorAll(".opcion-btn");
+  botones.forEach(b => b.disabled = true);
 
-const input=document.getElementById("pregunta");
-const texto=input.value.trim();
+  agregarMensaje(`Elegí la opción ${opcionSeleccionada.inciso}: ${opcionSeleccionada.texto}`, "usuario");
 
-if(!texto) return;
+  const configActual = bancoPreguntas[estacionActual];
 
-agregar(texto,"usuario");
-
-input.value="";
-
-const tema=detectar(texto);
-
-setTimeout(()=>{
-
-if(tema){
-agregar(obtener(tema),"ia");
-}else{
-agregar("Samuel guarda silencio unos segundos mientras observa el agua a la distancia. “Hay preguntas que el lago responde mejor que yo… pero puedes preguntarme sobre lo que vi, el Fragmento, el lago, las voces de esa noche o las personas del festival.”","ia");
+  if (opcionSeleccionada.correcta) {
+    mostrarTyping(() => {
+      agregarMensaje(`🔵 El agua no miente. Respuesta correcta. Recibes un testimonio clave:\n\n"${configActual.frasePremio}"`, "ia");
+      frasesRecolectadas.push(configActual.frasePremio);
+      estacionActual++;
+      setTimeout(cargarEstacion, 1500);
+    });
+  } else {
+    mostrarTyping(() => {
+      agregarMensaje("❌ El reflejo del agua muestra un error. Ese detalle no coincide con los recuerdos de la despensa o de la mesa. ¡Prueba otra opción!", "ia");
+      setTimeout(() => {
+        renderizarOpciones(configActual.opciones);
+      }, 1000);
+    });
+  }
 }
 
-},700);
-
-}
-
-window.onload=()=>{
-setTimeout(()=>{
-agregar("Samuel observa el horizonte antes de hablar. “La mayoría viene buscando respuestas rápidas… pero el lago nunca entrega la verdad completa de inmediato. ¿Qué deseas saber?”","ia");
-},500);
-};
-
+window.addEventListener("load", () => {
+  mostrarTyping(() => {
+    agregarMensaje("Soy Samuel. Las respuestas profundas tardan en llegar, pero con estas últimas 2 estaciones desvelaremos los detalles finales del hogar de Frank, la cocina y los misterios familiares. Elige sabiamente.", "ia");
+    setTimeout(cargarEstacion, 1500);
+  });
+});
 </script>
 
 </body>
