@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Samuel — Control de Lectura</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -55,6 +55,13 @@ background:rgba(8,18,24,.95);
 }
 
 .header-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+}
+
+.header-meta{
 display:flex;
 align-items:center;
 gap:12px;
@@ -259,10 +266,12 @@ transition:width 0.3s ease;
 
 <div class="header">
 <div class="header-row">
+<div class="header-meta">
 <div class="avatar">🌊</div>
 <div class="header-info">
 <h1>Samuel</h1>
 <div class="header-sub">Control de Lectura · Bloque del Hogar</div>
+</div>
 </div>
 <div class="zona" id="estacion-tag">ESTACIÓN 1 / 2</div>
 </div>
@@ -279,12 +288,11 @@ transition:width 0.3s ease;
 
 <div class="input-area">
 <div class="opciones-container" id="opciones-block">
-<!-- Opciones dinámicas -->
 </div>
 </div>
 
 <div class="footer">
-Evidencia de Lectura — Sistema de Comprobación
+Evidencia de Lectura — Sistema Sincronizado
 </div>
 
 </div>
